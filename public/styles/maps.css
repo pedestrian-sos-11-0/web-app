@@ -1,0 +1,45 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+iframe{
+    border: none;
+}
+#main{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+#map,#mapdiv{
+    width: 100%;
+}
+#map{
+    height: 100%;
+}
+#mapdiv{
+    /* height: 90%; */
+    height: 100%;
+    position: relative;
+}
+/* #bottom{
+    height: 10%;
+} */
+#marker{
+    position: absolute;
+    top: calc(50% - 32px);
+    left: calc(50% - 16px);
+    pointer-events: none;
+}
+#bottom{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* text-align: center; */
+    white-space: nowrap;
+    overflow-x: auto;
+}
+#bottom span{
+    width: 100%;
+    text-align: center;
+}

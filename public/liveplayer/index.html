@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #videos{
+            position: relative;
+            width: 90vw;
+            height: 90vh;
+        }
+        video{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="videos">
+        <video id="video"></video>
+        <video id="video2" style="visibility: hidden;"></video>
+    </div>
+    <!-- <button id="play" disabled>play</button> -->
+    <button id="play">play</button>
+    <script>
+        var video = document.getElementById("video");
+        var video2 = document.getElementById("video2");
+        var play = document.getElementById("play");
+        // var liveN = (new URL(window.location.href)).searchParams.get("n");
+        function getVideoPath(n){
+            // return "/?view&v=/uploads/livevideos3/" + liveN + "/" + n + ".mp4";
+            return "/test123/" + n + ".webm";
+        }
+        var videoN = 0;
+        play.onclick = function(){
+            video.play();
+        };
+        var checkVideoInterval;
+        function onVideoLoad(){
+            if(checkVideoInterval){
+                clearInterval(checkVideoInterval);
+                checkVideoInterval = null;
+                if(video.style.visibility == "visible"){
+                    video.play();
+                }else{
+                    video2.play();
+                }
+            }
+        }
+        function checkVideoFunction(){
+            if(!checkVideoInterval){
+                checkVideoInterval = setInterval(function(){
+                    if(video.style.visibility == "visible"){
+                        video.src = getVideoPath(videoN);
+                    }else{
+                        video2.src = getVideoPath(videoN);
+                    }
+                }, 1000);
+            }
+        }
+        // video.onloadeddata = function(){
+        //     play.disabled = 0;
+        // };
+        video.onloadeddata = onVideoLoad;
+        video2.onloadeddata = onVideoLoad;
+        video.onended = function(){
+            // videoN++;
+            // video.src = "/1690630252973270/"+videoN+".mp4";
+            video.style.visibility = "hidden";
+            video2.style.visibility = "visible";
+            video2.play();
+            videoN++;
+            video.src = getVideoPath(videoN);
+        };
+        video2.onended = function(){
+            video2.style.visibility = "hidden";
+            video.style.visibility = "visible";
+            video.play();
+            videoN++;
+            video2.src = getVideoPath(videoN);
+        };
+        video.onerror = checkVideoFunction;
+        video2.onerror = checkVideoFunction;
+        // if(liveN){
+            video.src = getVideoPath(videoN);
+            videoN++;
+            video2.src = getVideoPath(videoN);
+        // }
+        // video.onloadedmetadata = function(){
+        //     video.play();
+        // };
+        // var videoData;
+        // var mediaSource = new MediaSource;
+        // video.src = URL.createObjectURL(mediaSource);
+//         function loadVideo(){
+//             var ajax = new XMLHttpRequest();
+//             ajax.onload = function(){
+//                 // console.log(this.response)
+//                 // var fileReader = new FileReader();
+//                 // fileReader.onload = function(){
+//                 //     video.src = this.result;
+//                 //     loadLastChunk();
+//                 // };
+//                 // fileReader.readAsDataURL(this.response);
+//                 // fileReader = new FileReader();
+//                 // fileReader.onload = function(){
+//                 //     videoData = this.result;
+//                 // };
+//                 // fileReader.readAsText(this.response);
+//                 /*mediaSource.addEventListener("sourceopen", function(){
+//                     console.log(1)
+//                     const sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs="vorbis,vp8"');
+//                     const appendChunk = chunk => chunk.arrayBuffer().then(data => sourceBuffer.appendBuffer(data));
+//                     appendChunk(this.response);
+//                 });*/
+//                 // var ms = new MediaSource();
+
+// // var video = document.querySelector('video');
+// // video.src = window.URL.createObjectURL(ms);
+
+// // ms.addEventListener('sourceopen', function(e) {
+// //   var sourceBuffer = ms.addSourceBuffer('video/webm; codecs="vorbis,vp8"');
+// //   sourceBuffer.appendBuffer(ajax.response);
+
+// //   fileReader = new FileReader();
+// //                 fileReader.onload = function(){
+// //                     sourceBuffer.appendBuffer(this.result);
+// //                 };
+// //                 // fileReader.readAsText(ajax.response);
+// // });
+// var ms = new MediaSource();
+// video.src = URL.createObjectURL(ms);
+// ms.onsourceopen = function(){
+//     var sourceBuffer = ms.addSourceBuffer('video/webm; codecs="vorbis,vp8"');
+//     // var sourceBuffer = ms.addSourceBuffer('video/webm; codecs="vp8"');
+//     // var sourceBuffer = ms.addSourceBuffer('video/x-matroska;codecs=avc1,opus');
+//     // var sourceBuffer = ms.addSourceBuffer('video/webm;codecs=opus');
+//     // var sourceBuffer = ms.addSourceBuffer('video/webm');
+//     var fileReader = new FileReader();
+//     fileReader.onloadend = function(){
+//         sourceBuffer.appendBuffer(this.result);
+//     };
+//     fileReader.readAsArrayBuffer(ajax.response);
+// };
+// console.log(ajax.response)
+// // video.src = ajax.response;
+//             };
+//             // ajax.responseType = "blob";
+//             // ajax.open("GET", "../?view&v=uploads/livevideos/" + (new URL(window.location.href)).searchParams.get("n") + ".webm");
+//             ajax.responseType = "blob";
+//             // ajax.open("GET", "http://localhost/?view&v=uploads/livevideos/1688751513680564/0.webm");
+//             ajax.open("GET", "http://localhost/?view&v=uploads/livevideos/1688820428180337/0.webm");
+//             ajax.send();
+//         }
+//         function loadLastChunk(){
+//             var ajax = new XMLHttpRequest();
+//             ajax.onload = function(){
+//                 // console.log(this.response)
+//                 // var fileReader = new FileReader();
+//                 // fileReader.onload = function(){
+//                 //     var fileReader = new FileReader();
+//                 //     fileReader.onload = function(){
+//                 //         video.src = this.result;
+//                 //     };
+//                 //     fileReader.readAsDataURL(new Blob([videoData + this.response]));
+//                 // };
+//                 // fileReader.readAsText(this.response);
+//             };
+//             ajax.responseType = "blob";
+//             ajax.open("GET", "../?view&v=uploads/livevideos/" + (new URL(window.location.href)).searchParams.get("n") + "lastlivechunk");
+//             ajax.send();
+//         }
+//         function replay(chunks) {
+//   const mediaSource = new MediaSource()
+//   video.src = URL.createObjectURL(mediaSource)
+
+//   mediaSource.addEventListener('sourceopen', () => {
+//     const sourceBuffer = mediaSource.addSourceBuffer()
+//     const appendChunk = chunk => chunk.arrayBuffer().then(data => sourceBuffer.appendBuffer(data))
+//     sourceBuffer.addEventListener('updateend', () => {
+//       if (chunks[i]) {
+//         appendChunk(chunks[i++])
+//       } else {
+//         mediaSource.endOfStream()
+//       }
+//     })
+//     appendChunk(chunks[i++])
+//   })
+// }
+        // loadVideo();
+    // var chunks = [];
+    // var chunkQuantity = 4;
+    // for(let i = 0; i < chunkQuantity; i++){
+    //     var ajax = new XMLHttpRequest();
+    // ajax.onload = function(){
+    //     // chunks.push(this.response);
+    //     chunks[i] = this.response;
+    //     // if(i == 12){
+    //     if(chunks.length == chunkQuantity){
+    //         video.src = URL.createObjectURL(new Blob(chunks, {type: "video/webm"}));
+    //     }
+    // };
+    // ajax.responseType = "arraybuffer";
+    // ajax.open("GET", "/?view&v=uploads/livevideos/1690635604388044/"+i+".webm");
+    // ajax.send();
+    // }
+    // video.onended = function(){
+    //     var ajax2 = new XMLHttpRequest();
+    //         ajax2.onload = function(){
+    //     // chunks.push(this.response);
+    //     chunks[4] = this.response;
+    //     // if(i == 12){
+    //     // if(chunks.length == chunkQuantity){
+    //         video.src = URL.createObjectURL(new Blob(chunks, {type: "video/webm"}));
+    //         video.load();
+    //         video.play();
+    //     // }
+    // };
+    // ajax2.responseType = "arraybuffer";
+    // ajax2.open("GET", "/?view&v=uploads/livevideos/1690635604388044/"+4+".webm");
+    // ajax2.send();
+    // }
+    // var mediaSource = new MediaSource();
+    // video.src = URL.createObjectURL(mediaSource);
+    
+// function appendChunk() {
+// //   var video = document.getElementById("myVideo");
+//   var mediaSource = new MediaSource();
+//   video.src = URL.createObjectURL(mediaSource);
+//   mediaSource.addEventListener('sourceopen', function() {
+//     var sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs="vp8, vorbis"');
+//     fetch("/?view&v=uploads/livevideos/1690630252973270/0.webm")
+//       .then(response => response.arrayBuffer())
+//       .then(buffer => {
+//         console.log(buffer)
+//         sourceBuffer.appendBuffer(buffer)
+//       });
+//     //   setTimeout(function(){
+//     //     fetch("/?view&v=uploads/livevideos/1690635604388044/1.webm")
+//     //   .then(response => response.arrayBuffer())
+//     //   .then(buffer => {
+//     //     sourceBuffer.appendBuffer(buffer)
+//     //     console.log(buffer)
+//     //   });
+//     //   },5000);
+//   });
+// }
+// function appendChunk() {
+// //   var video = document.getElementById("myVideo");
+//   var mediaSource = new MediaSource();
+//   video.src = URL.createObjectURL(mediaSource);
+//   mediaSource.addEventListener('sourceopen', function() {
+//     var sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs="vp8"');
+//     fetch('/?view&v=uploads/livevideos/1690630252973270/0.webm')
+//       .then(response => response.arrayBuffer())
+//       .then(buffer => {
+//         console.log(buffer)
+//         var blob = new Blob([buffer], {type: 'video/webm'});
+//         console.log(blob)
+//         // sourceBuffer.appendBuffer(blob);
+//         video.src = URL.createObjectURL(blob);
+//       });
+//   });
+// }
+// appendChunk()
+// var mediaSource = new MediaSource();
+// // var video = document.getElementById("myVideo");
+// video.src = URL.createObjectURL(mediaSource);
+// mediaSource.addEventListener('sourceopen', function() {
+//   var sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs="vp8, vorbis"');
+
+//   // Start fetching new chunks of video data
+// //   setInterval(function() {
+//     fetch('/?view&v=uploads/livevideos/1690630252973270/0.webm')
+//       .then(response => response.arrayBuffer())
+//       .then(buffer => {
+//         var blob = new Blob([buffer], {type: 'video/webm'});
+//         sourceBuffer.appendBuffer(blob);
+//       });
+// //   }, 1000);
+// });
+// // var video = document.createElement('video');
+// var mediaSource = new MediaSource();
+// video.src = URL.createObjectURL(mediaSource);
+// mediaSource.addEventListener('sourceopen', function(e) {
+//   var sourceBuffer = mediaSource.addSourceBuffer('video/mp4; codecs="avc1.42E01E, mp4a.40.2');
+//   var buffers = [];
+//   var buffersDownloadedQuantity = 0;
+//   const videosQuantity = 13;
+//   for(let i = 0; i < videosQuantity; i++){
+//     fetch('/1690630252973270/'+i+'.mp4')
+//     .then(function(response) {
+//       return response.arrayBuffer();
+//     })
+//     .then(function(arrayBuffer) {
+//         console.log(arrayBuffer, i)
+//         // video.src = URL.createObjectURL(new Blob([arrayBuffer]))
+//         buffers[i] = arrayBuffer;
+//         if(++buffersDownloadedQuantity == videosQuantity){
+//             for(let i = 0; i < videosQuantity; i++){
+//                 sourceBuffer.appendBuffer(buffers[i]);
+//             }
+//         }
+//     });
+//   }
+// });
+// const mediaSource = new MediaSource();
+// // const video = document.querySelector('video');
+// video.src = URL.createObjectURL(mediaSource);
+
+// mediaSource.addEventListener('sourceopen', function(e) {
+// //   const sourceBuffer = mediaSource.addSourceBuffer('video/mp4; codecs="avc1.64001E"');
+//   const sourceBuffer = mediaSource.addSourceBuffer('video/mp4; codecs="avc1.42E01E, mp4a.40.2');
+//   const videoSources = [
+//     '/1690630252973270/0.mp4',
+//     '/1690630252973270/1.mp4',
+//     '/1690630252973270/2.mp4'
+//   ];
+//   let i = 0;
+//   function fetchNext() {
+//     if (i >= videoSources.length) {
+//       return;
+//     }
+//     fetch(videoSources[i])
+//       .then(response => response.arrayBuffer())
+//       .then(arrayBuffer => {
+//         sourceBuffer.appendBuffer(arrayBuffer);
+//         i++;
+//         fetchNext();
+//       });
+//   }
+//   fetchNext();
+// });
+// const video1 = document.createElement('video');
+// video.src = '/1690630252973270/0.mp4';
+// const video2 = document.createElement('video');
+// video2.src = '/1690630252973270/1.mp4';
+// video.appendChild(video2);
+
+
+// const assetURL = "/fragmented.mp4";
+// // Need to be specific for Blink regarding codecs
+// // ./mp4info frag_bunny.mp4 | grep Codec
+// const mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
+// // const mediaSource = getMediaSource();
+// const mediaSource = new MediaSource();
+
+// if ("MediaSource" in window && MediaSource.isTypeSupported(mimeCodec)) {
+//   console.log(mediaSource.readyState); // closed
+//   mediaSource.addEventListener("sourceopen", sourceOpen);
+//   video.src = URL.createObjectURL(mediaSource);
+// } else {
+//   console.error("Unsupported MIME type or codec: ", mimeCodec);
+// }
+
+// function sourceOpen() {
+//   console.log(this.readyState); // open
+//   const sourceBuffer = mediaSource.addSourceBuffer(mimeCodec);
+//   fetch(assetURL, (buf) => {
+//     sourceBuffer.addEventListener("updateend", () => {
+//       mediaSource.endOfStream();
+//       video.play();
+//       console.log(mediaSource.readyState); // ended
+//     });
+//     sourceBuffer.appendBuffer(buf);
+//   });
+// }
+
+    </script>
+</body>
+</html>

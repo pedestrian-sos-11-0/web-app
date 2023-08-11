@@ -1,0 +1,92 @@
+body    {
+    margin: 0;
+    padding: 0;
+}
+#main, #top {
+    text-align: center;
+}
+#top *{
+    display: inline-block;
+    vertical-align: middle;
+}
+#main   {
+    min-height: 100vh;
+    font-family: sans-serif;
+    width: 100%;
+    word-wrap: break-word;
+}
+.pedestrian {
+    color: #256aff;
+}
+.sos    {
+    color: #ec0400;
+}
+.inputDivs{
+    display: inline-block;
+    margin: 4px;
+    padding: 4px;
+    border: 1px solid #256aff;
+    border-radius: 4px;
+    vertical-align: middle;
+}
+.inputDivs label{
+    font-weight: bold;
+}
+.inputDivs div{
+    margin: 2px;
+    padding: 2px;
+    border: 1px solid #256aff80;
+}
+.inputDivs div *{
+    vertical-align: middle;
+}
+.inputDivs input, .inputDivs select, .inputDivs textarea{
+    font-size: 16px;
+}
+.inputsDivs{
+    margin: 4px;
+    padding: 4px;
+    border: 2px solid #256aff;
+    border-radius: 4px;
+}
+.bigDivs{
+    margin: 2px;
+    padding: 2px;
+    border: 2px solid #256aff;
+    border-radius: 2px;
+}
+.disabled{
+    /* pointer-events: none;
+    opacity: 0.5;
+    background-color: #ec0400; */
+    display: none;
+}
+#warningDiv{
+    border: 2px solid #ec0400;
+    padding: 4px;
+}
+#warningTitle{
+    font-weight: bold;
+    color: #ec0400;
+    font-size: 50px;
+    border-bottom: 1px solid #ec0400;
+    margin-bottom: 1px;
+}
+#warningDescription{
+    font-size: 32px;
+}
+#warning2{
+    font-weight: bold;
+    color: #ec0400;
+}
+.textareadiv{
+    max-width: 100%;
+}
+.textareadiv textarea{
+    max-width: calc(100% - 8px);
+    width: 100%;
+    height: 30vh;
+}
+#freefieldboxdiv{
+    width: calc(100% - 12px);
+}

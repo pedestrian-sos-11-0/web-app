@@ -1,0 +1,138 @@
+#upload {
+    display: none;
+}
+#location, #uploadprogress   {
+    padding: 1px;
+    border: 1px solid #256aff;
+}
+#uploadstatuses {
+    margin-top: 2%;
+    border-width: 2px;
+    border-image: linear-gradient(#0000ff, #0080ff) 1;
+    text-align: initial;
+}
+.descriptioninput  {
+    width: 99%;
+}
+.boxs2 {
+    border-style: dotted;
+    margin: 1%;
+    padding: 1%;
+}
+.progressbar0, .progressbar {
+    border-radius: 8px;
+}
+.progressbar0   {
+    width: 99%;
+    height: 2vh;
+    border: 2px solid #256aff;
+}
+.progressbar    {
+    background-color: #256aff;
+    height: 2vh;
+}
+#dragoverlay,#settingswindowoverlay{
+    display: none;
+}
+.overlay    {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    /* cursor: pointer; */
+}
+/* .overlay > *{
+    cursor: initial;
+} */
+#dragoverlay    {
+    background-color: #256aff80;
+}
+#location   {
+    border-radius: 8px;
+    max-width: calc(100% - 8px);
+    text-align: initial;
+}
+#location *   {
+    margin: 2px;
+    padding: 2px;
+    vertical-align: middle;
+}
+/* .locationDivs    {
+    border-bottom: 1px solid #256aff;
+}
+.locationTitles {
+    font-weight: 600;
+    border-right: 1px dotted #256aff;
+} */
+#location table, #location th, #location td{
+    border: 1px solid #256aff;
+    border-width: 0 1px 1px 0;
+    border-collapse: collapse;
+}
+#location table{
+    width: 100%;
+}
+#locationtop    {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid #256aff;
+    margin-bottom: 2px;
+    font-weight: bold;
+}
+#uploadstatusbottom {
+    left: 5%;
+    right: 5%;
+    width: 90%;
+    height: 7vh;
+    background-color: #256aff80;
+    border-radius: 8px 8px 0 0;
+    position: fixed;
+    bottom: -8vh;
+    display: none;
+    align-items: center;
+    padding: 1vh;
+}
+@keyframes showbottom   {
+    from{bottom: -8vh;}
+    to{bottom: 0;}
+}
+@keyframes hidebottom   {
+    from{bottom: 0;}
+    to{bottom: -8vh;}
+}
+#uploadstatusbottom div {
+    height: 50%;
+    border-radius: 8px;
+    transition: background-color 0.25s;
+}
+.statusText {
+    border: 2px solid;
+    margin: 2px;
+    padding: 2px;
+}
+/* #settingswindow{
+    border: 2px solid #256aff;
+    border-radius: 10px;
+} */
+#uploadstatusbottomcenter{
+    display: block;
+    display: flex;
+    justify-content: center;
+}
+/* .closeButtons{
+    background: none;
+    font-size: 25px;
+    border: 2px solid #ec040080;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.closeButtons:hover{
+    border-color: #ec0400;
+} */

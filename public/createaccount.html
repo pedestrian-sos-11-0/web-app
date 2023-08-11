@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/createaccount.css">
+</head>
+<body>
+    <div id="main">
+        <div id="top">
+            <a href="/" style="text-decoration: none;">
+                <img width="64" height="64" src="images/pedestriansos.svg">
+                <h1>
+                    <span class="pedestrian">pedestrian</span>&nbsp;<span class="sos">SOS!</span>
+                </h1>
+            </a>
+        </div>
+        <div style="border: 4px solid #000000;">
+            <div style="border: 4px solid #ffff00;">
+                <img style="vertical-align: middle;" width="256" height="256" src="/images/warning.png">
+                &nbsp;
+                <span style="font-size: 36px;font-weight: bold;text-decoration: underline overline;vertical-align: middle;">WEB PAGE UNDER CONSTRUCTION...</span>
+            </div>
+        </div>
+        <h2>
+            <span class="account">account</span>
+        </h2>
+        <a href="/" style="border: 2px solid #256aff;padding: 4px;display: inline-block;">
+            <img width="32" height="32" src="../images/homepage.svg">&nbsp;<span><span class="gomainpage">gomainpage</span></span>
+        </a>
+        <br><br>
+        <div id="warningDiv">
+            <div id="warningTitle">
+                <span class="warning"></span>!
+            </div>
+            <div id="warningDescription">
+                <span class="accountcreationwarning"></span>
+            </div>
+            <br>
+            <div>
+                <input id="agreeverifycheckbox" type="checkbox">
+                <label for="agreeverifycheckbox">
+                    <span class="agreeverifytext"></span>
+                </label>
+                <br><br>
+                <div>
+                    <a href="/" style="text-decoration: none;">
+                        <button>
+                            <img width="32" height="32" src="images/homepage.svg">&nbsp;<span class="gomainpage"></span>
+                        </button>
+                    </a>
+                    &nbsp;
+                    <button disabled id="agreeverifybutton">
+                        <span class="startregistration"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div id="registerDiv" class="disabled">
+            <form id="registerForm">
+                <div class="bigDivs">
+                    <h3>
+                        <span class="basicinfo"></span>
+                    </h3>
+                    <div>
+                        <span class="optional"></span>.&nbsp;<span class="influencesaccounttechnicalfunctions"></span>
+                    </div>
+                    <hr><br>
+                    <div class="inputsDivs">
+                        <div class="inputDivs">
+                            <label for="username">
+                                <span class="usernametitle"></span>
+                            </label>
+                            <input type="text" id="username">
+                            <div>
+                                <span class="usernamedescription"></span>
+                            </div>
+                            <div>
+                                <img width="16" height="16" src="images/public.svg">
+                                <span class="public"></span>
+                            </div>
+                            <div>
+                                <span class="optional"></span>
+                            </div>
+                        </div>
+                        <div class="inputDivs">
+                            <label for="repeatusername">
+                                <span class="repeattitle"></span>
+                                <span class="usernametitle"></span>
+                            </label>
+                            <input type="text" id="repeatusername">
+                            <div>
+                                <span class="repeatdescription"></span>
+                                <span class="usernametitle"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inputsDivs">
+                        <div class="inputDivs">
+                            <label for="password">
+                                <span class="passwordtitle"></span>
+                            </label>
+                            <input type="password" id="password">
+                            <div>
+                                <span class="passworddescription"></span>
+                            </div>
+                            <div>
+                                <span class="optional"></span>
+                            </div>
+                        </div>
+                        <div class="inputDivs">
+                            <label for="repeatpassword">
+                                <span class="repeattitle"></span>
+                                <span class="passwordtitle"></span>
+                            </label>
+                            <input type="password" id="repeatpassword">
+                            <div>
+                                <span class="repeatdescription"></span>
+                                <span class="passwordtitle"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bigDivs">
+                    <h3>
+                        <span class="additionalinfo"></span>
+                    </h3>
+                    <div>
+                        <span class="optional"></span>.&nbsp;<span class="notinfluencesaccounttechnicalfunctions"></span>
+                    </div>
+                    <hr><br>
+                    <div class="inputDivs">
+                        <label for="name">
+                            <span class="nametitle"></span>
+                        </label>
+                        <input type="text" id="name">
+                        <div>
+                            <span class="namedescription"></span>
+                        </div>
+                        <div>
+                            <img width="16" height="16" src="images/public.svg">
+                            <span class="public"></span>
+                        </div>
+                        <div>
+                            <span class="optional"></span>
+                        </div>
+                    </div>
+                    <div class="inputDivs" id="freefieldboxdiv">
+                        <label for="freefield">
+                            <span class="freefieldtitle"></span>
+                        </label>
+                        <div class="textareadiv">
+                            <textarea id="freefield"></textarea>
+                        </div>
+                        <div>
+                            <span class="freefielddescription"></span>
+                        </div>
+                        <div>
+                            <img width="16" height="16" src="images/public.svg">
+                            <span class="public"></span>
+                        </div>
+                        <div>
+                            <span class="optional"></span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="scripts/createaccount.js"></script>
+</body>
+</html>

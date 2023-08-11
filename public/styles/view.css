@@ -1,0 +1,164 @@
+body    {
+    margin: 0;
+    padding: 0;
+}
+#main   {
+    font-family: sans-serif;
+    text-align: center;
+    background-color: #ffffff;
+    min-height: 100vh;
+}
+#top *,.one,.one *:not(hr),.buttons,.buttons *{
+    display: inline-block;
+    vertical-align: middle;
+}
+#main hr{
+    border-top: 1px solid #256aff;
+}
+.pedestrian {
+    color: #256aff;
+}
+#sos    {
+    color: #ec0400;
+}
+#top{
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border-bottom: 2px solid #256aff;
+    background-color: inherit;
+    z-index: 1;
+}
+#top a img,#top a h1{
+    transition: 0.1s;
+}
+.one    {
+    width: 90%;
+    border: 2px solid #256aff;
+    border-radius: 8px;
+    margin: 2%;
+    padding: 1%;
+}
+.one > div  {
+    max-width: 90%;
+}
+.one *{
+    word-wrap: break-word;
+}
+.photovideo   {
+    width: 90%;
+    text-align: center;
+}
+.photovideo *   {
+    max-width: 100%;
+    width: 100%;
+    min-height: 25vh;
+    max-height: 75vh;
+}
+/* .pvoverlay0{
+    position: relative;
+}
+.pvoverlay{
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    color: #ffffff;
+    font-size: 50px;
+    text-decoration: none;
+    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+.photovideo img {
+    object-fit: contain;
+}
+.boxs  {
+    border: 1px solid #256aff;
+    padding: 8px;
+    border-radius: 4px;
+    width: 99%;
+    font-size: 16px;
+}
+.boxs:not(:first-child) {
+    margin-top: 1%;
+}
+.boxs div:not(.buttonsdivs):not(:empty)   {
+    border: 1px dotted #256aff;
+    padding: 1px;
+}
+.boxs>div:not(:first-child) {
+    margin-top: 1%;
+}
+.title{
+    font-weight: bold;
+}
+.descriptiondiv    {
+    width: 90%;
+    max-height: 50vh;
+    overflow-y: auto;
+    text-align: initial;
+    white-space: pre-wrap;
+}
+.buttons {
+    font-size: 20px;
+    font-weight: bold;
+    border: 2px dotted #256aff;
+    border-radius: 8px;
+    padding: 4px;
+    cursor: pointer;
+    background: none;
+    text-decoration: none;
+    color: inherit;
+    margin: 4px;
+}
+.buttons:disabled   {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-color: #ec0400;
+}
+.buttons:hover   {
+    border-style: dashed;
+}
+.buttons:active   {
+    border-style: solid;
+}
+@media(prefers-color-scheme: dark)    {
+    :root   {
+        color-scheme: dark;
+    }
+    #main   {
+        background-color: #000000;
+    }
+}
+.seemore{
+    background: none;
+    border: none;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    color: #256aff;
+}
+.seemore:hover{
+    text-decoration: underline;
+}
+/*.overlay    {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+}*/
+.linksdivs{
+    border: 1px solid #256aff;
+    padding: 1px;
+}

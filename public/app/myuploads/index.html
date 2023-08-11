@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/myuploads.css">
+</head>
+<body>
+    <div id="main">
+        <div id="top">
+            <a href="/app/" style="text-decoration: none;">
+                <img alt width="64" height="64" src="/images/pedestriansos.svg">
+                <h1>
+                    <span class="pedestrian"></span>&#160;<span class="sos">SOS!</span>
+                </h1>
+            </a>
+        </div>
+        <h2>
+            <img alt width="32" height="32" src="/images/myuploads.svg">
+            <span class="myuploads"></span>
+        </h2>
+        <div id="myuploads"></div>
+        <div>
+            <button class="buttons smallbuttons" id="previousButton" disabled>
+                <span style="color:#256aff;font-size:32px;">&#60;&#60;</span>&#160;<span class="previous"></span>
+            </button>
+            &#160;
+            <button class="buttons smallbuttons" id="nextButton" disabled>
+                <span style="color:#256aff;font-size:32px;">&#62;&#62;</span>&#160;<span class="next"></span>
+            </button>
+        </div>
+        <span id="currentPageIndex">0</span> / <span id="totalPageQuantity">0</span>
+        <br>
+        <button id="clearMyUploads" class="buttons smallbuttons" disabled>
+            <span style="color:#ec0400;font-size:32px;">&times;</span>&#160;<span class="clearall"></span>
+        </button>
+        <br><br>
+        <a href="/" class="buttons">
+            <img alt width="64" height="64" src="/images/homepage.svg">&#160;<span class="gomainpage"></span>
+        </a>
+        <br><br>
+    </div>
+    <script src="/scripts/myuploads.js"></script>
+</body>
+</html>

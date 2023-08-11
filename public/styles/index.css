@@ -1,0 +1,159 @@
+body    {
+    margin: 0;
+    padding: 0;
+}
+#main, #top {
+    text-align: center;
+}
+#top *{
+    display: inline-block;
+    vertical-align: middle;
+}
+#main   {
+    min-height: 100vh;
+    font-family: sans-serif;
+    width: 100%;
+    word-wrap: break-word;
+}
+.pedestrian {
+    color: #256aff;
+}
+.sos    {
+    color: #ec0400;
+}
+#buttons, .buttonsDivs    {
+    display: inline-block;
+    max-width: 100%;
+}
+.buttonsDivs div  {
+    margin: 2px;
+    display: inline-block;
+}
+.buttonsDivs2{
+    margin: 1% 0;
+}
+.buttonsDivs2 > div{
+    display: inline-block;
+    margin: 1%;
+}
+.buttons {
+    display: inline-block;
+    font-size: 25px;
+    font-weight: bold;
+    border: 2px dotted #256aff;
+    border-radius: 8px;
+    padding: 4px;
+    cursor: pointer;
+    background: none;
+    text-decoration: none;
+    color: inherit;
+}
+.buttons *{
+    vertical-align: middle;
+}
+.buttons:disabled   {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-color: #ec0400;
+}
+.buttons:hover   {
+    border-style: dashed;
+}
+.buttons:active   {
+    border-style: solid;
+}
+.afteruploadbuttons {
+    font-size: 20px;
+}
+.boxs    {
+    border: 2px solid #256aff;
+    margin: 1%;
+    padding: 1%;
+    width: 90%;
+    border-radius: 8px;
+    display: inline-block;
+}
+#main textarea   {
+    width: 99%;
+    max-height: 50vh;
+    background: none;
+    resize: none;
+    font-size: 16px;
+}
+.icons{
+    fill: #000000;
+}
+@media(prefers-color-scheme: dark)    {
+    #main   {
+        background-color: #000000;
+    }
+    .texts  {
+        color: #ffffff;
+    }
+    :root   {
+        color-scheme: dark;
+    }
+    .icons{
+        fill: #ffffff;
+    }
+}
+.info   {
+    border: 2px dotted #256aff;
+    border-radius: 8px;
+    padding: 16px;
+}
+.info hr{
+    border-top: 1px solid #256aff;
+}
+/* .uploadforms{
+    border: 1px solid #256aff;
+    margin: 4px;
+    padding: 4px;
+}
+.uploadbuttondiv,.buttonsDivs .uploadforms{
+    display: inline-block;
+}
+.uploadforms:invalid .uploadbuttondiv{
+    cursor: not-allowed;
+}
+.uploadforms:invalid .uploadbuttondiv>button{
+    pointer-events: none;
+    opacity: 0.5;
+    border-color: #ec0400;
+} */
+.hiddenonload{
+    display: none;
+}
+#filelink{
+    font-size: 16px;
+}
+.buttongroup{
+    border: 1px solid #256aff;
+    display: inline-block;
+}
+.uploadforms button[type="button"] {
+    display: inline-block;
+    border: none;
+    border-radius: 8px;
+    padding: 0;
+    cursor: pointer;
+    background: none;
+}
+.uploadbuttondiv,.buttonsDivs .uploadforms{
+    display: inline-block;
+}
+.uploadforms:invalid .uploadbuttondiv{
+    cursor: not-allowed;
+}
+.uploadforms:invalid .uploadbuttondiv>button{
+    pointer-events: none;
+    opacity: 0.5;
+    border-color: #ec0400;
+}
+.uploadforms{
+    margin: 4px;
+}
+.uploadforms input[type="file"]{
+    width: 0;
+    height: 0;
+}

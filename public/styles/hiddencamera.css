@@ -1,0 +1,55 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    height: 100vh;
+    overflow-y: hidden;
+}
+#body2{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+#main{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+#screen{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    background-color: #808080;
+}
+#video{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+#canvas{
+    display: none;
+}
+#fullscreen{
+    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 12;
+}
+#colorfulindicator{
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 11;
+    width: 100%;
+    pointer-events: none;
+}

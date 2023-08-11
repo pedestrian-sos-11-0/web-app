@@ -1,0 +1,176 @@
+body    {
+    margin: 0;
+    padding: 0;
+}
+#main, #top {
+    text-align: center;
+}
+#top *{
+    display: inline-block;
+    vertical-align: middle;
+}
+#main   {
+    min-height: 100vh;
+    font-family: sans-serif;
+    width: 100%;
+    word-wrap: break-word;
+}
+.pedestrian {
+    color: #256aff;
+}
+.sos    {
+    color: #ec0400;
+}
+.settingsbox h4{
+    margin: 0;
+}
+.settingsbottomline{
+    border-bottom: 1px solid #256aff;
+}
+.settingsbox{
+    border: 1px dotted #256aff;
+    border-radius: 4px;
+    padding: 8px;
+    margin-top: 8px;
+    text-align: center;
+}
+.xycenter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4px;
+}
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .25s;
+    transition: .25s;
+}
+.slider:before, .slider img {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #ffffff;
+    -webkit-transition: .25s;
+    transition: .25s;
+}
+input:checked + .slider {
+    background-color: #256aff;
+}
+input:checked + .slider:before, input:checked + .slider img {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+#darkmodecheckbox:checked + .slider:before, #darkmodecheckbox:checked + .slider img {
+    background-color: #000000;
+    content: url("../images/darkmode1.png");
+}
+.slider.round, .slider img {
+    border-radius: 34px;
+}
+.slider.round:before {
+    border-radius: 50%;
+}
+#darkmodediv    {
+    border: 2px solid #256aff80;
+    border-radius: 8px;
+    margin: 1%;
+    padding: 1%;
+    text-align: center;
+    cursor: pointer;
+}
+#darkmodediv:hover  {
+    border-color: #256aff;
+}
+#darkmodediv *  {
+    margin: 1%;
+}
+.settingsbox select{
+    font-size: 16px;
+    margin: 1%;
+    padding: 1%;
+    cursor: pointer;
+}
+.settingsbox input[type="checkbox"], .settingsbox input[type="radio"]{
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+}
+.settingsbox label{
+    cursor: pointer;
+}
+.settingsbox .buttons{
+    font-size: 16px;
+}
+.settingssubbox{
+    border: 1px solid #256aff80;
+    /* display: inline-block; */
+    border-radius: 2px;
+    padding: 2px;
+    margin-top: 2px;
+    flex-wrap: wrap;
+}
+.settingdescription{
+    margin-top: 4px;
+    border-top: 1px solid #256aff80;
+}
+.settingsbox table{
+    width: 100%;
+}
+@media(prefers-color-scheme: dark)    {
+    #main   {
+        background-color: #000000;
+    }
+    :root   {
+        color-scheme: dark;
+    }
+}
+.buttons {
+    display: inline-block;
+    font-size: 25px;
+    font-weight: bold;
+    border: 2px dotted #256aff;
+    border-radius: 8px;
+    padding: 4px;
+    cursor: pointer;
+    background: none;
+    text-decoration: none;
+    color: inherit;
+}
+.buttons *{
+    vertical-align: middle;
+}
+.buttons:disabled   {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-color: #ec0400;
+}
+.buttons:hover   {
+    border-style: dashed;
+}
+.buttons:active   {
+    border-style: solid;
+}
+.smallbuttons {
+    font-size: 20px;
+}

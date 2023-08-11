@@ -1,0 +1,82 @@
+<?php
+define("jsonLanguagesPath", $_SERVER["DOCUMENT_ROOT"] . "/json/languages/main/");
+$jsonLangFiles = array_slice(scandir(jsonLanguagesPath), 2);
+if(isset($_FILES["images"]["tmp_name"])){
+    define("protectedPath", dirname($_SERVER["DOCUMENT_ROOT"]) . "/protected/");
+    define("protectedPrivatePath", protectedPath . "private/");
+    define("captchafiles", protectedPrivatePath . "captchafiles/");
+    define("captchaimages", captchafiles . "captchaimages/");
+    define("captchatexts", captchafiles . "captchatexts/");
+    $files = $_FILES["images"]["tmp_name"];
+    $typeID = count(scandir(captchatexts)) - 2;
+    $typeimg = 0;
+    for($i = 0; $i < count($files); $i++){
+        $path = $files[$i];
+        if(exif_imagetype($path) == IMAGETYPE_PNG){
+            $img = imagecreatefrompng($path);
+        }
+        else if(exif_imagetype($path) == IMAGETYPE_JPEG){
+            $img = imagecreatefromjpeg($path);
+        }else{
+            continue;
+        }
+        if(!$typeimg){
+            $typeimg = 1;
+        }
+        $img = imagescale($img, 128, 128);
+        imagepng($img, captchaimages . $i . "_" . $typeID);
+    }
+    if($typeimg){
+        $textDirPath = captchatexts . $typeID . "/";
+        mkdir($textDirPath);
+        foreach($jsonLangFiles as $file){
+            $textLang = pathinfo(jsonLanguagesPath . $file, PATHINFO_FILENAME);
+            file_put_contents($textDirPath . $textLang . ".txt", $_POST["text_" . $textLang]);
+        }
+    }
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @media(prefers-color-scheme: dark)    {
+            :root   {
+                color-scheme: dark;
+            }
+        }
+    </style>
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" accept="image/png,image/jpeg" name="images[]" multiple required>
+        <table>
+            <tbody>
+                <?php
+                    foreach($jsonLangFiles as $file){
+                        $file = jsonLanguagesPath . $file;
+                        $langCode = pathinfo($file, PATHINFO_FILENAME);
+                        $langName = json_decode(file_get_contents($file), TRUE)["langname"];
+                        echo '
+                            <tr>
+                                <th>
+                                    <label for="'.$langCode.'">'.$langName.'</label>
+                                </th>
+                                <td>
+                                    <input type="text" name="text_'.$langCode.'" id="'.$langCode.'" required>
+                                </td>
+                                <th>
+                                    <label for="'.$langCode.'">'.$langCode.'</label>
+                                </th>
+                            </tr>
+                        ';
+                    }
+                ?>
+            </tbody>
+        </table>
+        <input type="submit">
+    </form>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        iframe{
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+    <link rel="stylesheet" href="/styles/maps.css">
+</head>
+<body>
+    <div id="main">
+        <div id="mapdiv">
+            <!-- <iframe id="map" src="http://localhost:8081/"></iframe> -->
+            <iframe sandbox="allow-scripts" id="map" src="/maps0" allowfullscreen></iframe>
+            <div id="marker">
+                <img width="32" height="32" src="/images/locationmarker.svg">
+            </div>
+        </div>
+        <div id="bottom">
+            <span id="coordinates">0, 0</span>
+        </div>
+    </div>
+    <script src="/scripts/maps.js"></script>
+</body>
+</html>

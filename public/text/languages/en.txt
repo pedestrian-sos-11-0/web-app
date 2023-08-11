@@ -1,0 +1,11 @@
+Everything uploaded is public. Anyone can see, share, download uploaded data.
+Identity of uploader is anonymous, because user does not have to enter any personal information.
+If you upload data, for security reasons, you cannot delete it. Also, you cannot change visibility of uploaded data and it will be always public.
+This software is for publishing content about problems (for example: violation of pedestrian rights, environment pollution, etc..).
+Not allowed:
+inappropriate content, which is not about problems (for example: entertainment, business, etc..);
+evil actions (for example: promotion of environment pollution, promotion of any other types of malice, etc..);
+interferencing our services (for example: overflowing storage, etc..);
+and other evil actions..
+Data, which is not allowed, will be deleted.
+Abuse is prohibited and intentionally malicious users will be blocked without warning.

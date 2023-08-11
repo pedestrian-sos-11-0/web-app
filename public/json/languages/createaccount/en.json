@@ -1,0 +1,22 @@
+{
+    "account": "Account",
+    "accountcreationwarning": "If you upload file with account, your account identity will be publicly displayed to uploaded file. Everything you enter in registration form will be public and you will not be able to remove them or change their visibility. Even if you edit any data, it will be still publicly visible in edit history and you cannot remove it. You cannot remove account and you cannot change visibility of it. After registration will be completed, your account and data will be permanently public. Accordingly, if you would like to anonymously upload data, do not enter any personal information or do not create account. Creating account is not compulsory and you can still use our services without account.",
+    "agreeverifytext": "I read, understood and agree",
+    "startregistration": "Start registration",
+    "public": "Public",
+    "optional": "Optional",
+    "repeattitle": "Repeat",
+    "repeatdescription": "To prevent typos, re-enter",
+    "basicinfo": "Basic information",
+    "influencesaccounttechnicalfunctions": "Influences account technical functions (log in and identification methods)",
+    "usernametitle": "Username",
+    "usernamedescription": "It is not compulsory to enter your real name. You can enter anything, even it is not human name. Username is unique. Only 1 account can have specific username. Used for log in to account and for identification. If you do not fill it, account unique number will be still used for log in and identification.",
+    "passwordtitle": "Password",
+    "passworddescription": "If you do not enter password, you will be logged in with key saved in this browser.",
+    "additionalinfo": "Additional information",
+    "notinfluencesaccounttechnicalfunctions": "Not influences account technical functions. If filled in, they are only informational and do not affect any functions of our services.",
+    "nametitle": "Name",
+    "namedescription": "You can enter first name and last name both in this field, but it is not compulsory and you can enter anything. This field is optional and it is not compulsory to enter your real name. You can enter anything, even it is not human name.",
+    "freefieldtitle": "Free field",
+    "freefielddescription": "This field is optional and does not affect anything. You can enter anything here."
+}

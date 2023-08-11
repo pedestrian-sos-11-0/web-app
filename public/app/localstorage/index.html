@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/localstorage.css">
+</head>
+<body>
+    <div id="main">
+        <div id="top">
+            <a href="/app/" style="text-decoration: none;">
+                <img alt width="64" height="64" src="/images/pedestriansos.svg">
+                <h1>
+                    <span class="pedestrian"></span>&#160;<span class="sos">SOS!</span>
+                </h1>
+            </a>
+        </div>
+        <h2>
+            <img alt width="32" height="32" src="/images/localstorage.svg">
+            <span class="localstorage"></span>
+        </h2>
+        <div>
+            <div>
+                <button id="videodata" class="buttons smallbuttons databuttons">
+                    <img alt width="32" height="32" src="/images/video.svg">&#160;<span class="video"></span>
+                </button>
+                <button id="locationdata" class="buttons smallbuttons databuttons">
+                    <img alt width="32" height="32" src="/images/location.svg">&#160;<span class="locationcoordinates"></span>
+                </button>
+                <button id="locationuploaddata" class="buttons smallbuttons databuttons">
+                    <img alt width="32" height="32" src="/images/location.svg">&#160;<img alt width="32" height="32" src="/images/uploadicon.svg">&#160;<span class="locationcoordinates"></span>
+                </button>
+                <button id="descriptiondata" class="buttons smallbuttons databuttons">
+                    <img alt width="32" height="32" src="/images/description.svg">&#160;<span class="description"></span>
+                </button>
+            </div>
+            <br>
+            <div id="preview"></div>
+            <br>
+            <div id="datetime"></div>
+            <br>
+            <div>
+                <span id="datasize"></span>B
+            </div>
+            <br>
+            <div>
+                <button id="downloadbutton" class="buttons" disabled>
+                    <img alt width="64" height="64" src="/images/download.svg">&#160;<span class="download"></span>
+                </button>
+                <button id="deletebutton" class="buttons smallbuttons" disabled>
+                    <img alt width="32" height="32" src="/images/delete.svg">&#160;<span class="delete"></span>
+                </button>
+            </div>
+            <br>
+            <div>
+                <div>
+                    <button class="buttons smallbuttons" id="previousButton" disabled>
+                        <span style="color:#256aff;font-size:32px;">&#60;&#60;</span>&#160;<span class="previous"></span>
+                    </button>
+                    &#160;
+                    <button class="buttons smallbuttons" id="nextButton" disabled>
+                        <span style="color:#256aff;font-size:32px;">&#62;&#62;</span>&#160;<span class="next"></span>
+                    </button>
+                </div>
+                <br>
+                <div>
+                    <span id="currentPageIndex"></span> / <span id="totalPageQuantity"></span>
+                </div>
+                <br>
+                <div>
+                    <span id="storageUsage"></span>B / <span id="storageQuota"></span>B
+                    &#160;
+                    (<span id="storageUsedPercent"></span>%)
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <a href="/" class="buttons">
+            <img alt width="64" height="64" src="/images/homepage.svg">&#160;<span class="gomainpage"></span>
+        </a>
+        <br><br>
+    </div>
+    <script src="/scripts/localstorage.js"></script>
+</body>
+</html>
