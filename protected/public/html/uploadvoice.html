@@ -1,0 +1,13 @@
+<form method="post" enctype="multipart/form-data" class="uploadforms">
+    <!--LANG-->
+    <input type="hidden" name="id" value="value_id">
+    <input type="hidden" name="key" value="value_key">
+    <input type="file" accept="audio/*" name="voice" class="texts" id="voiceinput" required>
+    <label for="voiceinput" class="b buttons afteruploadbuttons texts"><img width="32" height="32" src="../images/microphone.svg">&nbsp;<span><string>choosevoice</string></span></label>
+    <br>
+    <span><string>maxvoicefilesize</string>: <php>MAX_VOICE_SIZE</php><string>MB</string></span>
+    <br>
+    <div class="uploadbuttondiv">
+        <button name="submit" type="submit" class="b buttons afteruploadbuttons texts"><img width="32" height="32" src="/images/uploadicon.svg">&nbsp;<span><string>uploadvoice</string></span></button>
+    </div>
+</form>

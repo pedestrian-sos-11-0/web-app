@@ -1,0 +1,1122 @@
+<div class="settingsbox">
+    <div id="darkmodediv" class="xycenter">
+        <span class="darkmode"><string>darkmode</string></span>
+        <div>
+            <label class="switch">
+                <input type="checkbox" id="darkmodecheckbox">
+                <span class="slider round"><img width="26" height="26" src="/images/darkmode0.png"></span>
+            </label>
+        </div>
+    </div>
+    <div class="xycenter">
+        <input type="checkbox" id="defaulttheme">
+        <label class="devicedefault checkboxlabel" for="defaulttheme"><string>devicedefault</string></label>
+    </div>
+</div>
+<div class="settingsbox">
+    <div class="xycenter">
+        <label for="setlang" class="xycenter">
+            <img width="26" height="26" src="/images/language.svg">
+            &#160;
+            <span class="language"><string>language</string></span>
+        </label>
+        <select id="setlang">
+            <php>langoptions</php>
+        </select>
+    </div>
+    <div class="xycenter">
+        <input type="checkbox" id="defaultlang">
+        <label class="devicedefault checkboxlabel" for="defaultlang"><string>devicedefault</string></label>
+    </div>
+</div>
+<div class="settingsbox">
+    <div class="xycenter">
+        <label for="settimezone" class="xycenter">
+            <img width="26" height="26" src="/images/timezone.svg">
+            &#160;
+            <span class="timezone"><string>timezone</string></span>
+        </label>
+    </div>
+    <div class="xycenter">
+        <div id="timezonevalue"></div>
+        <select id="settimezone">
+            <option value="-12">-12</option>
+            <option value="-11">-11</option>
+            <option value="-10">-10</option>
+            <option value="-9">-9</option>
+            <option value="-8">-8</option>
+            <option value="-7">-7</option>
+            <option value="-6">-6</option>
+            <option value="-5">-5</option>
+            <option value="-4">-4</option>
+            <option value="-3">-3</option>
+            <option value="-2">-2</option>
+            <option value="-1">-1</option>
+            <option value="0">0</option>
+            <option value="1">+1</option>
+            <option value="2">+2</option>
+            <option value="3">+3</option>
+            <option value="4">+4</option>
+            <option value="5">+5</option>
+            <option value="6">+6</option>
+            <option value="7">+7</option>
+            <option value="8">+8</option>
+            <option value="9">+9</option>
+            <option value="10">+10</option>
+            <option value="11">+11</option>
+            <option value="12">+12</option>
+            <option value="13">+13</option>
+            <option value="14">+14</option>
+        </select>
+    </div>
+    <div class="xycenter">
+        <input type="checkbox" id="defaulttimezone">
+        <label class="devicedefault checkboxlabel" for="defaulttimezone"><string>devicedefault</string></label>
+    </div>
+</div>
+<div class="settingsbox">
+    <div class="xycenter">
+        <label for="saveuploads" class="xycenter checkboxlabel">
+            <img width="26" height="26" src="/images/save.svg">
+            <img width="26" height="26" src="/images/myuploads.svg">
+            &#160;
+            <span class="savemyuploadsinthisbrowser"><string>savemyuploadsinthisbrowser</string></span>
+        </label>
+        <input type="checkbox" id="saveuploads">
+    </div>
+</div>
+<div class="settingsbox">
+    <div class="xycenter">
+        <img width="30" height="30" src="../images/location.svg">
+        &#160;
+        <h4><span class="mylocation"><string>mylocation</string></span></h4>
+    </div>
+    <div class="settingsbottomline"></div>
+    <div class="settingssubbox">
+        <div class="xycenter">
+            <label for="currentlocationmode" class="xycenter checkboxlabel">
+                <img width="26" height="26" src="/images/currentlocation.svg">
+                &#160;
+                <span class="currentlocation"><string>currentlocation</string></span>
+            </label>
+            <input type="checkbox" id="currentlocationmode">
+        </div>
+        <div class="settingdescription currentlocationdescription"><string>currentlocationdescription</string></div>
+    </div>
+    <div class="settingssubbox">
+        <div class="xycenter">
+            <label for="locationhighaccuracymode" class="xycenter checkboxlabel">
+                <img width="26" height="26" src="/images/locationhighaccuracy.svg">
+                &#160;
+                <span class="locationhighaccuracy"><string>locationhighaccuracy</string></span>
+            </label>
+            <input type="checkbox" id="locationhighaccuracymode">
+        </div>
+        <div class="settingdescription locationhighaccuracydescription"><string>locationhighaccuracydescription</string></div>
+    </div>
+    <div class="settingssubbox">
+        <div class="xycenter">
+            <label for="locationinitializationmode" class="xycenter checkboxlabel">
+                <img width="26" height="26" src="/images/initialization.svg">
+                &#160;
+                <span class="initiallocation"><string>initiallocation</string></span>
+            </label>
+            <input type="checkbox" id="locationinitializationmode">
+        </div>
+        <div class="settingdescription locationinitializationdescription"><string>locationinitializationdescription</string></div>
+    </div>
+    <div class="settingssubbox">
+        <div class="xycenter">
+            <label for="locationcachemode" class="xycenter checkboxlabel">
+                <img width="26" height="26" src="/images/cache.svg">
+                &#160;
+                <span class="locationcache"><string>locationcache</string></span>
+            </label>
+            <input type="checkbox" id="locationcachemode">
+        </div>
+        <div class="settingssubbox xycenter">
+            <label for="locationcachetimeout" class="xycenter checkboxlabel">
+                <span class="cachetimeout"><string>cachetimeout</string></span>
+            </label>
+            <input type="number" min="0" id="locationcachetimeout" placeholder="s">
+        </div>
+        <div class="settingdescription locationcachedescription"><string>locationcachedescription</string></div>
+    </div>
+</div>
+<div class="settingsbox">
+    <div class="xycenter">
+        <img width="30" height="30" src="../images/location.svg">
+        <img width="30" height="30" src="../images/uploadicon.svg">
+        &#160;
+        <h4><span class="attachmylocation"><string>attachmylocation</string></span></h4>
+    </div>
+    <div class="settingsbottomline"></div>
+    <div class="xycenter">
+        <label for="takephotolocationattach" class="xycenter checkboxlabel">
+            <img width="26" height="26" src="/images/take_photo.svg">
+            &#160;
+            <span class="takephoto"><string>takephoto</string></span>
+        </label>
+        <input type="checkbox" id="takephotolocationattach">
+    </div>
+    <div class="xycenter">
+        <label for="recordvideolocationattach" class="xycenter checkboxlabel">
+            <img width="26" height="26" src="/images/record_video.svg">
+            &#160;
+            <span class="recordvideo"><string>recordvideo</string></span>
+        </label>
+        <input type="checkbox" id="recordvideolocationattach">
+    </div>
+    <div class="xycenter">
+        <label for="choosephotoslocationattach" class="xycenter checkboxlabel">
+            <img width="26" height="26" src="/images/photo.svg">
+            &#160;
+            <span class="choosephotos"><string>choosephotos</string></span>
+        </label>
+        <input type="checkbox" id="choosephotoslocationattach">
+    </div>
+    <div class="xycenter">
+        <label for="choosevideoslocationattach" class="xycenter checkboxlabel">
+            <img width="26" height="26" src="/images/video.svg">
+            &#160;
+            <span class="choosevideos"><string>choosevideos</string></span>
+        </label>
+        <input type="checkbox" id="choosevideoslocationattach">
+    </div>
+    <div class="xycenter">
+        <label for="choosefileslocationattach" class="xycenter checkboxlabel">
+            <img width="26" height="26" src="/images/photovideo.svg">
+            &#160;
+            <span class="choosefiles"><string>choosefiles</string></span>
+        </label>
+        <input type="checkbox" id="choosefileslocationattach">
+    </div>
+    <div class="xycenter">
+        <label for="enterlinklocationattach" class="xycenter checkboxlabel">
+            <img width="26" height="26" src="/images/link.svg">
+            &#160;
+            <span class="enterlink"><string>enterlink</string></span>
+        </label>
+        <input type="checkbox" id="enterlinklocationattach">
+    </div>
+    <div class="settingsbox">
+        <div class="xycenter">
+            <img width="30" height="30" src="../images/camera.svg">
+            &#160;
+            <h4><span class="camera"><string>camera</string></span></h4>
+        </div>
+        <div class="settingsbottomline"></div>
+        <div class="xycenter">
+            <label for="cameratakephotolocationattach" class="xycenter checkboxlabel">
+                <img width="26" height="26" src="/images/take_photo.svg">
+                &#160;
+                <span class="takephoto"><string>takephoto</string></span>
+            </label>
+            <input type="checkbox" id="cameratakephotolocationattach">
+        </div>
+        <div class="xycenter">
+            <label for="camerarecordvideolocationattach" class="xycenter checkboxlabel">
+                <img width="26" height="26" src="/images/record_video.svg">
+                &#160;
+                <span class="recordvideo"><string>recordvideo</string></span>
+            </label>
+            <input type="checkbox" id="camerarecordvideolocationattach">
+        </div>
+        <div class="xycenter">
+            <label for="cameralivestreamlocationattach" class="xycenter checkboxlabel">
+                <img width="26" height="26" src="/images/live.svg">
+                &#160;
+                <span class="livestream"><string>livestream</string></span>
+            </label>
+            <input type="checkbox" id="cameralivestreamlocationattach">
+        </div>
+        <div class="settingssubbox">
+            <div class="xycenter">
+                <label for="cameralivestreamconstantlylocationattach" class="xycenter checkboxlabel">
+                    <img width="26" height="26" src="/images/live.svg">
+                    &#160;
+                    <img width="26" height="26" src="/images/currentlocation.svg">
+                    &#160;
+                    <span class="livestream"><string>livestream</string></span>
+                </label>
+                <input type="checkbox" id="cameralivestreamconstantlylocationattach">
+            </div>
+            <div class="settingdescription cameralivestreamconstantlylocationattachdescription"></div>
+        </div>
+    </div>
+    <div class="settingsbox">
+        <div class="xycenter">
+            <img width="30" height="30" src="../images/hiddencamera.svg">
+            &#160;
+            <h4><span class="hiddencamera"><string>hiddencamera</string></span></h4>
+        </div>
+        <div class="settingsbottomline"></div>
+        <div class="xycenter">
+            <label for="hiddencameratakephotolocationattach" class="xycenter checkboxlabel">
+                <img width="26" height="26" src="/images/take_photo.svg">
+                &#160;
+                <span class="takephoto"><string>takephoto</string></span>
+            </label>
+            <input type="checkbox" id="hiddencameratakephotolocationattach">
+        </div>
+        <div class="xycenter">
+            <label for="hiddencamerarecordvideolocationattach" class="xycenter checkboxlabel">
+                <img width="26" height="26" src="/images/record_video.svg">
+                &#160;
+                <span class="recordvideo"><string>recordvideo</string></span>
+            </label>
+            <input type="checkbox" id="hiddencamerarecordvideolocationattach">
+        </div>
+        <div class="xycenter">
+            <label for="hiddencameralivestreamlocationattach" class="xycenter checkboxlabel">
+                <img width="26" height="26" src="/images/live.svg">
+                &#160;
+                <span class="livestream"><string>livestream</string></span>
+            </label>
+            <input type="checkbox" id="hiddencameralivestreamlocationattach">
+        </div>
+        <div class="settingssubbox">
+            <div class="xycenter">
+                <label for="hiddencameralivestreamconstantlylocationattach" class="xycenter checkboxlabel">
+                    <img width="26" height="26" src="/images/live.svg">
+                    &#160;
+                    <img width="26" height="26" src="/images/currentlocation.svg">
+                    &#160;
+                    <span class="livestream"><string>livestream</string></span>
+                </label>
+                <input type="checkbox" id="hiddencameralivestreamconstantlylocationattach">
+            </div>
+            <div class="settingdescription cameralivestreamconstantlylocationattachdescription"></div>
+        </div>
+    </div>
+</div>
+<div class="settingsbox">
+    <div class="xycenter">
+        <img width="30" height="30" src="/images/download.svg">
+        &#160;
+        <h4><span class="automaticdownload"><string>automaticdownload</string></span></h4>
+    </div>
+    <div class="settingsbottomline"></div>
+    <div class="xycenter">
+        <label for="takephotoautomaticdownload" class="xycenter checkboxlabel">
+            <img width="26" height="26" src="/images/take_photo.svg">
+            &#160;
+            <span class="takephoto"><string>takephoto</string></span>
+        </label>
+        <input type="checkbox" id="takephotoautomaticdownload">
+    </div>
+    <div class="xycenter">
+        <label for="recordvideoautomaticdownload" class="xycenter checkboxlabel">
+            <img width="26" height="26" src="/images/record_video.svg">
+            &#160;
+            <span class="recordvideo"><string>recordvideo</string></span>
+        </label>
+        <input type="checkbox" id="recordvideoautomaticdownload">
+    </div>
+    <div class="settingsbox">
+        <div class="xycenter">
+            <img width="30" height="30" src="../images/camera.svg">
+            &#160;
+            <h4><span class="camera"><string>camera</string></span></h4>
+        </div>
+        <div class="settingsbottomline"></div>
+        <div class="xycenter">
+            <label for="cameratakephotoautomaticdownload" class="xycenter checkboxlabel">
+                <img width="26" height="26" src="/images/take_photo.svg">
+                &#160;
+                <span class="takephoto"><string>takephoto</string></span>
+            </label>
+            <input type="checkbox" id="cameratakephotoautomaticdownload">
+        </div>
+        <div class="xycenter">
+            <label for="camerarecordvideoautomaticdownload" class="xycenter checkboxlabel">
+                <img width="26" height="26" src="/images/record_video.svg">
+                &#160;
+                <span class="recordvideo"><string>recordvideo</string></span>
+            </label>
+            <input type="checkbox" id="camerarecordvideoautomaticdownload">
+        </div>
+        <div class="xycenter">
+            <label for="cameralivestreamautomaticdownload" class="xycenter checkboxlabel">
+                <img width="26" height="26" src="/images/live.svg">
+                &#160;
+                <span class="livestream"><string>livestream</string></span>
+            </label>
+            <input type="checkbox" id="cameralivestreamautomaticdownload">
+        </div>
+    </div>
+    <div class="settingsbox">
+        <div class="xycenter">
+            <img width="30" height="30" src="../images/hiddencamera.svg">
+            &#160;
+            <h4><span class="hiddencamera"><string>hiddencamera</string></span></h4>
+        </div>
+        <div class="settingsbottomline"></div>
+        <div class="xycenter">
+            <label for="hiddencameratakephotoautomaticdownload" class="xycenter checkboxlabel">
+                <img width="26" height="26" src="/images/take_photo.svg">
+                &#160;
+                <span class="takephoto"><string>takephoto</string></span>
+            </label>
+            <input type="checkbox" id="hiddencameratakephotoautomaticdownload">
+        </div>
+        <div class="xycenter">
+            <label for="hiddencamerarecordvideoautomaticdownload" class="xycenter checkboxlabel">
+                <img width="26" height="26" src="/images/record_video.svg">
+                &#160;
+                <span class="recordvideo"><string>recordvideo</string></span>
+            </label>
+            <input type="checkbox" id="hiddencamerarecordvideoautomaticdownload">
+        </div>
+        <div class="xycenter">
+            <label for="hiddencameralivestreamautomaticdownload" class="xycenter checkboxlabel">
+                <img width="26" height="26" src="/images/live.svg">
+                &#160;
+                <span class="livestream"><string>livestream</string></span>
+            </label>
+            <input type="checkbox" id="hiddencameralivestreamautomaticdownload">
+        </div>
+    </div>
+</div>
+<!--<div class="settingsbox">
+    <div class="xycenter">
+        <img width="30" height="30" src="../images/homepage.svg">
+        &#160;
+        <h4><span class="openatstartup"><string>openatstartup</string></span></h4>
+    </div>
+    <div class="settingsbottomline"></div>
+    <div class="xycenter">
+        <label for="defaultstartup" class="xycenter checkboxlabel">
+            <img width="26" height="26" src="/images/homepage.svg">
+            &#160;
+            <span class="default"><string>default</string></span>
+        </label>
+        <input type="radio" name="startupradioinputs" id="defaultstartup">
+    </div>
+    <div class="xycenter">
+        <label for="takephotostartup" class="xycenter checkboxlabel">
+            <img width="26" height="26" src="/images/take_photo.svg">
+            &#160;
+            <span class="takephoto"><string>takephoto</string></span>
+        </label>
+        <input type="radio" name="startupradioinputs" id="takephotostartup">
+    </div>
+    <div class="xycenter">
+        <label for="recordvideostartup" class="xycenter checkboxlabel">
+            <img width="26" height="26" src="/images/record_video.svg">
+            &#160;
+            <span class="recordvideo"><string>recordvideo</string></span>
+        </label>
+        <input type="radio" name="startupradioinputs" id="recordvideostartup">
+    </div>
+    <div class="xycenter">
+        <label for="choosephotosstartup" class="xycenter checkboxlabel">
+            <img width="26" height="26" src="/images/photo.svg">
+            &#160;
+            <span class="choosephotos"><string>choosephotos</string></span>
+        </label>
+        <input type="radio" name="startupradioinputs" id="choosephotosstartup">
+    </div>
+    <div class="xycenter">
+        <label for="choosevideosstartup" class="xycenter checkboxlabel">
+            <img width="26" height="26" src="/images/video.svg">
+            &#160;
+            <span class="choosevideos"><string>choosevideos</string></span>
+        </label>
+        <input type="radio" name="startupradioinputs" id="choosevideosstartup">
+    </div>
+    <div class="xycenter">
+        <label for="choosefilesstartup" class="xycenter checkboxlabel">
+            <img width="26" height="26" src="/images/photovideo.svg">
+            &#160;
+            <span class="choosefiles"><string>choosefiles</string></span>
+        </label>
+        <input type="radio" name="startupradioinputs" id="choosefilesstartup">
+    </div>
+</div>-->
+<!--<div class="settingsbox">
+    <div class="xycenter">
+        <img width="30" height="30" src="../images/retry.svg">
+        &#160;
+        <h4><span class="reopenafteruploadstart"><string>reopenafteruploadstart</string></span></h4>
+    </div>
+    <div class="settingsbottomline"></div>
+    <div class="xycenter">
+        <label for="takephotoreopen" class="xycenter checkboxlabel">
+            <img width="26" height="26" src="/images/take_photo.svg">
+            &#160;
+            <span class="takephoto"><string>takephoto</string></span>
+        </label>
+        <input type="checkbox" id="takephotoreopen">
+    </div>
+    <div class="xycenter">
+        <label for="recordvideoreopen" class="xycenter checkboxlabel">
+            <img width="26" height="26" src="/images/record_video.svg">
+            &#160;
+            <span class="recordvideo"><string>recordvideo</string></span>
+        </label>
+        <input type="checkbox" id="recordvideoreopen">
+    </div>
+    <div class="xycenter">
+        <label for="choosephotosreopen" class="xycenter checkboxlabel">
+            <img width="26" height="26" src="/images/photo.svg">
+            &#160;
+            <span class="choosephotos"><string>choosephotos</string></span>
+        </label>
+        <input type="checkbox" id="choosephotosreopen">
+    </div>
+    <div class="xycenter">
+        <label for="choosevideosreopen" class="xycenter checkboxlabel">
+            <img width="26" height="26" src="/images/video.svg">
+            &#160;
+            <span class="choosevideos"><string>choosevideos</string></span>
+        </label>
+        <input type="checkbox" id="choosevideosreopen">
+    </div>
+    <div class="xycenter">
+        <label for="choosefilesreopen" class="xycenter checkboxlabel">
+            <img width="26" height="26" src="/images/photovideo.svg">
+            &#160;
+            <span class="choosefiles"><string>choosefiles</string></span>
+        </label>
+        <input type="checkbox" id="choosefilesreopen">
+    </div>
+</div>-->
+<!--<div class="settingsbox">
+    <div class="xycenter">
+        <label for="colorfiltercheckbox" class="xycenter">
+            <img width="26" height="26" src="/images/colorfilter.svg">
+            &#160;
+            <span class="colorfilter"><string>colorfilter</string></span>
+        </label>
+        &#160;
+        <div>
+            <label class="switch">
+                <input type="checkbox" id="colorfiltercheckbox">
+                <span class="slider round"></span>
+            </label>
+        </div>
+    </div>
+    <input type="range" min="0" max="100" id="colorfilterrange">
+    <br>
+    <input type="number" min="0" max="100" id="colorfilternumber">%
+</div>-->
+<div class="settingsbox">
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <label for="lightcolor" class="lightcolor"><string>lightcolor</string></label>
+                </td>
+                <td>
+                    <input type="color" id="lightcolor">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="lightbackgroundcolor" class="lightbackgroundcolor"><string>lightbackgroundcolor</string></label>
+                </td>
+                <td>
+                    <input type="color" id="lightbackgroundcolor">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="darkcolor" class="darkcolor"><string>darkcolor</string></label>
+                </td>
+                <td>
+                    <input type="color" id="darkcolor">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="darkbackgroundcolor" class="darkbackgroundcolor"><string>darkbackgroundcolor</string></label>
+                </td>
+                <td>
+                    <input type="color" id="darkbackgroundcolor">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="settingsbox">
+    <div class="xycenter">
+        <img width="30" height="30" src="/images/viewicon.svg">
+        &#160;
+        <h4><span class="viewuploads"><string>viewuploads</string></span></h4>
+    </div>
+    <div class="settingsbottomline"></div>
+    <div class="xycenter">
+        <label for="loadonscroll" class="xycenter checkboxlabel">
+            <img width="26" height="26" src="/images/viewmore.svg">
+            <img width="26" height="26" src="/images/scroll.svg">
+            &#160;
+            <span class="loadnewcontentwhenscroll"><string>loadnewcontentwhenscroll</string></span>
+        </label>
+        <input type="checkbox" id="loadonscroll">
+    </div>
+</div>
+<div class="settingsbox">
+    <div class="xycenter">
+        <img width="30" height="30" src="/images/camera.svg">
+        &#160;
+        <h4><span class="camera"><string>camera</string></span></h4>
+    </div>
+    <div class="settingsbottomline"></div>
+    <div class="xycenter">
+        <label for="cameramoveabletakephotobutton" class="xycenter checkboxlabel">
+            <!-- <img width="26" height="26" src="">
+            &#160; -->
+            <span class="cameramoveabletakephotobutton"><string>cameramoveabletakephotobutton</string></span>
+        </label>
+        <input type="checkbox" id="cameramoveabletakephotobutton">
+    </div>
+    <div class="xycenter">
+        <label for="cameratakephotoonvideoclick" class="xycenter checkboxlabel">
+            <!-- <img width="26" height="26" src="">
+            &#160; -->
+            <span class="cameratakephotoonvideoclick"><string>cameratakephotoonvideoclick</string></span>
+        </label>
+        <input type="checkbox" id="cameratakephotoonvideoclick">
+    </div>
+    <div class="xycenter">
+        <label for="camerafullscreenonclick" class="xycenter checkboxlabel">
+            <!-- <img width="26" height="26" src="">
+            &#160; -->
+            <span class="camerafullscreenonclick"><string>camerafullscreenonclick</string></span>
+        </label>
+        <input type="checkbox" id="camerafullscreenonclick">
+    </div>
+    <div class="xycenter">
+        <label for="cameravideoonlyonclick" class="xycenter checkboxlabel">
+            <!-- <img width="26" height="26" src="">
+            &#160; -->
+            <span class="cameravideoonlyonclick"><string>cameravideoonlyonclick</string></span>
+        </label>
+        <input type="checkbox" id="cameravideoonlyonclick">
+    </div>
+    <div class="xycenter">
+        <label for="camerablackscreenondblclick" class="xycenter checkboxlabel">
+            <!-- <img width="26" height="26" src="">
+            &#160; -->
+            <span class="camerablackscreenondblclick"><string>camerablackscreenondblclick</string></span>
+        </label>
+        <input type="checkbox" id="camerablackscreenondblclick">
+    </div>
+    <div class="settingssubbox">
+        <div class="xycenter">
+            <label for="cameraemergencymode" class="xycenter checkboxlabel">
+                <img width="26" height="26" src="/images/emergency.svg">
+                &#160;
+                <span class="emergencymode"><string>emergencymode</string></span>
+            </label>
+            <input type="checkbox" id="cameraemergencymode">
+        </div>
+        <div class="settingdescription emergencymodedescription"></div>
+    </div>
+    <div class="settingssubbox">
+        <div class="settingssubbox">
+            <div class="xycenter">
+                <label for="directrecordvideo" class="xycenter checkboxlabel">
+                    <img width="26" height="26" src="/images/record_video.svg">
+                    &#160;
+                    <span class="directrecordvideo"><string>directrecordvideo</string></span>
+                </label>
+                <input type="checkbox" id="directrecordvideo">
+            </div>
+            <div class="settingdescription directrecordvideodescription"><string>directrecordvideodescription</string></div>
+            <div class="xycenter">
+                <button class="buttons" id="opendirectrecordvideopage"><img width="16" height="16" src="/images/newtab.svg">&#160;<span class="open"><string>open</string></span></button>
+            </div>
+        </div>
+        <div class="settingssubbox">
+            <div class="xycenter">
+                <label for="directlivestream" class="xycenter checkboxlabel">
+                    <img width="26" height="26" src="/images/live.svg">
+                    &#160;
+                    <span class="directlivestream"><string>directlivestream</string></span>
+                </label>
+                <input type="checkbox" id="directlivestream">
+            </div>
+            <div class="settingdescription directlivestreamdescription"><string>directlivestreamdescription</string></div>
+            <div class="xycenter">
+                <button class="buttons" id="opendirectlivestreampage"><img width="16" height="16" src="/images/newtab.svg">&#160;<span class="open"><string>open</string></span></button>
+            </div>
+        </div>
+        <div class="settingssubbox">
+            <div class="xycenter">
+                <label for="directemergencymode" class="xycenter checkboxlabel">
+                    <img width="26" height="26" src="/images/emergency.svg">
+                    &#160;
+                    <span class="directemergencymode"><string>directemergencymode</string></span>
+                </label>
+                <input type="checkbox" id="directemergencymode">
+            </div>
+            <div class="settingdescription directemergencymodedescription"><string>directemergencymodedescription</string></div>
+            <div class="xycenter">
+                <button class="buttons" id="opendirectemergencymodepage"><img width="16" height="16" src="/images/newtab.svg">&#160;<span class="open"><string>open</string></span></button>
+            </div>
+        </div>
+        <div class="settingdescription"><b><span class="tip"><string>tip</string></span>:&#160;</b><span class="shortcuttip"><string>shortcuttip</string></span></div>
+    </div>
+    <div class="settingssubbox">
+        <div class="xycenter">
+            <label for="camerawindowonfocusactions" class="xycenter checkboxlabel">
+                <!-- <img width="26" height="26" src="/images/.svg">
+                &#160; -->
+                <span class="onfocusactions"><string>onfocusactions</string></span>
+            </label>
+            <input type="checkbox" id="camerawindowonfocusactions">
+        </div>
+        <div class="settingdescription onfocusactionsdescription"></div>
+    </div>
+</div>
+<div class="settingsbox">
+    <div class="xycenter">
+        <img width="30" height="30" src="/images/hiddencamera.svg">
+        &#160;
+        <h4><span class="hiddencamera"><string>hiddencamera</string></span></h4>
+    </div>
+    <div class="settingsbottomline"></div>
+    <div class="hiddencameradescription"></div>
+    <div class="settingssubbox">
+        <div class="xycenter">
+            <label for="takephotohiddencamera" class="xycenter checkboxlabel">
+                <img width="26" height="26" src="/images/take_photo.svg">
+                &#160;
+                <span class="takephoto"><string>takephoto</string></span>
+            </label>
+            <input type="checkbox" id="takephotohiddencamera">
+        </div>
+        <div class="settingdescription takephotohiddencameradescription"></div>
+        <div class="xycenter">
+            <button class="buttons" id="openhiddencameratakephotopage"><img width="16" height="16" src="/images/newtab.svg">&#160;<span class="open"><string>open</string></span></button>
+        </div>
+        <div class="settingssubbox xycenter">
+            <label for="hiddencameratitletakephoto" class="xycenter checkboxlabel">
+                <span class="titlestring"><string>titlestring</string></span>
+            </label>
+            <input type="text" id="hiddencameratitletakephoto" class="notunloadwarning">
+        </div>
+        <div class="settingssubbox xycenter">
+            <label for="hiddencameraicontakephoto" class="xycenter checkboxlabel">
+                <span class="icon"><string>icon</string></span>
+                &#160;
+                <img width="32" height="32" id="hiddencameraicontakephotopreview" src="">
+            </label>
+            <input type="file" accept="image/*" id="hiddencameraicontakephoto">
+            &#160;
+            <div class="xycenter">
+                <button disabled class="buttons" id="hiddencameraicontakephotoclear">
+                    <span style="color:#ec0400;font-size:16px;">&times;</span>&#160;<span class="clear"><string>clear</string></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="settingssubbox">
+        <div class="xycenter">
+            <label for="recordvideohiddencamera" class="xycenter checkboxlabel">
+                <img width="26" height="26" src="/images/record_video.svg">
+                &#160;
+                <span class="recordvideo"><string>recordvideo</string></span>
+            </label>
+            <input type="checkbox" id="recordvideohiddencamera">
+        </div>
+        <div class="settingdescription recordvideohiddencameradescription"></div>
+        <div class="xycenter">
+            <button class="buttons" id="openhiddencamerarecordvideopage"><img width="16" height="16" src="/images/newtab.svg">&#160;<span class="open"><string>open</string></span></button>
+        </div>
+        <div class="settingssubbox xycenter">
+            <label for="hiddencameratitlerecordvideo" class="xycenter checkboxlabel">
+                <span class="titlestring"><string>titlestring</string></span>
+            </label>
+            <input type="text" id="hiddencameratitlerecordvideo" class="notunloadwarning">
+        </div>
+        <div class="settingssubbox xycenter">
+            <label for="hiddencameraiconrecordvideo" class="xycenter checkboxlabel">
+                <span class="icon"><string>icon</string></span>
+                &#160;
+                <img width="32" height="32" id="hiddencameraiconrecordvideopreview" src="">
+            </label>
+            <input type="file" accept="image/*" id="hiddencameraiconrecordvideo">
+            &#160;
+            <div class="xycenter">
+                <button disabled class="buttons" id="hiddencameraiconrecordvideoclear">
+                    <span style="color:#ec0400;font-size:16px;">&times;</span>&#160;<span class="clear"><string>clear</string></span>
+                </button>
+            </div>
+        </div>
+        <div class="settingssubbox">
+            <div class="xycenter">
+                <label for="hiddencameradirectrecordvideo" class="xycenter checkboxlabel">
+                    <img width="26" height="26" src="/images/record_video.svg">
+                    &#160;
+                    <span class="directrecordvideo"><string>directrecordvideo</string></span>
+                </label>
+                <input type="checkbox" id="hiddencameradirectrecordvideo">
+            </div>
+        </div>
+    </div>
+    <div class="settingssubbox">
+        <div class="xycenter">
+            <label for="livestreamhiddencamera" class="xycenter checkboxlabel">
+                <img width="26" height="26" src="/images/live.svg">
+                &#160;
+                <span class="livestream"><string>livestream</string></span>
+            </label>
+            <input type="checkbox" id="livestreamhiddencamera">
+        </div>
+        <div class="settingdescription livestreamhiddencameradescription"></div>
+        <div class="xycenter">
+            <button class="buttons" id="openhiddencameralivestreampage"><img width="16" height="16" src="/images/newtab.svg">&#160;<span class="open"><string>open</string></span></button>
+        </div>
+        <div class="settingssubbox xycenter">
+            <label for="hiddencameratitlelivestream" class="xycenter checkboxlabel">
+                <span class="titlestring"><string>titlestring</string></span>
+            </label>
+            <input type="text" id="hiddencameratitlelivestream" class="notunloadwarning">
+        </div>
+        <div class="settingssubbox xycenter">
+            <label for="hiddencameraiconlivestream" class="xycenter checkboxlabel">
+                <span class="icon"><string>icon</string></span>
+                &#160;
+                <img width="32" height="32" id="hiddencameraiconlivestreampreview" src="">
+            </label>
+            <input type="file" accept="image/*" id="hiddencameraiconlivestream">
+            &#160;
+            <div class="xycenter">
+                <button disabled class="buttons" id="hiddencameraiconlivestreamclear">
+                    <span style="color:#ec0400;font-size:16px;">&times;</span>&#160;<span class="clear"><string>clear</string></span>
+                </button>
+            </div>
+        </div>
+        <div class="settingssubbox">
+            <div class="xycenter">
+                <label for="hiddencameradirectlivestream" class="xycenter checkboxlabel">
+                    <img width="26" height="26" src="/images/live.svg">
+                    &#160;
+                    <span class="directlivestream"><string>directlivestream</string></span>
+                </label>
+                <input type="checkbox" id="hiddencameradirectlivestream">
+            </div>
+        </div>
+    </div>
+    <div class="settingssubbox">
+        <div class="xycenter">
+            <label for="hiddencameracolorfulindicator" class="xycenter checkboxlabel">
+                <span class="colorfulindicator"><string>colorfulindicator</string></span>
+            </label>
+            <input type="checkbox" id="hiddencameracolorfulindicator">
+        </div>
+        <div class="xycenter">
+            <label for="hiddencameracolorfulindicatorsize" class="xycenter checkboxlabel">
+                <span class="size"><string>size</string></span>
+            </label>
+            <input type="number" min="0" max="100" id="hiddencameracolorfulindicatorsize">
+            %
+        </div>
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <label for="hiddencameracolorfulindicatorrecordingstarted" class="recordingstarted"><string>recordingstarted</string></label>
+                    </td>
+                    <td>
+                        <input type="color" id="hiddencameracolorfulindicatorrecordingstarted">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="hiddencameracolorfulindicatoruploading" class="uploadingorpreparing"><string>uploadingorpreparing</string></label>
+                    </td>
+                    <td>
+                        <input type="color" id="hiddencameracolorfulindicatoruploading">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="hiddencameracolorfulindicatoruploaded" class="uploadcompleted"><string>uploadcompleted</string></label>
+                    </td>
+                    <td>
+                        <input type="color" id="hiddencameracolorfulindicatoruploaded">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="hiddencameracolorfulindicatorerror" class="error"><string>error</string></label>
+                    </td>
+                    <td>
+                        <input type="color" id="hiddencameracolorfulindicatorerror">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="settingssubbox">
+        <div class="xycenter">
+            <label for="hiddencameravibration" class="xycenter checkboxlabel">
+                <span class="vibration"><string>vibration</string></span>
+            </label>
+            <input type="checkbox" id="hiddencameravibration">
+        </div>
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <label for="hiddencameravibrationrecordingstarted" class="recordingstarted"><string>recordingstarted</string></label>
+                    </td>
+                    <td>
+                        <input type="number" min="0" max="1000" step="1" id="hiddencameravibrationrecordingstarted"><span class="millisecond"><string>millisecond</string></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="hiddencameravibrationuploading" class="uploadingorpreparing"><string>uploadingorpreparing</string></label>
+                    </td>
+                    <td>
+                        <input type="number" min="0" max="1000" step="1" id="hiddencameravibrationuploading"><span class="millisecond"><string>millisecond</string></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="hiddencameravibrationuploaded" class="uploadcompleted"><string>uploadcompleted</string></label>
+                    </td>
+                    <td>
+                        <input type="number" min="0" max="1000" step="1" id="hiddencameravibrationuploaded"><span class="millisecond"><string>millisecond</string></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="hiddencameravibrationerror" class="error"><string>error</string></label>
+                    </td>
+                    <td>
+                        <input type="number" min="0" max="1000" step="1" id="hiddencameravibrationerror"><span class="millisecond"><string>millisecond</string></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="xycenter">
+        <label for="hiddencameraopenfullscreenonclick" class="xycenter checkboxlabel">
+            <img width="26" height="26" src="/images/fullscreen.svg">
+            &#160;
+            <span class="openfullscreenonblackscreentouch"><string>openfullscreenonblackscreentouch</string></span>
+        </label>
+        <input type="checkbox" id="hiddencameraopenfullscreenonclick">
+    </div>
+    <div class="xycenter">
+        <label for="hiddencamerafullscreenbutton" class="xycenter checkboxlabel">
+            <img width="26" height="26" src="/images/fullscreen.svg">
+            &#160;
+            <span class="fullscreenbutton"><string>fullscreenbutton</string></span>
+        </label>
+        <input type="checkbox" id="hiddencamerafullscreenbutton">
+    </div>
+    <div class="settingssubbox">
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <label for="hiddencameracamerareadycolor" class="cameraready"><string>cameraready</string></label>
+                    </td>
+                    <td>
+                        <input type="color" id="hiddencameracamerareadycolor">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="hiddencameracameranotreadycolor" class="cameranotready"><string>cameranotready</string></label>
+                    </td>
+                    <td>
+                        <input type="color" id="hiddencameracameranotreadycolor">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="hiddencameracameranotworkcolor" class="cameranotwork"><string>cameranotwork</string></label>
+                    </td>
+                    <td>
+                        <input type="color" id="hiddencameracameranotworkcolor">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="settingssubbox">
+        <span class="backgroundimage"><string>backgroundimage</string></span>
+        <div class="settingsbottomline"></div>
+        <div class="settingssubbox xycenter">
+            <label for="hiddencamerabackgroundimage" class="xycenter checkboxlabel">
+                <span class="backgroundimage"><string>backgroundimage</string></span>
+            </label>
+            &#160;
+            <input type="file" accept="image/*" id="hiddencamerabackgroundimage">
+            <div class="xycenter">
+                <button disabled class="buttons" id="hiddencamerabackgroundimagepreview"><img width="16" height="16" src="/images/newtab.svg">&#160;<span class="open"><string>open</string></span></button>
+            </div>
+            &#160;
+            <div class="xycenter">
+                <button disabled class="buttons" id="hiddencamerabackgroundimageclear">
+                    <span style="color:#ec0400;font-size:16px;">&times;</span>&#160;<span class="clear"><string>clear</string></span>
+                </button>
+            </div>
+        </div>
+        <div class="settingssubbox xycenter">
+            <label for="hiddencamerabackgroundimagecameraready" class="xycenter checkboxlabel">
+                <span class="cameraready"><string>cameraready</string></span>
+            </label>
+            &#160;
+            <input type="file" accept="image/*" id="hiddencamerabackgroundimagecameraready">
+            <div class="xycenter">
+                <button disabled class="buttons" id="hiddencamerabackgroundimagecamerareadypreview"><img width="16" height="16" src="/images/newtab.svg">&#160;<span class="open"><string>open</string></span></button>
+            </div>
+            &#160;
+            <div class="xycenter">
+                <button disabled class="buttons" id="hiddencamerabackgroundimagecamerareadyclear">
+                    <span style="color:#ec0400;font-size:16px;">&times;</span>&#160;<span class="clear"><string>clear</string></span>
+                </button>
+            </div>
+        </div>
+        <div class="settingssubbox xycenter">
+            <label for="hiddencamerabackgroundimagecameranotready" class="xycenter checkboxlabel">
+                <span class="cameranotready"><string>cameranotready</string></span>
+            </label>
+            &#160;
+            <input type="file" accept="image/*" id="hiddencamerabackgroundimagecameranotready">
+            <div class="xycenter">
+                <button disabled class="buttons" id="hiddencamerabackgroundimagecameranotreadypreview"><img width="16" height="16" src="/images/newtab.svg">&#160;<span class="open"><string>open</string></span></button>
+            </div>
+            &#160;
+            <div class="xycenter">
+                <button disabled class="buttons" id="hiddencamerabackgroundimagecameranotreadyclear">
+                    <span style="color:#ec0400;font-size:16px;">&times;</span>&#160;<span class="clear"><string>clear</string></span>
+                </button>
+            </div>
+        </div>
+        <div class="settingssubbox xycenter">
+            <label for="hiddencamerabackgroundimagecameranotwork" class="xycenter checkboxlabel">
+                <span class="cameranotwork"><string>cameranotwork</string></span>
+            </label>
+            &#160;
+            <input type="file" accept="image/*" id="hiddencamerabackgroundimagecameranotwork">
+            <div class="xycenter">
+                <button disabled class="buttons" id="hiddencamerabackgroundimagecameranotworkpreview"><img width="16" height="16" src="/images/newtab.svg">&#160;<span class="open"><string>open</string></span></button>
+            </div>
+            &#160;
+            <div class="xycenter">
+                <button disabled class="buttons" id="hiddencamerabackgroundimagecameranotworkclear">
+                    <span style="color:#ec0400;font-size:16px;">&times;</span>&#160;<span class="clear"><string>clear</string></span>
+                </button>
+            </div>
+        </div>
+        <div class="settingssubbox xycenter">
+            <label for="hiddencamerabackgroundimagerecordingstarted" class="xycenter checkboxlabel">
+                <span class="recordingstarted"><string>recordingstarted</string></span>
+            </label>
+            &#160;
+            <input type="file" accept="image/*" id="hiddencamerabackgroundimagerecordingstarted">
+            <div class="xycenter">
+                <button disabled class="buttons" id="hiddencamerabackgroundimagerecordingstartedpreview"><img width="16" height="16" src="/images/newtab.svg">&#160;<span class="open"><string>open</string></span></button>
+            </div>
+            &#160;
+            <div class="xycenter">
+                <button disabled class="buttons" id="hiddencamerabackgroundimagerecordingstartedclear">
+                    <span style="color:#ec0400;font-size:16px;">&times;</span>&#160;<span class="clear"><string>clear</string></span>
+                </button>
+            </div>
+        </div>
+        <div class="settingssubbox xycenter">
+            <label for="hiddencamerabackgroundimageuploading" class="xycenter checkboxlabel">
+                <span class="uploadingorpreparing"><string>uploadingorpreparing</string></span>
+            </label>
+            &#160;
+            <input type="file" accept="image/*" id="hiddencamerabackgroundimageuploading">
+            <div class="xycenter">
+                <button disabled class="buttons" id="hiddencamerabackgroundimageuploadingpreview"><img width="16" height="16" src="/images/newtab.svg">&#160;<span class="open"><string>open</string></span></button>
+            </div>
+            &#160;
+            <div class="xycenter">
+                <button disabled class="buttons" id="hiddencamerabackgroundimageuploadingclear">
+                    <span style="color:#ec0400;font-size:16px;">&times;</span>&#160;<span class="clear"><string>clear</string></span>
+                </button>
+            </div>
+        </div>
+        <div class="settingssubbox xycenter">
+            <label for="hiddencamerabackgroundimageuploadedclear" class="xycenter checkboxlabel">
+                <span class="uploadcompleted"><string>uploadcompleted</string></span>
+            </label>
+            &#160;
+            <input type="file" accept="image/*" id="hiddencamerabackgroundimageuploaded">
+            <div class="xycenter">
+                <button disabled class="buttons" id="hiddencamerabackgroundimageuploadedpreview"><img width="16" height="16" src="/images/newtab.svg">&#160;<span class="open"><string>open</string></span></button>
+            </div>
+            &#160;
+            <div class="xycenter">
+                <button disabled class="buttons" id="hiddencamerabackgroundimageuploadedclear">
+                    <span style="color:#ec0400;font-size:16px;">&times;</span>&#160;<span class="clear"><string>clear</string></span>
+                </button>
+            </div>
+        </div>
+        <div class="settingssubbox xycenter">
+            <label for="hiddencamerabackgroundimageerror" class="xycenter checkboxlabel">
+                <span class="error"><string>error</string></span>
+            </label>
+            &#160;
+            <input type="file" accept="image/*" id="hiddencamerabackgroundimageerror">
+            <div class="xycenter">
+                <button disabled class="buttons" id="hiddencamerabackgroundimageerrorpreview"><img width="16" height="16" src="/images/newtab.svg">&#160;<span class="open"><string>open</string></span></button>
+            </div>
+            &#160;
+            <div class="xycenter">
+                <button disabled class="buttons" id="hiddencamerabackgroundimageerrorclear">
+                    <span style="color:#ec0400;font-size:16px;">&times;</span>&#160;<span class="clear"><string>clear</string></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="xycenter">
+        <label for="hiddencamerafacingmode" class="xycenter">
+            <span class="camera"><string>camera</string></span>
+        </label>
+        <select id="hiddencamerafacingmode">
+            <option value="environment" class="environment"></option>
+            <option value="user" class="user"></option>
+        </select>
+    </div>
+</div>
+<div class="settingsbox">
+    <div class="xycenter">
+        <h4><span class="mobilewebappmode"><string>mobilewebappmode</string></span></h4>
+    </div>
+    <div class="settingsbottomline"></div>
+    <div class="xycenter">
+        <label for="mobilewebappmodemainapppage" class="xycenter checkboxlabel">
+            <img width="26" height="26" src="/images/pedestriansos.svg">
+            &#160;
+            <span class="mainapppage"><string>mainapppage</string></span>
+        </label>
+        <input type="checkbox" id="mobilewebappmodemainapppage">
+    </div>
+    <div class="xycenter">
+        <label for="mobilewebappmodecamera" class="xycenter checkboxlabel">
+            <img width="26" height="26" src="/images/camera.svg">
+            &#160;
+            <span class="camera"><string>camera</string></span>
+        </label>
+        <input type="checkbox" id="mobilewebappmodecamera">
+    </div>
+    <div class="xycenter">
+        <label for="mobilewebappmodehiddencamera" class="xycenter checkboxlabel">
+            <img width="26" height="26" src="/images/hiddencamera.svg">
+            &#160;
+            <span class="hiddencamera"><string>hiddencamera</string></span>
+        </label>
+        <input type="checkbox" id="mobilewebappmodehiddencamera">
+    </div>
+    <div class="settingdescription"><span class="mobilewebappmodedescription"><string>mobilewebappmodedescription</string></span></div>
+</div>
+<div class="settingsbox">
+    <button class="buttons" id="resetsettings">
+        <span style="color:#ec0400;font-size:32px;">&times;</span> <span class="resetsettings" style="font-size: 16px;"><string>resetsettings</string></span>
+    </button>
+</div>

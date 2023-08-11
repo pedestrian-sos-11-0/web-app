@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="<htmllang>lang</htmllang>">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title><string>pedestrian</string>&nbsp;SOS!</title>
+        <link rel="stylesheet" href="/styles/index.css">
+        <link rel="stylesheet" href="/styles/index0.css">
+        <meta name="title" content="<string>pedestrian</string> SOS!">
+        <meta name="description" content="<string>webapp</string>">
+        <meta name="image" content="images/pedestriansos_256.png">
+    </head>
+    <body>
+        <div id="main">
+            <div id="top">
+                <a href="/" style="text-decoration: none;" title="<string>gomainpage</string>">
+                    <img alt width="64" height="64" src="/images/pedestriansos.svg">
+                    <h1>
+                        <span class="pedestrian"><string>pedestrian</string></span>&nbsp;<span class="sos">SOS!</span>
+                    </h1>
+                </a>
+            </div>
+            <br>
+            <!--UPLOAD_RESPONSE-->
+            <div id="buttons" class="texts">
+                <div class="buttonsDivs">
+                    <form method="post" enctype="multipart/form-data" class="uploadforms">
+                        <input type="file" accept="image/*" id="takephoto" name="photovideo" capture="environment" required>
+                        <label class="buttons texts" for="takephoto">
+                            <img alt width="64" height="64" src="/images/take_photo.svg">
+                            &nbsp;
+                            <span><string>takephoto</string></span>
+                        </label>
+                        <div class="uploadbuttondiv">
+                            <button type="submit" name="submit" class="buttons uploadbuttons texts">
+                                <img alt width="64" height="64" src="/images/uploadicon.svg">
+                                &nbsp;
+                                <span><string>upload</string></span>
+                            </button>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" name="location" value="1" checked>
+                                <img alt width="16" height="16" src="/../images/location.svg">
+                                <img alt width="16" height="16" src="/../images/uploadicon.svg">
+                                &nbsp;
+                                <span><string>attachmylocation</string></span>
+                            </label>
+                        </div>
+                    </form>
+                    <form method="post" enctype="multipart/form-data" class="uploadforms">
+                        <input type="file" accept="video/*" id="recordvideo" name="photovideo" capture="environment" required>
+                        <label class="buttons texts" for="recordvideo">
+                            <img alt width="64" height="64" src="/images/record_video.svg">
+                            &nbsp;
+                            <span><string>recordvideo</string></span>
+                        </label>
+                        <div class="uploadbuttondiv">
+                            <button type="submit" name="submit" class="buttons uploadbuttons texts">
+                                <img alt width="64" height="64" src="/images/uploadicon.svg">
+                                &nbsp;
+                                <span><string>upload</string></span>
+                            </button>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" name="location" value="1" checked>
+                                <img alt width="16" height="16" src="/../images/location.svg">
+                                <img alt width="16" height="16" src="/../images/uploadicon.svg">
+                                &nbsp;
+                                <span><string>attachmylocation</string></span>
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="buttonsDivs">
+                    <form method="post" enctype="multipart/form-data" class="uploadforms">
+                        <input type="file" accept="image/*" id="choosephoto" name="photovideo[]" required multiple>
+                        <label class="buttons texts" for="choosephoto">
+                            <img alt width="64" height="64" src="/images/photo.svg">
+                            &nbsp;
+                            <span><string>choosephotos</string></span>
+                        </label>
+                        <div class="uploadbuttondiv">
+                            <button type="submit" name="submit" class="buttons uploadbuttons texts">
+                                <img alt width="64" height="64" src="/images/uploadicon.svg">
+                                &nbsp;
+                                <span><string>upload</string></span>
+                            </button>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" name="location" value="1">
+                                <img alt width="16" height="16" src="/../images/location.svg">
+                                <img alt width="16" height="16" src="/../images/uploadicon.svg">
+                                &nbsp;
+                                <span><string>attachmylocation</string></span>
+                            </label>
+                        </div>
+                    </form>
+                    <form method="post" enctype="multipart/form-data" class="uploadforms">
+                        <input type="file" accept="video/*" id="choosevideo" name="photovideo[]" required multiple>
+                        <label class="buttons texts" for="choosevideo">
+                            <img alt width="64" height="64" src="/images/video.svg">
+                            &nbsp;
+                            <span><string>choosevideos</string></span>
+                        </label>
+                        <div class="uploadbuttondiv">
+                            <button type="submit" name="submit" class="buttons uploadbuttons texts">
+                                <img alt width="64" height="64" src="/images/uploadicon.svg">
+                                &nbsp;
+                                <span><string>upload</string></span>
+                            </button>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" name="location" value="1">
+                                <img alt width="16" height="16" src="/../images/location.svg">
+                                <img alt width="16" height="16" src="/../images/uploadicon.svg">
+                                &nbsp;
+                                <span><string>attachmylocation</string></span>
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="buttonsDivs">
+                    <form method="post" enctype="multipart/form-data" class="uploadforms">
+                        <input type="file" accept="image/*,video/*" id="choosefiles" name="photovideo[]" required multiple>
+                        <label class="buttons texts" for="choosefiles">
+                            <img alt width="64" height="64" src="/images/photovideo.svg">
+                            &nbsp;
+                            <span><string>choosefiles</string></span>
+                        </label>
+                        <div class="uploadbuttondiv">
+                            <button type="submit" name="submit" class="buttons uploadbuttons texts">
+                                <img alt width="64" height="64" src="/images/uploadicon.svg">
+                                &nbsp;
+                                <span><string>upload</string></span>
+                            </button>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" name="location" value="1">
+                                <img alt width="16" height="16" src="/../images/location.svg">
+                                <img alt width="16" height="16" src="/../images/uploadicon.svg">
+                                &nbsp;
+                                <span><string>attachmylocation</string></span>
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <br>
+                <div class="buttonsDivs">
+                    <form method="post" class="uploadforms">
+                        <label class="buttons" for="filelink">
+                            <img alt width="64" height="64" src="/images/link.svg">
+                            &nbsp;
+                            <span><string>enterlink</string></span>
+                        </label>
+                        <input type="url" id="filelink" name="filelink" placeholder="<string>enterlink</string>..." required>
+                        <div class="uploadbuttondiv">
+                            <button type="submit" name="submit" class="buttons uploadbuttons">
+                                <img alt width="64" height="64" src="/images/uploadicon.svg">
+                                &nbsp;
+                                <span><string>upload</string></span>
+                            </button>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" name="location" value="1">
+                                <img alt width="16" height="16" src="/../images/location.svg">
+                                <img alt width="16" height="16" src="/../images/uploadicon.svg">
+                                &nbsp;
+                                <span><string>attachmylocation</string></span>
+                            </label>
+                        </div>
+                        <br>
+                        <strong><string>linknote</string></strong>
+                    </form>
+                </div>
+            </div>
+            <!--AFTER_UPLOAD-->
+            <br><br>
+            <div class="buttongroup">
+                <a id="viewuploadsbutton" class="buttons viewuploadsbuttons" href="/?noscript&view<php>LANG</php>">
+                    <img alt width="64" height="64" src="/images/viewicon.svg">
+                    &nbsp;
+                    <span><string>viewuploads</string></span>
+                </a>
+                <a id="viewuploadsbutton2" class="buttons viewuploadsbuttons" href="/?noscript&view<php>LANG</php>" target="_blank">
+                    <img width="64" height="64" src="/images/newtab.svg" title="<string>viewuploads</string> | <string>openinnewtab</string>">
+                </a>
+            </div>
+            <br><br>
+            <div class="info">
+                <string>maxfilesize</string> <php>max_file_size</php>MB.
+                <hr>
+                <string>onlyimgvid</string>
+                <hr>
+                <string>allowedext</string>: .bmp, .gif, .ico, .jpg, .png, .tif, .webp, .avi, .mpeg, .ogv, .ts, .webm, .3gp, .3g2, .mp4.
+                <hr>
+                <string>maxfilesnum</string> 10.
+            </div>
+            <br>
+            <div class="info">
+                <img alt width="16" height="16" src="/images/uploadicon.svg">
+                <img alt width="16" height="16" src="/images/public.svg">
+                <span><string>uploadedispublic</string></span>
+                <hr>
+                <img alt width="16" height="16" src="/images/location.svg">
+                <img alt width="16" height="16" src="/images/uploadicon.svg">
+                <img alt width="16" height="16" src="/images/public.svg">
+                <span><string>locationwillbeattached</string></span>
+                <hr>
+                <img alt width="16" height="16" src="/images/undeletable.svg">
+                <span><string>uploadedisundeletable</string></span>
+            </div>
+            <br><br>
+            <form style="border: 2px dotted #256aff;padding: 4px;display: inline-block;" method="get">
+                <input type="hidden" name="noscript">
+                <label for="lang">
+                    <img alt width="26" height="26" src="/images/language.svg">
+                    <string>language</string>
+                </label>
+                <select name="lang" id="lang" required>
+                    <option value="" disabled selected hidden>...</option>
+                    <php>langoptions</php>
+                </select>
+                <button type="submit"><string>open</string></button>
+            </form>
+            <br><br>
+            <a href="/" class="buttons">
+                <img alt width="64" height="64" src="/images/homepage.svg">&nbsp;<span><string>gomainpage</string></span>
+            </a>
+            <br><br>
+        </div>
+        <script>try{function consoleWarning(a,b){for(var i=0;i<3;i++){console.log("%c!!!!!!!!!!","color:#ff0000;font-size:64px;font-weight:bold;");console.log("%c"+a+"!","color:#ff0000;font-size:32px;font-weight:bold;");console.log("%c"+b,"font-size:25px");console.log("%c!!!!!!!!!!","color:#ff0000;font-size:64px;font-weight:bold;");}}consoleWarning("<string>warning</string>","<string>consolewarning</string>");}catch(e){}</script>
+    </body>
+</html>
