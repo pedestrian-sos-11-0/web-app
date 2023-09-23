@@ -44,11 +44,7 @@
     bottom: 0;
     justify-content: center;
     align-items: center;
-    /* cursor: pointer; */
 }
-/* .overlay > *{
-    cursor: initial;
-} */
 #dragoverlay    {
     background-color: #256aff80;
 }
@@ -62,13 +58,6 @@
     padding: 2px;
     vertical-align: middle;
 }
-/* .locationDivs    {
-    border-bottom: 1px solid #256aff;
-}
-.locationTitles {
-    font-weight: 600;
-    border-right: 1px dotted #256aff;
-} */
 #location table, #location th, #location td{
     border: 1px solid #256aff;
     border-width: 0 1px 1px 0;
@@ -116,23 +105,8 @@
     margin: 2px;
     padding: 2px;
 }
-/* #settingswindow{
-    border: 2px solid #256aff;
-    border-radius: 10px;
-} */
 #uploadstatusbottomcenter{
     display: block;
     display: flex;
     justify-content: center;
 }
-/* .closeButtons{
-    background: none;
-    font-size: 25px;
-    border: 2px solid #ec040080;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-}
-.closeButtons:hover{
-    border-color: #ec0400;
-} */

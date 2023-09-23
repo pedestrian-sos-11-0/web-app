@@ -2,6 +2,7 @@
     "darkmode": "Dark mode",
     "devicedefault": "Device default",
     "savemyuploadsinthisbrowser": "Save my uploads in this browser",
+    "savelocalstorage": "Save to local storage",
     "resetsettings": "Reset Settings",
     "lightcolor": "Light colour",
     "lightbackgroundcolor": "Light background colour",
@@ -52,5 +53,6 @@
     "cameralivestreamconstantlylocationattachdescription": "Constantly attach location when new coordinates available while live streaming, even if current location setting is disabled.",
     "automaticdownload": "Automatic download",
     "onfocusactions": "On focus actions",
-    "onfocusactionsdescription": "Show buttons in camera web page, which if enabled, start appropriate action (record video, live stream, emergency mode) after camera window will be focused. For example, if record video selected, after leaving web page and opening again without closing (for example: turning off screen and then turning on, opening another app and returning to this app, etc..), video recording will be started immediately."
+    "onfocusactionsdescription": "Show buttons in camera web page, which if enabled, start appropriate action (record video, live stream, emergency mode) after camera window will be focused. For example, if record video selected, after leaving web page and opening again without closing (for example: turning off screen and then turning on, opening another app and returning to this app, etc..), video recording will be started immediately.",
+    "all": "All"
 }

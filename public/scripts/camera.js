@@ -228,21 +228,41 @@ function getNoValIfNoVal(val){
 try{
     var indexedDbRequest = indexedDB.open("localdata");
     indexedDbRequest.onupgradeneeded = function(){
+        this.result.createObjectStore("all");
         this.result.createObjectStore("location");
         this.result.createObjectStore("locationupload");
         this.result.createObjectStore("description");
+        this.result.createObjectStore("ids");
     };
 }catch(e){}
-function saveData(objectStoreName, data){
+function saveData(dbname, objectStoreName, data, key){
     try{
-        var indexedDbRequest = indexedDB.open("localdata");
+        if(localStorage.getItem("savelocalstorage_" + objectStoreName) == "false"){
+            return;
+        }
+        var indexedDbRequest = indexedDB.open(dbname);
         indexedDbRequest.onsuccess = function(){
             var db = this.result;
             var transaction = db.transaction(objectStoreName, "readwrite");
             var store = transaction.objectStore(objectStoreName);
-            store.put(data, Date.now());
+            if(!key){
+                key = Date.now();
+            }
+            if(objectStoreName == "all"){
+                try{
+                    store.add(data, key);
+                }catch(e){}
+            }else{
+                store.put(data, key + "_" + Date.now());
+            }
         };
+        if(key && (objectStoreName != "all")){
+            saveData("localdata", "all", "", key);
+        }
     }catch(e){}
+}
+function saveData_localdata(objectStoreName, data, key){
+    saveData("localdata", objectStoreName, data, key);
 }
 function getLocationString(local_latitude, local_longitude, local_altitude, local_accuracy, local_altitudeAccuracy, local_timestamp){
     local_latitude = getNoValIfNoVal(local_latitude);
@@ -394,16 +414,17 @@ function afterLocation(position)  {
     altitudeAccuracy = position.coords.altitudeAccuracy;
     locationTime = position.timestamp;
     var locationCoordinatesArray = [latitude, longitude, altitude, accuracy, altitudeAccuracy, locationTime];
-    saveData("location", locationCoordinatesArray);
+    saveData_localdata("location", locationCoordinatesArray);
     if(locationUploadArray.length > 0){
         for(var key in locationUploadArray){
+            saveData_localdata("locationupload", locationCoordinatesArray, locationUploadArray[key][3]);
             uploadLocation(locationUploadArray[key][0], locationUploadArray[key][1], locationUploadArray[key][2], locationCoordinatesArray);
             locationUploadArray.shift();
         }
     }
     if(locationPreUploadElements.length > 0){
-        saveData("locationupload", locationCoordinatesArray);
         for(var key in locationPreUploadElements){
+            saveData_localdata("locationupload", locationCoordinatesArray, locationPreUploadElements[key][2]);
             preUpload(locationCoordinates, locationPreUploadElements[key][0], locationCoordinatesArray, locationPreUploadElements[key][1]);
             locationPreUploadElements.shift();
         }
@@ -434,6 +455,7 @@ function afterLocation(position)  {
     var locationEnabledVal = localStorage.getItem("cameralivestreamlocationattach");
     var liveLocationEnabledVal = localStorage.getItem("cameralivestreamconstantlylocationattach");
     if((((locationEnabledVal == "true") || !locationEnabledVal) || ((liveLocationEnabledVal == "true") || !liveLocationEnabledVal)) && liveStreaming && liveN_2){
+        saveData_localdata("locationupload", locationCoordinatesArray, global_dbid);
         uploadLocation(liveN_2, liveID_2, liveKey_2, locationCoordinatesArray);
     }
 }
@@ -619,7 +641,7 @@ function automaticDownload(downloadButton, cameraMode){
 //         localStorage.setItem("saveuploads", true);
 //     }
 // }catch(e){}
-function uploadFile(file, cameraMode, id0, id, key, n0){
+function uploadFile(file, cameraMode, id0, id, key, n0, dbid){
     setTimeout(function(){
         var currentUploadID = ++lastUploadID;
         unloadWarning++;
@@ -685,6 +707,9 @@ function uploadFile(file, cameraMode, id0, id, key, n0){
         statusDiv.prepend(progressBarDiv);
         var locationEnabledVal = localStorage.getItem("camera" + cameraMode + "locationattach");
         var locationUploadEnabled = ((locationEnabledVal == "true") || !locationEnabledVal);
+        if(!dbid){
+            dbid = Date.now();
+        }
         if(id0){
             if(locationCoordinates[id0]){
                 preUpload(locationCoordinates, currentUploadID, locationCoordinates[id0], statusDiv);
@@ -692,13 +717,13 @@ function uploadFile(file, cameraMode, id0, id, key, n0){
         }else if(locationUploadEnabled){
             if(latitude != null && longitude != null && localStorage.getItem("currentlocationmode") == "true")    {
                 var locationCoordinatesArray = [latitude, longitude, altitude, accuracy, altitudeAccuracy, locationTime];
-                saveData("locationupload", locationCoordinatesArray);
+                saveData_localdata("locationupload", locationCoordinatesArray, dbid);
                 preUpload(locationCoordinates, currentUploadID, locationCoordinatesArray, statusDiv);
             }else{
                 if(!watchPositionID && !detectingLocation){
                     getLocation2();
                 }
-                locationPreUploadElements.push([currentUploadID, statusDiv]);
+                locationPreUploadElements.push([currentUploadID, statusDiv, dbid]);
             }
         }
         var ajax = new XMLHttpRequest();
@@ -731,7 +756,7 @@ function uploadFile(file, cameraMode, id0, id, key, n0){
                         if(!watchPositionID && !detectingLocation){
                             getLocation2();
                         }
-                        locationUploadArray.push([n, id, key]);
+                        locationUploadArray.push([n, id, key, dbid]);
                     }
                     if(currentUploadID == lastUploadID){
                         topProgressBar.style.backgroundColor = "#00ff0080";
@@ -746,10 +771,11 @@ function uploadFile(file, cameraMode, id0, id, key, n0){
                             }else{
                                 uploadsStorage = [];
                             }
-                            uploadsStorage.push([n, id, key/*, true, true*/]);
+                            uploadsStorage.push([n, id, key, dbid]);
                             localStorage.setItem("uploads", JSON.stringify(uploadsStorage));
                         }
                     }catch(e){}
+                    saveData_localdata("ids", [n, id, key], dbid);
                     unloadWarning--;
                 }else if(ajax.response == "1"){
                     if(currentUploadID == lastUploadID){
@@ -765,7 +791,7 @@ function uploadFile(file, cameraMode, id0, id, key, n0){
                     var retryButton = document.createElement("button");
                     retryButton.innerHTML = '<img class="whiteicon" width="32" height="32" src="/images/retry.svg">';
                     retryButton.onclick = function(){
-                        uploadFile(file, cameraMode, currentUploadID, id, key, n0);
+                        uploadFile(file, cameraMode, currentUploadID, id, key, n0, dbid);
                     };
                     retryButton.classList.add("buttons");
                     addStatus(imageName, imageName, "ff0000", ajax.responseText, retryButton);
@@ -781,11 +807,11 @@ function uploadFile(file, cameraMode, id0, id, key, n0){
                 var retryButton = document.createElement("button");
                 retryButton.innerHTML = '<img class="whiteicon" width="32" height="32" src="/images/retry.svg">';
                 retryButton.onclick = function(){
-                    uploadFile(file, cameraMode, currentUploadID, id, key, n0);
+                    uploadFile(file, cameraMode, currentUploadID, id, key, n0, dbid);
                 };
                 retryButton.classList.add("buttons");
                 addStatus(imageName, imageName, "ff0000", ajax.Error, retryButton);
-                var onlineFunc = function(){window.removeEventListener("online", onlineFunc);uploadFile(file, cameraMode, currentUploadID, id, key, n0);};
+                var onlineFunc = function(){window.removeEventListener("online", onlineFunc);uploadFile(file, cameraMode, currentUploadID, id, key, n0, dbid);};
                 window.addEventListener("online", onlineFunc);
             },0);
         }
@@ -865,6 +891,7 @@ function onVideoStop(live, dbid){
         if(recordedBlob != ""){
             if(live){
                 if(liveStartupOfflineRecording){
+                    liveStartupOfflineRecordedUploadStarted = true;
                     liveStartupOfflineRecording = false;
                     uploadFile(recordedBlob, "recordvideo");
                 }else{
@@ -881,9 +908,12 @@ function onVideoStop(live, dbid){
                     automaticDownload(downloadButton, "livestream");
                 }
             }else{
-                uploadFile(recordedBlob, "recordvideo");
+                uploadFile(recordedBlob, "recordvideo", null, null, null, null, dbid);
                 unloadWarning--;
             }
+        }
+        if(localStorage.getItem("savelocalstorage_video") == "false"){
+            indexedDB.deleteDatabase("videos" + dbid);
         }
     });
     if(live){
@@ -938,7 +968,7 @@ function getVideoIndexedDB(dbid, callbackFunc, key/*, keyRange*/){
         var store = transaction.objectStore("chunks");
         /*if(keyRange){
             var getRequest = store.getAll(keyRange);
-        }else */if(key){
+        }else */if(key || (key === 0)){
             var getRequest = store.get(key);
         }else{
             var getRequest = store.getAll();
@@ -989,34 +1019,32 @@ function startRecording(stream, live, dbid){
             // store = transaction.objectStore("chunks");
         };
     }catch(e){}
+    global_dbid = dbid;
     if(live){
-        global_dbid = dbid;
         // data = [];
         recorder.ondataavailable = function(e){
-            setTimeout(function(){
-                if(navigator.onLine){
-                    sendLiveChunk(new Blob([e.data], {type: "video/webm"}));
-                    // data.push(e.data);
-                    // var downloadButton = document.createElement("a");
-                    // downloadButton.href = URL.createObjectURL(e.data);
-                    // downloadButton.download = (new Date()).getTime();
-                    // downloadButton.click();
+            if(navigator.onLine && !liveStartupOfflineRecording){
+                sendLiveChunk(new Blob([e.data], {type: "video/webm"}));
+                // data.push(e.data);
+                // var downloadButton = document.createElement("a");
+                // downloadButton.href = URL.createObjectURL(e.data);
+                // downloadButton.download = (new Date()).getTime();
+                // downloadButton.click();
+            }else{
+                // offlineData.push(e.data);
+                if(offlineDataKeys[0] || (offlineDataKeys[0] === 0)){
+                    offlineDataKeys[1] = DB_CHUNK_N;
                 }else{
-                    // offlineData.push(e.data);
-                    if(offlineDataKeys[0]){
-                        offlineDataKeys[1] = DB_CHUNK_N;
-                    }else{
-                        offlineDataKeys[0] = DB_CHUNK_N;
-                    }
-                    chunk_n++;
+                    offlineDataKeys[0] = DB_CHUNK_N;
                 }
-                try{
-                    var transaction = db.transaction("chunks", "readwrite");
-                    store = transaction.objectStore("chunks");
-                    // store.put(new Blob([e.data], {type: "video/webm"}), DB_CHUNK_N++);
-                    store.put(e.data, DB_CHUNK_N++);
-                }catch(e){}
-            },0);
+                chunk_n++;
+            }
+            try{
+                var transaction = db.transaction("chunks", "readwrite");
+                store = transaction.objectStore("chunks");
+                // store.put(new Blob([e.data], {type: "video/webm"}), DB_CHUNK_N++);
+                store.put(e.data, DB_CHUNK_N++);
+            }catch(e){}
             // setTimeout(function(){
             //     data.push(e.data);
             // },0);
@@ -1028,6 +1056,7 @@ function startRecording(stream, live, dbid){
             // automaticDownload(downloadButton, "livestream");
             // URL.revokeObjectURL(objectURL);
         };
+        liveStartupOfflineRecordedUploadStarted = null;
         recorder.start(1000);
     }else{
         // data = [];
@@ -1038,7 +1067,8 @@ function startRecording(stream, live, dbid){
             // data.push(e.data);
             var transaction = db.transaction("chunks", "readwrite");
             store = transaction.objectStore("chunks");
-            store.put(new Blob([e.data], {type: "video/webm"}), DB_CHUNK_N++);
+            // store.put(new Blob([e.data], {type: "video/webm"}), DB_CHUNK_N++);
+            store.put(e.data, DB_CHUNK_N++);
         };
         // recorder.start();
         recorder.start(1000);
@@ -1157,6 +1187,17 @@ function whenOffline(){
     statusBox.prepend(offlineImg);
 }
 window.addEventListener("offline", whenOffline);
+function uploadOfflineLiveChunks(dbid){
+    if(offlineDataKeys.length){
+        for(var i = offlineDataKeys[0]; i <= offlineDataKeys[1]; i++){
+            getVideoIndexedDB(dbid, function(chunk, key){
+                sendLiveChunk(new Blob([chunk], {type: "video/webm"}), 2, key);
+            }, i);
+        }
+        offlineDataKeys = [];
+    }
+}
+var liveStartupOfflineRecordedUploadStarted;
 window.addEventListener("online", function(){
     offlineImg.style.display = "none";
     statusBox.style.backgroundColor = "#256aff40";
@@ -1181,13 +1222,8 @@ window.addEventListener("online", function(){
         //     offlineDataKeys = [];
         // }
     }
-    if(offlineDataKeys.length){
-        for(var i = offlineDataKeys[0]; i <= offlineDataKeys[1]; i++){
-            getVideoIndexedDB(global_dbid, function(chunk, key){
-                sendLiveChunk(new Blob([chunk], {type: "video/webm"}), 2, key);
-            }, i);
-        }
-        offlineDataKeys = [];
+    if(!liveStartupOfflineRecording && !liveStartupOfflineRecordedUploadStarted){
+        uploadOfflineLiveChunks(global_dbid);
     }
 });
 if(!navigator.onLine){
@@ -1419,12 +1455,10 @@ try{
     try{
         (new ScreenOrientation()).onchange = function(){
             setScreenOrientation();
-            alert(13)
         };
     }catch(e){
         window.onorientationchange = function(){
             setScreenOrientation();
-            alert(25)
         };
     }
     window.onload = function(){
@@ -1469,12 +1503,11 @@ try{
             liveN_2 = responseArray[3];
             liveID_2 = responseArray[4];
             liveKey_2 = responseArray[5];
-            chunk_n = 0;
             if(!liveStartupOfflineRecording){
+                chunk_n = 0;
                 videoSetup(true, dbid);
-            }else{
-                liveStartupOfflineRecording = false;
             }
+            liveChunkStatus.style.display = "flex";
             var liveChunksStatus = document.createElement("div");
             liveChunksStatus.innerHTML = '<div style="background-color:#256aff80;"><span style="background-color:#00ff0080;" id="liveuploadedchunks'+liveN_2+'">0</span> / <span style="background-color:#0000ff80;" id="livetotalchunks'+liveN_2+'">0</span><br><span style="background-color:#ff000080;" id="liveerrorchunks'+liveN_2+'">0</span></div>';
             var downloadButton = createDownloadButton(null, dbid);
@@ -1492,7 +1525,9 @@ try{
             var locationEnabledVal = localStorage.getItem("cameralivestreamlocationattach");
             if((locationEnabledVal == "true") || !locationEnabledVal){
                 if(latitude != null && longitude != null && localStorage.getItem("currentlocationmode") == "true")    {
-                    uploadLocation(liveN_2, liveID_2, liveKey_2, [latitude, longitude, altitude, accuracy, altitudeAccuracy, locationTime]);
+                    var locationCoordinates = [latitude, longitude, altitude, accuracy, altitudeAccuracy, locationTime];
+                    saveData_localdata("locationupload", locationCoordinates, dbid);
+                    uploadLocation(liveN_2, liveID_2, liveKey_2, locationCoordinates);
                 }else{
                     if(!watchPositionID && !detectingLocation){
                         getLocation2();
@@ -1516,8 +1551,13 @@ try{
                     localStorage.setItem("uploads", JSON.stringify(uploadsStorage));
                 }
             }catch(e){}
+            saveData_localdata("ids", [liveN_2, liveID_2, liveKey_2], dbid);
             if(emergencyModeEnabled){
                 sendEmergencyModeSignal();
+            }
+            if(liveStartupOfflineRecording){
+                liveStartupOfflineRecording = false;
+                uploadOfflineLiveChunks(dbid);
             }
         }else{
             liveSetupAjaxOnerror(ajax);
@@ -1617,7 +1657,7 @@ try{
         formData.append("id", liveID);
         formData.append("key", liveKey);
         formData.append("chunk", chunk);
-        if(local_chunk_n){
+        if(local_chunk_n || (local_chunk_n === 0)){
             formData.append("chunk_n", local_chunk_n);
         }else{
             formData.append("chunk_n", chunk_n++);
@@ -1649,7 +1689,6 @@ try{
             recordStatus.style.backgroundColor = "#ffff0040";
             recordStatus.style.display = "flex";
             recordStatus.title = getString("livestreaming");
-            liveChunkStatus.style.display = "flex";
             liveSetup();
         }else{
             liveButton.disabled = 1;
@@ -1868,7 +1907,7 @@ function setLanguage(lang,get)  {
             }
         }
         else{
-            var getlang = (new URL(window.location.href)).searchParams.get("lang");
+            var getlang = urlParams.searchParams.get("lang");
             if(getlang != null && get != 1){
                 lang = getlang;
                 setLanguage(lang,1);
@@ -1983,11 +2022,13 @@ try{
     }
     createOnFocusDivFunc();
     window.addEventListener("storage", function(){
-        if(localStorage.getItem("camerawindowonfocusactions") == "true"){
-            createOnFocusDivFunc();
-            onfocusDiv.style.display = "flex";
-        }else{
-            onfocusDiv.style.display = "none";
+        if(onfocusDiv){
+            if(localStorage.getItem("camerawindowonfocusactions") == "true"){
+                createOnFocusDivFunc();
+                onfocusDiv.style.display = "flex";
+            }else{
+                onfocusDiv.style.display = "none";
+            }
         }
     });
 }catch(e){}

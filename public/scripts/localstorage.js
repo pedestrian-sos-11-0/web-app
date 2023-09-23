@@ -137,19 +137,74 @@ try{
         }catch(e){}
     });
 }catch(e){}
-var objectURL;
-function getData(name, objectStoreName, callbackFunc, onerrorFunc, /*indexes*/index, setup){
+function createDownloadButton(objectURL){
+    var downloadButton = document.createElement("a");
+    downloadButton.download = (new Date()).getTime();
+    downloadButton.href = objectURL;
+    downloadButton.innerHTML = '<img alt width="32" height="32" src="/images/download.svg">&#160;<span class="download">'+getString("download")+'</span>';
+    downloadButton.classList.add("buttons", "smallbuttons");
+    return downloadButton;
+}
+function createDeleteButton(key, videoDatabases, objectStoreName){
+    var deleteButton = document.createElement("button");
+    deleteButton.innerHTML = '<img alt width="32" height="32" src="/images/delete.svg">&#160;<span class="delete">'+getString("delete")+'</span>';
+    deleteButton.classList.add("buttons", "smallbuttons");
+    if(!key){
+        deleteButton.onclick = function(){
+            if(confirm(getString("delete")+"?")){
+                var indexedDbRequest = indexedDB.deleteDatabase(videoDatabases[currentPageIndex.innerText - 1].name);
+                indexedDbRequest.onsuccess = function(){
+                    loadVideos();
+                };
+            }
+        };
+    }else{
+        deleteButton.onclick = function(){
+            if(confirm(getString("delete")+"?")){
+                var indexedDbRequest = indexedDB.open("localdata");
+                indexedDbRequest.onsuccess = function(){
+                    var transaction = this.result.transaction(objectStoreName, "readwrite");
+                    var store = transaction.objectStore(objectStoreName);
+                    (store.delete(key)).onsuccess = function(){
+                        var currentIndex = Number(currentPageIndex.innerText) - 1;
+                        var quantity = Number(totalPageQuantity.innerText) - 1;
+                        var index;
+                        if(currentIndex >= quantity){
+                            index = quantity - 1;
+                        }else{
+                            index = currentIndex;
+                        }
+                        loadStrings(objectStoreName, index, true);
+                    };
+                };
+            }
+        };
+    }
+    return deleteButton;
+}
+function getData(name, objectStoreName, callbackFunc, onerrorFunc, index, setup, keyRange){
     var indexedDbRequest = indexedDB.open(name);
     indexedDbRequest.onsuccess = function(){
         if(this.result.objectStoreNames.contains(objectStoreName)){
             var transaction = this.result.transaction(objectStoreName, "readonly");
             var store = transaction.objectStore(objectStoreName);
+            if(keyRange){
+                var getRequest0 = store.getAllKeys(keyRange);
+                getRequest0.onsuccess = function(){
+                    var getRequest = store.getAll(keyRange);
+                    getRequest.onsuccess = function(){
+                        callbackFunc(this.result, getRequest0.result);
+                    };
+                };
+                return;
+            }
             // if(indexes){
             if(index || (index === 0)){
                 var getRequest = store.getAllKeys();
                 getRequest.onsuccess = function(){
                     var result = this.result;
                     if(result.length){
+                        result.reverse();
                         // var key1 = result[indexes[0]];
                         // var key2 = result[indexes[1]];
                         // if(!key2){
@@ -226,27 +281,38 @@ function getDateTime(millisecond){
         return "";
     }
 }
-function getVideo(dbname){
+function getVideo0(dbname, videoDatabases, onSuccessFunc, onErrorFunc){
     getData(dbname, "chunks", function(result){
         var blob = new Blob(result, {type: "video/webm"});
-        objectURL = URL.createObjectURL(blob);
-        if(downloadButton.disabled){
-            downloadButton.disabled = 0;
-        }
+        var objectURL = URL.createObjectURL(blob);
         var videoPlayer = document.createElement("video");
         videoPlayer.controls = 1;
         videoPlayer.src = objectURL;
+        onSuccessFunc(videoPlayer, createDownloadButton(objectURL), videoDatabases);
+    }, onErrorFunc);
+}
+function getVideo(dbname, videoDatabases){
+    getVideo0(dbname, videoDatabases, function(videoPlayer, downloadButton, videoDatabases){
         previewDiv.innerHTML = '';
         previewDiv.appendChild(videoPlayer);
-        dateTimeDiv.innerText = getDateTime(Number(dbname.replace("videos", "")));
-        dataSizeSpan.innerText = blob.size;
+        var videoDateTimeDiv = document.createElement("div");
+        videoDateTimeDiv.innerText = getDateTime(parseInt(dbname.replace("videos", "")));
+        previewDiv.appendChild(videoDateTimeDiv);
+        previewDiv.appendChild(document.createElement("br"));
+        var div = document.createElement("div");
+        div.appendChild(downloadButton);
+        div.appendChild(document.createTextNode(" \u00a0 "));
+        div.appendChild(createDeleteButton(null, videoDatabases));
+        div.appendChild(document.createElement("br"));
+        previewDiv.appendChild(div);
+    }, function(){
+        previewDiv.innerHTML = '';
+        previewDiv.appendChild(getNoDataDiv());
     });
 }
 var previewDiv = document.getElementById("preview");
-var dateTimeDiv = document.getElementById("datetime");
-var dataSizeSpan = document.getElementById("datasize");
-var downloadButton = document.getElementById("downloadbutton");
-var deleteButton = document.getElementById("deletebutton");
+var downloadAllButton = document.getElementById("downloadallbutton");
+var deleteAllButton = document.getElementById("deleteallbutton");
 var previousButton = document.getElementById("previousButton");
 var nextButton = document.getElementById("nextButton");
 var currentPageIndex = document.getElementById("currentPageIndex");
@@ -254,33 +320,16 @@ var totalPageQuantity = document.getElementById("totalPageQuantity");
 var storageUsage = document.getElementById("storageUsage");
 var storageQuota = document.getElementById("storageQuota");
 var storageUsedPercent = document.getElementById("storageUsedPercent");
-// var descriptionData;
-downloadButton.onclick = function(){
-    // if(descriptionData){
-    //     for(var i = 0; i < descriptionData.length; i++){
-    //         var downloadButton = document.createElement("a");
-    //         downloadButton.download = "description"+(new Date()).getTime();
-    //         downloadButton.href = URL.createObjectURL(new Blob([descriptionData[i]]));
-    //         downloadButton.click();
-    //     }
-    //     return;
-    // }
-    var downloadButton = document.createElement("a");
-    downloadButton.download = (new Date()).getTime();
-    downloadButton.href = objectURL;
-    downloadButton.click();
-};
-function displayNoData(){
+function getNoDataDiv(){
     var noDataDiv = document.createElement("div");
     noDataDiv.innerHTML = '<span style="background-color:#ff000080;" class="nodata">'+getString("nodata")+'</span>';
+    return noDataDiv;
+}
+function displayNoData(){
     previewDiv.innerHTML = '';
-    previewDiv.appendChild(noDataDiv);
-    downloadButton.disabled = 1;
+    previewDiv.appendChild(getNoDataDiv());
     nextButton.disabled = 1;
     previousButton.disabled = 1;
-    deleteButton.disabled = 1;
-    dateTimeDiv.innerText = '';
-    dataSizeSpan.innerText = '';
     currentPageIndex.innerText = "";
     totalPageQuantity.innerText = "";
 }
@@ -298,7 +347,7 @@ function loadVideos(){
             }catch(e){}
             totalPageQuantity.innerText = videoDatabases.length;
             currentPageIndex.innerText = 1;
-            getVideo(videoDatabases[0].name);
+            getVideo(videoDatabases[0].name, videoDatabases);
             if(videoDatabases.length > 1){
                 previousButton.onclick = function(){
                     if(currentPageIndex.innerText == "1"){
@@ -306,7 +355,7 @@ function loadVideos(){
                     }else{
                         currentPageIndex.innerText -= 1;
                     }
-                    getVideo(videoDatabases[currentPageIndex.innerText - 1].name);
+                    getVideo(videoDatabases[currentPageIndex.innerText - 1].name, videoDatabases);
                 };
                 nextButton.onclick = function(){
                     if(currentPageIndex.innerText == videoDatabases.length){
@@ -314,7 +363,7 @@ function loadVideos(){
                     }else{
                         currentPageIndex.innerText = parseInt(currentPageIndex.innerText) + 1;
                     }
-                    getVideo(videoDatabases[currentPageIndex.innerText - 1].name);
+                    getVideo(videoDatabases[currentPageIndex.innerText - 1].name, videoDatabases);
                 };
                 previousButton.disabled = 0;
                 nextButton.disabled = 0;
@@ -322,19 +371,28 @@ function loadVideos(){
                 previousButton.disabled = 1;
                 nextButton.disabled = 1;
             }
-            deleteButton.onclick = function(){
-                if(confirm(getString("delete")+"?")){
-                    var indexedDbRequest = indexedDB.deleteDatabase(videoDatabases[currentPageIndex.innerText - 1].name);
-                    indexedDbRequest.onsuccess = function(){
-                        loadVideos();
-                    };
-                }
-            };
-            deleteButton.disabled = 0;
+            // deleteButton.onclick = function(){
+            //     if(confirm(getString("delete")+"?")){
+            //         var indexedDbRequest = indexedDB.deleteDatabase(videoDatabases[currentPageIndex.innerText - 1].name);
+            //         indexedDbRequest.onsuccess = function(){
+            //             loadVideos();
+            //         };
+            //     }
+            // };
+            // deleteButton.disabled = 0;
         }else{
             displayNoData();
         }
     });
+}
+function getStringDiv(data){
+    var div = document.createElement("div");
+    // div.style.maxHeight = "50vh";
+    // div.style.overflowY = "auto";
+    // div.style.border = "2px solid #256aff";
+    div.classList.add("stringDataDiv");
+    div.innerText = data;
+    return div;
 }
 function showData(/*dataArray*/data){
     // var documentFragment = document.createDocumentFragment();
@@ -355,68 +413,159 @@ function showData(/*dataArray*/data){
     // div2.style.margin = "0 15px";
     // div2.style.padding = "0 15px";
     // div2.style.border = "2px solid #256aff";
-    var div = document.createElement("div");
-    div.style.maxHeight = "50vh";
-    div.style.overflowY = "auto";
-    div.style.border = "2px solid #256aff";
-    div.innerText = data;
     previewDiv.innerHTML = '';
-    previewDiv.appendChild(div);
+    previewDiv.appendChild(getStringDiv(data));
+}
+function addImageAndText(element, imageName, textString){
+    var img = document.createElement("img");
+    img.width = "32";
+    img.height = "32";
+    img.src = "/images/" + imageName + ".svg";
+    element.appendChild(img);
+    var span = document.createElement("span");
+    span.classList.add(textString);
+    span.innerText = getString(textString);
+    element.appendChild(document.createTextNode("\u00a0"));
+    element.appendChild(span);
+}
+function getDataDiv(titleString, iconName){
+    var div = document.createElement("div");
+    div.classList.add("dataBigDiv");
+    var titleDiv = document.createElement("div");
+    titleDiv.classList.add("dataTitleDiv");
+    addImageAndText(titleDiv, iconName, titleString);
+    div.appendChild(titleDiv);
+    return div;
+}
+function getDataWithID(id, objectStoreName, titleString, iconName){
+    getData("localdata", objectStoreName, function(result, key){
+        var div = getDataDiv(titleString, iconName);
+        if(result.length){
+            if(objectStoreName == "ids"){
+                var myuploadsIframe = document.createElement("iframe");
+                myuploadsIframe.style.width = "100%";
+                myuploadsIframe.style.height = "50vh";
+                myuploadsIframe.onload = function(){
+                    myuploadsIframe.contentWindow.loadUploads(null, [result[0].concat(id)]);
+                };
+                myuploadsIframe.style.display = "none";
+                var myUploadsBtn = document.createElement("button");
+                addImageAndText(myUploadsBtn, "myuploads", "myuploads");
+                myUploadsBtn.classList.add("buttons", "smallbuttons");
+                myUploadsBtn.onclick = function(){
+                    if(myuploadsIframe.style.display == "none"){
+                        myuploadsIframe.style.display = "initial";
+                    }else{
+                        myuploadsIframe.style.display = "none";
+                    }
+                };
+                var nDiv = document.createElement("div");
+                nDiv.appendChild(document.createTextNode("#"));
+                nDiv.appendChild(document.createTextNode(result[0][0]));
+                div.appendChild(nDiv);
+                div.appendChild(myUploadsBtn);
+                div.appendChild(myuploadsIframe);
+                myuploadsIframe.src = "/app/myuploads/";
+            }else{
+                for(var i = 0; i < result.length; i++){
+                    div.appendChild(getStringDiv(result[i]));
+                    if(objectStoreName.includes("location") && result[i][5]){
+                        var videoDateTimeDiv = document.createElement("div");
+                        videoDateTimeDiv.innerText = getDateTime(result[i][5]);
+                        div.appendChild(videoDateTimeDiv);
+                    }else{
+                        var videoDateTimeDiv = document.createElement("div");
+                        videoDateTimeDiv.innerText = getDateTime(parseInt(key[i].split("_")[1]));
+                        div.appendChild(videoDateTimeDiv);
+                    }
+                    div.appendChild(createDownloadButton(URL.createObjectURL(new Blob([result[i]]))));
+                    if(i != (result.length - 1)){
+                        div.appendChild(document.createElement("hr"));
+                    }
+                }
+            }
+        }else{
+            div.appendChild(getNoDataDiv());
+        }
+        previewDiv.appendChild(div);
+    }, function(){}, null, null, IDBKeyRange.bound(id.toString(), id + "\uffff"));
 }
 function loadStrings(objectStoreName, /*indexes*/index, setup){
     getData("localdata", objectStoreName, function(result, key){
-        // if(objectStoreName == "description"){
-        //     descriptionData = result;
-        // }else{
-        //     descriptionData = null;
-        //     objectURL = URL.createObjectURL(new Blob([result.join("\n")]));
-        // }
-        objectURL = URL.createObjectURL(new Blob([result]));
-        downloadButton.disabled = 0;
-        deleteButton.onclick = function(){
-            if(confirm(getString("delete")+"?")){
-                var indexedDbRequest = indexedDB.open("localdata");
-                indexedDbRequest.onsuccess = function(){
-                    var transaction = this.result.transaction(objectStoreName, "readwrite");
-                    var store = transaction.objectStore(objectStoreName);
-                    (store.delete(key)).onsuccess = function(){
-                        var currentIndex = Number(currentPageIndex.innerText) - 1;
-                        var quantity = Number(totalPageQuantity.innerText) - 1;
-                        var index;
-                        if(currentIndex >= quantity){
-                            index = quantity - 1;
-                        }else{
-                            index = currentIndex;
-                        }
-                        loadStrings(objectStoreName, index, true);
-                    };
-                };
+        if(objectStoreName == "all"){
+            previewDiv.innerText = '';
+            var div = getDataDiv("video", "video");
+            getVideo0("videos" + key, null, function(videoPlayer, downloadButton){
+                div.appendChild(videoPlayer);
+                div.appendChild(document.createElement("br"));
+                div.appendChild(downloadButton);
+                div.appendChild(document.createElement("br"));
+                var videoDateTimeDiv = document.createElement("div");
+                videoDateTimeDiv.innerText = getDateTime(key);
+                div.appendChild(videoDateTimeDiv);
+                previewDiv.appendChild(div);
+            }, function(){
+                div.appendChild(getNoDataDiv());
+                previewDiv.appendChild(div);
+            });
+            getDataWithID(key, "description", "description", "description");
+            getDataWithID(key, "locationupload", "locationcoordinates", "location");
+            getDataWithID(key, "ids", "myuploads", "myuploads");
+        }else{
+            // deleteButton.onclick = function(){
+            //     if(confirm(getString("delete")+"?")){
+            //         var indexedDbRequest = indexedDB.open("localdata");
+            //         indexedDbRequest.onsuccess = function(){
+            //             var transaction = this.result.transaction(objectStoreName, "readwrite");
+            //             var store = transaction.objectStore(objectStoreName);
+            //             (store.delete(key)).onsuccess = function(){
+            //                 var currentIndex = Number(currentPageIndex.innerText) - 1;
+            //                 var quantity = Number(totalPageQuantity.innerText) - 1;
+            //                 var index;
+            //                 if(currentIndex >= quantity){
+            //                     index = quantity - 1;
+            //                 }else{
+            //                     index = currentIndex;
+            //                 }
+            //                 loadStrings(objectStoreName, index, true);
+            //             };
+            //         };
+            //     }
+            // };
+            showData(result);
+            if(objectStoreName.includes("location") && result[5]){
+                var videoDateTimeDiv = document.createElement("div");
+                videoDateTimeDiv.innerText = getDateTime(result[5]);
+                previewDiv.appendChild(videoDateTimeDiv);
+            }else{
+                var videoDateTimeDiv = document.createElement("div");
+                videoDateTimeDiv.innerText = getDateTime(parseInt(key.split("_")[1]));
+                previewDiv.appendChild(videoDateTimeDiv);
             }
-        };
-        deleteButton.disabled = 0;
-        showData(result);
-        dataSizeSpan.innerText = result.length;
+            previewDiv.appendChild(document.createElement("br"));
+            var div = document.createElement("div");
+            div.appendChild(createDownloadButton(URL.createObjectURL(new Blob([result]))));
+            div.appendChild(document.createTextNode(" \u00a0 "));
+            div.appendChild(createDeleteButton(key, null, objectStoreName));
+            previewDiv.appendChild(div);
+            // dataSizeSpan.innerText = result.length;
+        }
     }, function(){
         displayNoData();
-    }, /*indexes*/index, setup);
+    }, index, setup);
 }
 var dataButtons = document.getElementsByClassName("databuttons");
 for(var i = 0; i < dataButtons.length; i++){
     dataButtons[i].onclick = function(){
-        downloadButton.disabled = 1;
         nextButton.disabled = 1;
         previousButton.disabled = 1;
-        deleteButton.disabled = 1;
         previewDiv.innerHTML = '';
-        dateTimeDiv.innerText = '';
-        dataSizeSpan.innerText = '';
         currentPageIndex.innerText = "";
         totalPageQuantity.innerText = "";
         if(this.style.outline == ''){
             if(this.id == "videodata"){
                 loadVideos();
             }else{
-                // loadStrings(this.id.replace("data", ""), [0, 9], true);
                 loadStrings(this.id.replace("data", ""), 0, true);
             }
             for(var i2 = 0; i2 < dataButtons.length; i2++){
@@ -438,3 +587,4 @@ try{
         navigator.serviceWorker.register("/app/offlineserviceworker.js");
     }
 }catch(e){}
+document.getElementById("alldata").click();

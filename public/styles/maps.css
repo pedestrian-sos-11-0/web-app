@@ -18,13 +18,9 @@ iframe{
     height: 100%;
 }
 #mapdiv{
-    /* height: 90%; */
     height: 100%;
     position: relative;
 }
-/* #bottom{
-    height: 10%;
-} */
 #marker{
     position: absolute;
     top: calc(50% - 32px);
@@ -35,7 +31,6 @@ iframe{
     display: flex;
     justify-content: center;
     align-items: center;
-    /* text-align: center; */
     white-space: nowrap;
     overflow-x: auto;
 }

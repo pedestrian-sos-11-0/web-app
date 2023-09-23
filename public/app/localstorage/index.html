@@ -21,6 +21,9 @@
         </h2>
         <div>
             <div>
+                <button id="alldata" class="buttons smallbuttons databuttons">
+                    <img alt width="32" height="32" src="/images/localstorage.svg">&#160;<span class="all"></span>
+                </button>
                 <button id="videodata" class="buttons smallbuttons databuttons">
                     <img alt width="32" height="32" src="/images/video.svg">&#160;<span class="video"></span>
                 </button>
@@ -28,7 +31,7 @@
                     <img alt width="32" height="32" src="/images/location.svg">&#160;<span class="locationcoordinates"></span>
                 </button>
                 <button id="locationuploaddata" class="buttons smallbuttons databuttons">
-                    <img alt width="32" height="32" src="/images/location.svg">&#160;<img alt width="32" height="32" src="/images/uploadicon.svg">&#160;<span class="locationcoordinates"></span>
+                    <img alt width="32" height="32" src="/images/location.svg">&#160;<img alt width="32" height="32" src="/images/uploadicon.svg">&#160;<span class="locationcoordinates"></span>&#160;|&#160;<span class="upload"></span>
                 </button>
                 <button id="descriptiondata" class="buttons smallbuttons databuttons">
                     <img alt width="32" height="32" src="/images/description.svg">&#160;<span class="description"></span>
@@ -36,21 +39,6 @@
             </div>
             <br>
             <div id="preview"></div>
-            <br>
-            <div id="datetime"></div>
-            <br>
-            <div>
-                <span id="datasize"></span>B
-            </div>
-            <br>
-            <div>
-                <button id="downloadbutton" class="buttons" disabled>
-                    <img alt width="64" height="64" src="/images/download.svg">&#160;<span class="download"></span>
-                </button>
-                <button id="deletebutton" class="buttons smallbuttons" disabled>
-                    <img alt width="32" height="32" src="/images/delete.svg">&#160;<span class="delete"></span>
-                </button>
-            </div>
             <br>
             <div>
                 <div>
@@ -66,6 +54,15 @@
                 <div>
                     <span id="currentPageIndex"></span> / <span id="totalPageQuantity"></span>
                 </div>
+                <!-- <br>
+                <div>
+                    <button id="downloadallbutton" class="buttons" disabled>
+                        <img alt width="64" height="64" src="/images/download.svg">&#160;<span class="downloadall"></span>
+                    </button>
+                    <button id="deleteallbutton" class="buttons" disabled>
+                        <img alt width="64" height="64" src="/images/delete.svg">&#160;<span class="deleteall"></span>
+                    </button>
+                </div> -->
                 <br>
                 <div>
                     <span id="storageUsage"></span>B / <span id="storageQuota"></span>B

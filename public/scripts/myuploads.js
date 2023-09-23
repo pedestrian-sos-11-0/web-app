@@ -285,7 +285,7 @@ function getFullscreenButton(element){
     btn.style.display = "none";
     return btn;
 }
-function mapsButton(btn){
+function mapsButton(btn, dbid){
     var fullscreen = btn.nextElementSibling;
     var iframe = fullscreen.parentNode.nextElementSibling;
     var upload = iframe.nextElementSibling.children[0];
@@ -297,11 +297,12 @@ function mapsButton(btn){
             // locationPreUpload(currentUploadID, iframe.document.getElementById("coordinates").innerText.split(", "), statusDiv);
             // console.log(iframe.contentWindow.document.getElementById("coordinates").innerText.split(", "));
             // locationPreUpload(btn.getAttribute("currentUploadID"), iframe.contentWindow.coordinates, document.getElementById("statusDiv"+btn.getAttribute("currentUploadID")));
-            if(btn.getAttribute("maps_btn_currentUploadID")){
-                uploadLocationFunc(btn.getAttribute("maps_btn_currentUploadID"), null, document.querySelector('[maps_div_currentUploadID="'+btn.getAttribute("maps_btn_currentUploadID")+'"]'), document.querySelector('[maps_div2_currentUploadID="'+btn.getAttribute("maps_btn_currentUploadID")+'"]'), iframe.contentWindow.coordinates);
-            }else{
+            // if(btn.getAttribute("maps_btn_currentUploadID")){
+            //     uploadLocationFunc(btn.getAttribute("maps_btn_currentUploadID"), null, document.querySelector('[maps_div_currentUploadID="'+btn.getAttribute("maps_btn_currentUploadID")+'"]'), document.querySelector('[maps_div2_currentUploadID="'+btn.getAttribute("maps_btn_currentUploadID")+'"]'), iframe.contentWindow.coordinates);
+            // }else{
+                saveData("locationupload", iframe.contentWindow.coordinates, dbid);
                 uploadLocation(btn.getAttribute("maps_id"), btn.getAttribute("maps_key"), document.querySelector('[maps_div_currentUploadID="'+btn.getAttribute("maps_id")+'"]'), null, iframe.contentWindow.coordinates);
-            }
+            // }
             if(document.fullscreenElement){
                 uploadStatus.style.backgroundColor = "#ffff00";
                 uploadStatus.style.visibility = "visible";
@@ -321,24 +322,28 @@ function mapsButton(btn){
         }
     }
 }
-function getMapsDiv(currentUploadID, statusDiv, status, id, key){
+function getMapsDiv(currentUploadID, statusDiv, status, id, key, dbid){
     var maps = document.createElement("div");
     // maps.innerHTML = '<button class="buttons smallbuttons" onclick=mapsButton(this, "'+currentUploadID+'", '+statusDiv+')><img width="32" height="32" src="/images/maps.svg"> <span class="maps">'+getString("maps")+'</span></button><iframe style="display: none;width: 100%;height: 75vh;"></iframe><button style="display:none;" class="buttons smallbuttons"><img width="32" height="32" src="/images/uploadicon.svg"> <span class="upload">'+getString("upload")+'</span></button>';
-    if(currentUploadID){
-        statusDiv.setAttribute("maps_div_currentUploadID", currentUploadID);
-        var attributes = 'maps_btn_currentUploadID="'+currentUploadID+'"';
-    }else{
+    // if(currentUploadID){
+    //     statusDiv.setAttribute("maps_div_currentUploadID", currentUploadID);
+    //     var attributes = 'maps_btn_currentUploadID="'+currentUploadID+'"';
+    // }else{
         statusDiv.setAttribute("maps_div_currentUploadID", id);
         var attributes = 'maps_id="'+id+'" maps_key="'+key+'"';
-    }
-    if(status){
-        status.setAttribute("maps_div2_currentUploadID", currentUploadID);
-    }
-    maps.innerHTML = '<div><button class="buttons smallbuttons" onclick="mapsButton(this)" '+attributes+'><img width="32" height="32" src="/images/maps.svg"> <span class="maps">'+getString("maps")+'</span></button></div><iframe style="display: none;width: 100%;height: 75vh;background-color:#fff;"></iframe><div><button style="display:none;" class="buttons smallbuttons"><img width="32" height="32" src="/images/uploadicon.svg"> <span class="upload">'+getString("upload")+'</span></button><div style="display:none;visibility:hidden;padding:4px;border-radius:8px;"><img style="vertical-align:middle;" width="32" height="32" src="/images/uploadicon.svg">&#160;<img style="vertical-align:middle;" width="32" height="32" src="/images/location.svg"></div></div>';
+    // }
+    // if(status){
+    //     status.setAttribute("maps_div2_currentUploadID", currentUploadID);
+    // }
+    maps.innerHTML = '<div><button class="buttons smallbuttons" onclick="mapsButton(this, ' + dbid + ')" '+attributes+'><img width="32" height="32" src="/images/maps.svg"> <span class="maps">'+getString("maps")+'</span></button></div><iframe style="display: none;width: calc(100% - 4px);height: 75vh;background-color:#fff;"></iframe><div><button style="display:none;" class="buttons smallbuttons"><img width="32" height="32" src="/images/uploadicon.svg"> <span class="upload">'+getString("upload")+'</span></button><div style="display:none;visibility:hidden;padding:4px;border-radius:8px;"><img style="vertical-align:middle;" width="32" height="32" src="/images/uploadicon.svg">&#160;<img style="vertical-align:middle;" width="32" height="32" src="/images/location.svg"></div></div>';
     try{
         maps.children[0].appendChild(getFullscreenButton(maps));
     }catch(e){}
     return maps;
+}
+function addZero(n){
+    if(n<10){n="0"+n;}
+    return n;
 }
 function getDateTime(millisecond){
     try{
@@ -347,7 +352,7 @@ function getDateTime(millisecond){
         }else{
             var d = new Date();
         }
-        return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+        return d.getFullYear() + "-" + addZero(d.getMonth() + 1) + "-" + addZero(d.getDate()) + " " + addZero(d.getHours()) + ":" + addZero(d.getMinutes()) + ":" + addZero(d.getSeconds());
     }catch(e){
         return "";
     }
@@ -766,6 +771,24 @@ function loadMedia(id, myUploadBox){
     ajax.open("GET", "/?view&raw=1&n=" + id);
     ajax.send();
 }
+function saveData(objectStoreName, data, key){
+    try{
+        if(localStorage.getItem("savelocalstorage_" + objectStoreName) == "false"){
+            return;
+        }
+        var indexedDbRequest = indexedDB.open("localdata");
+        indexedDbRequest.onsuccess = function(){
+            var db = this.result;
+            var transaction = db.transaction(objectStoreName, "readwrite");
+            var store = transaction.objectStore(objectStoreName);
+            if(!key){
+                key = Date.now();
+            }
+            store.put(data, key + "_" + Date.now());
+        };
+    }catch(e){}
+}
+var uploadsQuantityInPage = 1;
 function loadSingleUpload(uploadsData, i){
     var myUploadBox = document.createElement("div");
     myUploadBox.innerHTML = '';
@@ -825,6 +848,7 @@ function loadSingleUpload(uploadsData, i){
             e.preventDefault();
             var i = this.id.substring(1);
             var element = document.getElementById('i'+i);
+            saveData("description", this.children[0].value, uploadsData[3]);
             uploadDescription(uploadsData[1], uploadsData[2], this.children[0].value, this.children[0], this.children[1], element);
             this.children[0].value = '';
             this.children[2].innerText = "0";
@@ -853,13 +877,13 @@ function loadSingleUpload(uploadsData, i){
         }
         myUploadBox.insertBefore(voiceUpload, element);
     // }
-    myUploadBox.insertBefore(getMapsDiv(null, element, null, uploadsData[1], uploadsData[2]), element);
+    myUploadBox.insertBefore(getMapsDiv(null, element, null, uploadsData[1], uploadsData[2], uploadsData[3]), element);
     var clearSingleUpload = document.createElement("button");
     clearSingleUpload.innerHTML = '<span style="color:#ec0400;font-size:32px;">&times;</span> <span class="clear">'+getString("clear")+'</span>';
     clearSingleUpload.classList.add("buttons", "smallbuttons");
     clearSingleUpload.onclick = function(){
         if(confirm(getString("clear")+"?")){
-            uploads.splice(i + (parseInt(currentPageIndex.innerText) - 1) * 10, 1);
+            uploads.splice(i + (parseInt(currentPageIndex.innerText) - 1) * uploadsQuantityInPage, 1);
             localStorage.setItem("uploads", JSON.stringify(uploads));
             if(!uploads.length){
                 localStorage.removeItem("uploads");
@@ -875,10 +899,12 @@ function loadSingleUpload(uploadsData, i){
     }catch(e){}
     return myUploadBox;
 }
-function loadUploads(pageIndex){
+function loadUploads(pageIndex, uploadsToShow){
     myuploadsDiv.innerHTML = '';
-    pageIndex *= 10;
-    uploadsToShow = uploads.slice(pageIndex, pageIndex + 10);
+    if(!uploadsToShow){
+        pageIndex *= uploadsQuantityInPage;
+        uploadsToShow = uploads.slice(pageIndex, pageIndex + uploadsQuantityInPage);
+    }
     uploadsFragment = document.createDocumentFragment();
     for(var i = 0; i < uploadsToShow.length; i++){
         div = document.createElement("div");
@@ -891,7 +917,7 @@ var currentPageIndex = document.getElementById("currentPageIndex");
 var totalPageQuantity = document.getElementById("totalPageQuantity");
 if(uploads){
     currentPageIndex.innerText = "1";
-    var pagesQuantity = Math.ceil(uploads.length / 10);
+    var pagesQuantity = Math.ceil(uploads.length / uploadsQuantityInPage);
     if(pagesQuantity > 1){
         totalPageQuantity.innerText = pagesQuantity;
         previousButton.onclick = function(){

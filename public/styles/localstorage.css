@@ -29,12 +29,27 @@ body    {
         color-scheme: dark;
     }
 }
-#preview, #preview > *{
+#preview video{
     max-width: 100%;
     min-height: 25vh;
     max-height: 75vh;
 }
-#preview > div > div{
+.dataBigDiv{
+    border: 1px dotted #256aff;
+    margin: 16px 4px;
+    padding: 4px;
+}
+.dataBigDiv hr{
+    border-top: 1px solid #256aff;
+}
+.dataTitleDiv{
+    border-bottom: 1px dashed #256aff;
+    margin-bottom: 2px;
+    padding-bottom: 2px;
+}
+.stringDataDiv{
+    max-height: 50vh;
+    overflow-y: auto;
     border: 1px solid #256aff;
     margin: 4px;
     padding: 4px;
@@ -51,7 +66,7 @@ body    {
     text-decoration: none;
     color: inherit;
 }
-.buttons *{
+.buttons *, .dataTitleDiv *{
     vertical-align: middle;
 }
 .buttons:disabled   {

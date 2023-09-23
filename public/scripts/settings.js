@@ -388,6 +388,12 @@ function inputSettingSetup(id, input, storagename, defaultval){
 try{
     var checkboxSettings = [
         ["saveuploads", true],
+        ["savelocalstorage_all", true],
+        ["savelocalstorage_video", true],
+        ["savelocalstorage_location", true],
+        ["savelocalstorage_locationupload", true],
+        ["savelocalstorage_description", true],
+        ["savelocalstorage_ids", true],
         ["currentlocationmode", false],
         ["locationhighaccuracymode", true],
         ["locationinitializationmode", false],

@@ -48,29 +48,6 @@ try{
     }catch(e){}
     locationTitle.style.fontSize = "20px";
     locationTop.appendChild(locationTitle);
-    /*function locationSettingSetup(imageName, textName){
-        var local_div = document.createElement("div");
-        local_div.innerHTML = '<label style="cursor:pointer;"><div style="border:1px solid #256aff;text-align:center;display:inline-block;"><img width="16" height="16" src="/images/'+imageName+'.svg" style="vertical-align:middle;">&nbsp;<span class="'+textName+'" style="vertical-align:middle;">'+getString(textName)+'</span></div></label>';
-        var local_checkbox = document.createElement("input");
-        local_checkbox.type = "checkbox";
-        try{
-            local_checkbox.style.verticalAlign = "middle";
-            local_checkbox.style.cursor = "pointer";
-        }catch(e){}
-        local_div.style.display = "inline-block";
-        local_div.children[0].children[0].appendChild(local_checkbox);
-        locationSettingsDiv.appendChild(local_div);
-        local_checkbox.onchange = function(){
-            if(currentLocationCheckbox.checked || initialLocationCheckbox.checked){
-                getLocation2();
-            }else if(watchPositionID){
-                navigator.geolocation.clearWatch(watchPositionID);
-            }
-            localStorage.setItem(textName, JSON.stringify(this.checked));
-        };
-        local_checkbox.checked = JSON.parse(localStorage.getItem(textName));
-        return local_checkbox;
-    }*/
     function setStorageIfNot(local_name, local_value){
         if(!localStorage.getItem(local_name)){
             localStorage.setItem(local_name, local_value);
@@ -99,14 +76,6 @@ try{
     }
     function locationModeStatusSetup(imageName, textName, storageName){
         var local_div = document.createElement("div");
-        //var cachetimeoutval = '';
-        /*if(storageName == "locationcachemode"){
-            cachetimeoutval = '(<span id="cachetimeoutval">'+(localStorage.getItem("locationcachetimeout") / 1000)+'</span>s)';
-            window.addEventListener("storage", function(){
-                locationCacheValue.innerText = localStorage.getItem("locationcachetimeout") / 1000;
-            });
-        }*/
-        //local_div.innerHTML = '<div style="border:1px solid #256aff;text-align:center;display:inline-block;"><img width="16" height="16" src="/images/'+imageName+'.svg">&nbsp;<span class="'+textName+'">'+getString(textName)+'</span>'+cachetimeoutval+'</div>';
         local_div.innerHTML = '<img width="16" height="16" src="/images/'+imageName+'.svg" class="'+textName+'" title="'+getString(textName)+'">';
         local_div.style.display = "inline-block";
         local_div.id = "settingstatus"+storageName;
@@ -132,64 +101,12 @@ try{
             try{
                 locationImage.className = "locationcoordinates notdetecting";
             }catch(e){}
-            /*var locationSettingsDiv = document.createElement("div");
-            try{
-                locationSettingsDiv.style.textAlign = "center";
-                locationSettingsDiv.style.borderBottom = "2px solid #256aff";
-            }catch(e){}
-            locationDiv.insertBefore(locationSettingsDiv, locationTable);
-            var currentLocationCheckbox;
-            var highAccuracyModeCheckbox;
-            var locationOnLoadCheckbox;
-            var locationCacheCheckbox;
-            var locationCacheInput;
-            if(!localStorage.getItem("highaccuracy")){
-                localStorage.setItem("highaccuracy", JSON.stringify(true));
-            }
-            currentLocationCheckbox = locationSettingSetup("currentlocation", "currentlocation");
-            highAccuracyModeCheckbox = locationSettingSetup("locationhighaccuracy", "highaccuracy");
-            initialLocationCheckbox = locationSettingSetup("initialization", "initiallocation");
-            locationCacheCheckbox = locationSettingSetup("cache", "locationcache");
-            var locationCacheLabel = document.createElement("label");
-            try{
-                locationCacheLabel.style.border = "1px solid #256aff";
-                locationCacheLabel.style.display = "inline-block";
-            }catch(e){}
-            locationCacheLabel.innerHTML = '<span class="cachetimeout">'+getString("cachetimeout")+'</span>';
-            locationCacheInput = document.createElement("input");
-            locationCacheInput.type = "number";
-            locationCacheInput.min = "0";
-            locationCacheInput.oninput = function(){
-                localStorage.setItem("locationcachetimeout", this.value);
-            };
-            if(!localStorage.getItem("locationcachetimeout")){
-                localStorage.setItem("locationcachetimeout", 60);
-            }
-            locationCacheInput.value = localStorage.getItem("locationcachetimeout");
-            locationCacheLabel.appendChild(locationCacheInput);
-            var local_text = document.createTextNode("s");
-            locationCacheLabel.appendChild(locationCacheInput);
-            locationCacheLabel.appendChild(local_text);
-            locationSettingsDiv.appendChild(locationCacheLabel);*/
             var locationModeStatusDiv = document.createElement("div");
-            //locationModeStatusDiv.innerHTML = '<img width="16" height="16" src="/images/settings.svg"><span class="settings">'+getString("settings")+'</span><br>';
             try{
                 locationModeStatusDiv.style.textAlign = "center";
                 locationModeStatusDiv.style.borderBottom = "2px solid #256aff";
             }catch(e){}
             locationDiv.insertBefore(locationModeStatusDiv, locationTable);
-            /*var currentLocationStatus;
-            var highAccuracyModeStatus;
-            var locationOnLoadStatus;
-            var locationCacheStatus;
-            currentLocationStatus = locationModeStatusSetup("currentlocation", "currentlocation", "currentlocationmode");
-            highAccuracyModeStatus = locationModeStatusSetup("locationhighaccuracy", "locationhighaccuracy", "locationhighaccuracymode");
-            locationOnLoadStatus = locationModeStatusSetup("initialization", "initiallocation", "locationinitializationmode");
-            locationCacheStatus = locationModeStatusSetup("cache", "locationcache", "locationcachemode");*/
-            /*locationModeStatusSetup("currentlocation", "currentlocationmode");
-            locationModeStatusSetup("locationhighaccuracy", "locationhighaccuracymode");
-            locationModeStatusSetup("initialization", "locationinitializationmode");
-            locationModeStatusSetup("cache", "locationcachemode");*/
             try{
                 setStorageIfNot("locationhighaccuracymode", true);
                 setStorageIfNot("locationcachemode", true);
@@ -199,12 +116,6 @@ try{
             locationModeStatusSetup("locationhighaccuracy", "locationhighaccuracy", "locationhighaccuracymode");
             locationModeStatusSetup("initialization", "initiallocation", "locationinitializationmode");
             locationModeStatusSetup("cache", "locationcache", "locationcachemode");
-            //var locationCacheValue = document.getElementById("cachetimeoutval");
-            /*try{
-                setStorageIfNot("locationhighaccuracymode", true);
-                setStorageIfNot("locationcachemode", true);
-                setStorageIfNot("locationcachetimeout", 1000);
-            }catch(e){}*/
         }else{
             locationTbody.innerHTML = "<tr><th>Geolocation not supported by this browser.</th></tr>";
             locationDiv.style.backgroundColor = "#ff000080";
@@ -289,7 +200,6 @@ function getLocation(continuousUpdate, highAccuracy, cacheData, cacheTimeout)  {
     }catch(e){}
 }
 function getLocation2(){
-    //getLocation(currentLocationCheckbox.checked, highAccuracyModeCheckbox.checked, locationCacheCheckbox.checked, locationCacheInput.value * 1000);
     getLocation(localStorage.getItem("currentlocationmode") == "true", localStorage.getItem("locationhighaccuracymode") == "true", localStorage.getItem("locationcachemode") == "true", parseInt(localStorage.getItem("locationcachetimeout")));
 }
 function afterLocation(position)  {
@@ -303,7 +213,6 @@ function afterLocation(position)  {
         try{
             locationImage.className = "locationcoordinates detected";
         }catch(e){}
-        // locationUploadStatus.children[0].src = "/images/location.svg";
     }catch(e){}
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
@@ -314,13 +223,12 @@ function afterLocation(position)  {
     var coordinatesArray = [latitude, longitude, altitude, accuracy, altitudeAccuracy, locationTime];
     saveData("location", coordinatesArray);
     if(locationUploadArray.length > 0){
-        // var coordinatesArray = [latitude, longitude, altitude, accuracy, altitudeAccuracy, locationTime];
         for(var key in locationUploadArray){
             var element;
             try{
                 element = document.getElementById('q'+n_key[locationUploadArray[key][0]][0]);
             }catch(e){}
-            saveData("locationupload", coordinatesArray);
+            saveData("locationupload", coordinatesArray, locationUploadArray[key][3]);
             if(element){
                 uploadLocation(n_key[locationUploadArray[key][0]][1], n_key[locationUploadArray[key][0]][2], element, locationUploadArray[key][1], coordinatesArray);
             }else{
@@ -356,10 +264,6 @@ function locationError(error)    {
         locationImage.className = "locationcoordinates unavailable";
     }catch(e){}
     if(!locationDiv.contains(locationErrorDiv)){
-        /*try{
-            locationImage.src = "/images/nolocation.svg";
-            // locationUploadStatus.children[0].src = "/images/nolocation.svg";
-        }catch(e){}*/
         locationDiv.appendChild(locationErrorDiv);
         var errorHTML = 'ERROR!<br>';
         switch(error.code)   {
@@ -400,27 +304,11 @@ function locationError(error)    {
 }
 try{
     if(geolocationSupported)    {
-        /*if(initialLocationCheckbox.checked){
-            getLocation2();
-        }*/
         if(localStorage.getItem("locationinitializationmode") == "true"){
             getLocation2();
         }
     }
 }catch(e){}
-// try{
-//     function preImg(image){
-//         var img = document.createElement("img");
-//         img.src = image;
-//         img.width = "0";
-//         img.height = "0";
-//         img.style.display = "block";
-//         mainDiv.appendChild(img);
-//         img.remove();
-//     }
-//     preImg("/images/offline.svg");
-//     preImg("/images/retry.svg");
-// }catch(e){}
 function addRetryButton(func, element){
     var retryButton = document.createElement("button");
     retryButton.innerHTML = "<img width=\"32\" height=\"32\" src=\"/images/retry.svg\"> " + getString("retry");
@@ -437,9 +325,6 @@ function addRetryButton(func, element){
 }
 var uploadStatuses = document.getElementById("uploadstatuses");
 function uploadString(n, key, post, location, automaticLocation, value, element, input, button) {
-    /*if((automaticLocation && location && !geolocationSupported) || !location){
-        unloadWarning++;
-    }*/
     unloadWarning++;
     try{
         if(location){
@@ -497,13 +382,6 @@ function uploadString(n, key, post, location, automaticLocation, value, element,
             div.innerHTML = getDateTime() + "<br>" + img + text + '<span class="uploadcompleted">' + getString("uploadcompleted") + '</span>';
             color = "#00ff00";
             unloadWarning--;
-            // try{
-            //     if(!location && storage_ID){
-            //         var uploadsArray = JSON.parse(localStorage.getItem("uploads"));
-            //         uploadsArray[storage_ID][2] = false;
-            //         localStorage.setItem("uploads", JSON.stringify(uploadsArray));
-            //     }
-            // }catch(e){}
             try{
                 if(mapsUploadStatusFullscreen){
                     mapsUploadStatusFullscreen.style.backgroundColor = "#00ff00";
@@ -518,10 +396,6 @@ function uploadString(n, key, post, location, automaticLocation, value, element,
             }catch(e){}
             div.innerHTML = getDateTime() + "<br>" + img + text + '<span class="uploadfailed">' + getString("uploadfailed") + '</span>';
             color = "#ff0000";
-            // if(!location)    {
-            //     input.disabled = 0;
-            //     button.disabled = 0;
-            // }
             var div2 = document.createElement("div");
             div2.innerText = this.responseText;
             div2.style.border = borderStyle + color;
@@ -551,10 +425,6 @@ function uploadString(n, key, post, location, automaticLocation, value, element,
         div.innerHTML = getDateTime() + "<br>" + img + text + '<span class="uploaderror">' + getString("uploaderror") + '</span>';
         color = "#ff0000";
         div.style.borderColor = color;
-        // if(!location)    {
-        //     input.disabled = 0;
-        //     button.disabled = 0;
-        // }
         div2 = document.createElement("div");
         div2.innerText = this.Error;
         div2.style.border = borderStyle + color;
@@ -587,12 +457,7 @@ function uploadLocation(n, key, element, automaticLocation, coordinates)   {
 function uploadDescription(n, key, descriptionValue, input, button, element)    {
     uploadString(n, key, "&description="+encodeURIComponent(descriptionValue), false, null, descriptionValue, element, input, button);
 }
-function uploadVoice(n, key, statusElement, voiceinput, button, formdata0/*voicefiles0*/)  {
-    /*if(voicefiles0){
-        voicefiles = voicefiles0;
-    }else{
-        voicefiles = voiceinput.files[0];
-    }*/
+function uploadVoice(n, key, statusElement, voiceinput, button, formdata0)  {
     if(!formdata0){
         var voicefiles = voiceinput.files[0];
         if(!voicefiles){
@@ -604,7 +469,6 @@ function uploadVoice(n, key, statusElement, voiceinput, button, formdata0/*voice
         }
     }
     unloadWarning++;
-    // button.disabled = 1;
     var div = document.createElement("div");
     try{
         div.className = "statusText";
@@ -633,19 +497,11 @@ function uploadVoice(n, key, statusElement, voiceinput, button, formdata0/*voice
             div.innerHTML = getDateTime() + "<br>" + img+text+'<span class="uploadcompleted">'+getString("uploadcompleted")+'</span>';
             div.style.borderColor = "#00ff00";
             unloadWarning--;
-            // try{
-            //     if(storage_ID){
-            //         var uploadsArray = JSON.parse(localStorage.getItem("uploads"));
-            //         uploadsArray[storage_ID][3] = false;
-            //         localStorage.setItem("uploads", JSON.stringify(uploadsArray));
-            //     }
-            // }catch(e){}
         }
         else    {
             div.innerHTML = getDateTime() + "<br>" + img+text+'<span class="uploadfailed">'+getString("uploadfailed")+'</span>'+"\n(" + this.responseText + ")";
             div.style.borderColor = "#ff0000";
-            // button.disabled = 0;
-            addRetryButton(function(){uploadVoice(n, key, statusElement, voiceinput, button, formData/*formdata0*//*voicefiles0*/);}, statusElement);
+            addRetryButton(function(){uploadVoice(n, key, statusElement, voiceinput, button, formData);}, statusElement);
         }
         statusElement.insertBefore(div, statusElement.childNodes[0]);
     };
@@ -657,8 +513,7 @@ function uploadVoice(n, key, statusElement, voiceinput, button, formdata0/*voice
         div.innerHTML = getDateTime() + "<br>" + img+text+'<span class="uploaderror">'+getString("uploaderror")+'</span>'+"\n(" + this.Error + ")";
         div.style.borderColor = "#ff0000";
         statusElement.insertBefore(div, statusElement.childNodes[0]);
-        // button.disabled = 0;
-        addRetryButton(function(){uploadVoice(n, key, statusElement, voiceinput, button, formData/*formdata0*//*voicefiles0*/);}, statusElement);
+        addRetryButton(function(){uploadVoice(n, key, statusElement, voiceinput, button, formData);}, statusElement);
     };
     try{
         uploadProgressSetup(ajax, div);
@@ -691,6 +546,10 @@ function bottomProgressVisible(visible)    {
         }
     }catch(e){}
 }
+function addZero(n){
+    if(n<10){n="0"+n;}
+    return n;
+}
 function getDateTime(millisecond){
     try{
         if(millisecond){
@@ -698,7 +557,7 @@ function getDateTime(millisecond){
         }else{
             var d = new Date();
         }
-        return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+        return d.getFullYear() + "-" + addZero(d.getMonth() + 1) + "-" + addZero(d.getDate()) + " " + addZero(d.getHours()) + ":" + addZero(d.getMinutes()) + ":" + addZero(d.getSeconds());
     }catch(e){
         return "";
     }
@@ -715,24 +574,9 @@ function flexCenter(element, columnDirection) {
 }
 try{
     var uploadStatusBottom = document.getElementById("uploadstatusbottom");
-    /*try{
-        uploadStatusBottom.addEventListener("click", function(){
-            if(timeout1 != undefined)    {
-                clearTimeout(timeout1);
-            }
-            if(timeout2 != undefined)    {
-                clearTimeout(timeout2);
-            }
-            this.style.display = "none";
-            this.style.bottom = "-8vh";
-        });
-    }catch(e){}*/
     var bottomProgressBar = document.createElement("div");
     uploadStatusBottom.appendChild(bottomProgressBar);
     var uploadstatusesdisplayed = 0;
-    // var maxFileSize = 25000000;
-    // <?php $uploadLimits = parse_ini_file(dirname($_SERVER["DOCUMENT_ROOT"]) . "/protected/private/uploadlimits.ini"); ?>
-    // var maxFileSize = <?php echo $uploadLimits["max_file_size"]; ?>;
     var maxFileSize;
     var maxFilesNum;
     var maxVoiceFileSize;
@@ -807,9 +651,6 @@ try{
                 }catch(e){}
             }catch(e){}
         }
-        /*locationUploadStatus.addEventListener("click", function(){
-            scrollIntoViewFunc(locationDiv);
-        });*/
     }catch(e){}
     function setUploadStatusTop(element, stringelement, statusValue){
         if(statusValue == 0){
@@ -876,20 +717,37 @@ function checkFile(file, element){
 try{
     var indexedDbRequest = indexedDB.open("localdata");
     indexedDbRequest.onupgradeneeded = function(){
+        this.result.createObjectStore("all");
         this.result.createObjectStore("location");
         this.result.createObjectStore("locationupload");
         this.result.createObjectStore("description");
+        this.result.createObjectStore("ids");
     };
 }catch(e){}
-function saveData(objectStoreName, data){
+function saveData(objectStoreName, data, key){
     try{
+        if(localStorage.getItem("savelocalstorage_" + objectStoreName) == "false"){
+            return;
+        }
         var indexedDbRequest = indexedDB.open("localdata");
         indexedDbRequest.onsuccess = function(){
             var db = this.result;
             var transaction = db.transaction(objectStoreName, "readwrite");
             var store = transaction.objectStore(objectStoreName);
-            store.put(data, Date.now());
+            if(!key){
+                key = Date.now();
+            }
+            if(objectStoreName == "all"){
+                try{
+                    store.add(data, key);
+                }catch(e){}
+            }else{
+                store.put(data, key + "_" + Date.now());
+            }
         };
+        if(key && (objectStoreName != "all")){
+            saveData("all", "", key);
+        }
     }catch(e){}
 }
 function filesAttach(n, id, key, files, formdata0, element){
@@ -912,17 +770,6 @@ function filesAttach(n, id, key, files, formdata0, element){
     }
     formData.append("id", id);
     formData.append("key", key);
-    /*if(!files.length){
-        return;
-    }
-    formData = new FormData();
-    formData.append("n", n);
-    formData.append("key", key);
-    for(var i = 0; i < files.length; i++){
-        if(checkFile(files[i], element)){
-            formData.append("photovideo[]", files[i]);
-        }
-    }*/
     var div = document.createElement("div");
     try{
         div.classList.add("statusText");
@@ -950,7 +797,7 @@ function filesAttach(n, id, key, files, formdata0, element){
         }else{
             div.innerHTML = getDateTime() + "<br>" + img+text+'<span class="uploadfailed">'+getString("uploadfailed")+'</span>'+"\n(" + this.responseText + ")";
             div.style.borderColor = "#ff0000";
-            addRetryButton(function(){filesAttach(n, id, key, files, formData, element/*formdata0*/);}, element);
+            addRetryButton(function(){filesAttach(n, id, key, files, formData, element);}, element);
         }
         element.insertBefore(div, element.childNodes[0]);
     };
@@ -965,7 +812,7 @@ function filesAttach(n, id, key, files, formdata0, element){
         div.innerHTML = getDateTime() + "<br>" + img+text+'<span class="uploaderror">'+getString("uploaderror")+'</span>'+"\n(" + this.Error + ")";
         div.style.borderColor = "#ff0000";
         element.insertBefore(div, element.childNodes[0]);
-        addRetryButton(function(){filesAttach(n, id, key, files, formData, element/*formdata0*/);}, element);
+        addRetryButton(function(){filesAttach(n, id, key, files, formData, element);}, element);
     };
     try{
         uploadProgressSetup(ajax, div);
@@ -996,61 +843,15 @@ function preUpload(id, value, div, imageName, stringName, array, displayValue){
     div.insertBefore(statusText, div.childNodes[0]);
 }
 function locationPreUpload(id, value, div){
-    /*if(!locationCoordinates[id]){
-        locationCoordinates[id] = [];
-    }
-    locationCoordinates[id].push(value);
-    var statusText = document.createElement("div");
-    statusText.innerHTML = '<img width="16" height="16" src="/images/location.svg"> <span class="locationcoordinates">' + getString("locationcoordinates") + '</span>; <span class="uploadstartafterfile">' + getString("uploadstartafterfile") + '</span>';
-    var div2 = document.createElement("div");
-    div2.innerText = value.join("; ");
-    try{
-        var borderStyle = "1px dotted ";
-        div2.style.border = borderStyle + color;
-        div2.style.overflowY = "auto";
-        div2.style.maxHeight = "50vh";
-    }catch(e){}
-    statusText.appendChild(div2);
-    div.insertBefore(statusText, div.childNodes[0]);*/
     preUpload(id, value, div, "location", "locationcoordinates", locationCoordinates, value.join("; "));
 }
 function filesPreAttach(id, value, div){
-    /*if(!attachFiles[id]){
-        attachFiles[id] = [];
-    }
-    attachFiles[id].push(value);
-    var statusText = document.createElement("div");
-    statusText.innerHTML = '<img width="16" height="16" src="/images/photovideo.svg"> <span class="file(s)">' + getString("file(s)") + '</span>; <span class="uploadstartafterfile">' + getString("uploadstartafterfile") + '</span>';
-    div.insertBefore(statusText, div.childNodes[0]);*/
     preUpload(id, value, div, "photovideo", "file(s)", attachFiles);
 }
 function descriptionPreUpload(id, value, div){
-    /*if(!descriptionTexts[id]){
-        descriptionTexts[id] = [];
-    }
-    descriptionTexts[id].push(value);
-    var statusText = document.createElement("div");
-    statusText.innerHTML = '<img width="16" height="16" src="/images/description.svg"> <span class="description">' + getString("description") + '</span>; <span class="uploadstartafterfile">' + getString("uploadstartafterfile") + '</span>';
-    var div2 = document.createElement("div");
-    div2.innerText = value;
-    try{
-        var borderStyle = "1px dotted ";
-        div2.style.border = borderStyle + color;
-        div2.style.overflowY = "auto";
-        div2.style.maxHeight = "50vh";
-    }catch(e){}
-    statusText.appendChild(div2);
-    div.insertBefore(statusText, div.childNodes[0]);*/
     preUpload(id, value, div, "description", "description", descriptionTexts, value);
 }
 function voicePreUpload(id, value, div){
-    /*if(!voiceFiles[id]){
-        voiceFiles[id] = [];
-    }
-    voiceFiles[id].push(value);
-    var statusText = document.createElement("div");
-    statusText.innerHTML = '<img width="16" height="16" src="/images/microphone.svg"> <span class="voice">' + getString("voice") + '</span>; <span class="uploadstartafterfile">' + getString("uploadstartafterfile") + '</span>';
-    div.insertBefore(statusText, div.childNodes[0]);*/
     preUpload(id, value, div, "microphone", "voice", voiceFiles);
 }
 function addProgressBar(element){
@@ -1112,8 +913,7 @@ function uploadProgressSetup(ajax, div, currentUploadID){
         }catch(e){}
     };
 }
-function uploadLocationFunc(currentUploadID, automaticLocation, statusDiv, status, coordinates){
-    //if((latitude != null && longitude != null) && currentLocationCheckbox.checked)    {
+function uploadLocationFunc(currentUploadID, automaticLocation, statusDiv, status, coordinates, dbid){
     if((latitude != null && longitude != null && localStorage.getItem("currentlocationmode") == "true") || coordinates)    {
         var n;
         var id;
@@ -1125,7 +925,7 @@ function uploadLocationFunc(currentUploadID, automaticLocation, statusDiv, statu
         }catch(e){}
         if(!coordinates){
             coordinates = [latitude, longitude, altitude, accuracy, altitudeAccuracy, locationTime];
-            saveData("locationupload", coordinates);
+            saveData("locationupload", coordinates, dbid);
         }
         if(n && id && key){
             uploadLocation(id, key, document.getElementById('q'+n), automaticLocation, coordinates);
@@ -1133,14 +933,8 @@ function uploadLocationFunc(currentUploadID, automaticLocation, statusDiv, statu
             locationPreUpload(currentUploadID, coordinates, statusDiv);
         }
     }else{
-        locationUploadArray.push([currentUploadID, automaticLocation, statusDiv]);
+        locationUploadArray.push([currentUploadID, automaticLocation, statusDiv, dbid]);
         try{
-            /*if(!currentLocationCheckbox.checked){
-                getLocation2();
-            }*/
-            /*if(localStorage.getItem("currentlocationmode") != "true"){
-                getLocation2();
-            }*/
             if(!watchPositionID && !detectingLocation){
                 getLocation2();
             }
@@ -1158,7 +952,6 @@ function getFullscreenButton(element){
     btn.innerHTML = '<img width="32" height="32" src="/images/fullscreen.svg">';
     element.onfullscreenchange = function(){
         if(!document.fullscreenElement){
-            // document.exitFullscreen();
             try{
                 element.style.backgroundColor = "initial";
             }catch(e){}
@@ -1175,7 +968,6 @@ function getFullscreenButton(element){
                 }
             }catch(e){}
         }else{
-            // element.requestFullscreen();
             try{
                 if(darkModeEnabled){
                     element.style.backgroundColor = "#000";
@@ -1201,27 +993,8 @@ function getFullscreenButton(element){
     btn.onclick = function(){
         if(document.fullscreenElement){
             document.exitFullscreen();
-            // try{
-            //     element.style.backgroundColor = "initial";
-            // }catch(e){}
-            // try{
-            //     element.style.display = "block";
-            //     element.children[1].style.height = "75vh";
-            // }catch(e){}
         }else{
             element.requestFullscreen();
-            // try{
-            //     if(darkModeEnabled){
-            //         element.style.backgroundColor = "#000";
-            //     }else{
-            //         element.style.backgroundColor = "#fff";
-            //     }
-            // }catch(e){}
-            // try{
-            //     element.style.display = "flex";
-            //     element.style.flexDirection = "column";
-            //     element.children[1].style.height = "100%";
-            // }catch(e){}
         }
     };
     try{
@@ -1234,7 +1007,7 @@ function getFullscreenButton(element){
     return btn;
 }
 var mapsUploadStatusFullscreen;
-function mapsButton(btn){
+function mapsButton(btn, dbid){
     var fullscreen = btn.nextElementSibling;
     var iframe = fullscreen.parentNode.nextElementSibling;
     var upload = iframe.nextElementSibling.children[0];
@@ -1242,11 +1015,7 @@ function mapsButton(btn){
     if(iframe.style.display != "block"){
         iframe.style.display = "block";
         upload.onclick = function(){
-            saveData("locationupload", iframe.contentWindow.coordinates);
-            // uploadLocation(id, key, document.getElementById('q'+n), iframe.document.getElementById("coordinates").innerText.split(", "));
-            // locationPreUpload(currentUploadID, iframe.document.getElementById("coordinates").innerText.split(", "), statusDiv);
-            // console.log(iframe.contentWindow.document.getElementById("coordinates").innerText.split(", "));
-            // locationPreUpload(btn.getAttribute("currentUploadID"), iframe.contentWindow.coordinates, document.getElementById("statusDiv"+btn.getAttribute("currentUploadID")));
+            saveData("locationupload", iframe.contentWindow.coordinates, dbid);
             if(btn.getAttribute("maps_btn_currentUploadID")){
                 uploadLocationFunc(btn.getAttribute("maps_btn_currentUploadID"), null, document.querySelector('[maps_div_currentUploadID="'+btn.getAttribute("maps_btn_currentUploadID")+'"]'), document.querySelector('[maps_div2_currentUploadID="'+btn.getAttribute("maps_btn_currentUploadID")+'"]'), iframe.contentWindow.coordinates);
             }else{
@@ -1271,9 +1040,8 @@ function mapsButton(btn){
         }
     }
 }
-function getMapsDiv(currentUploadID, statusDiv, status, id, key){
+function getMapsDiv(currentUploadID, statusDiv, status, id, key, dbid){
     var maps = document.createElement("div");
-    // maps.innerHTML = '<button class="buttons afteruploadbuttons" onclick=mapsButton(this, "'+currentUploadID+'", '+statusDiv+')><img width="32" height="32" src="/images/maps.svg"> <span class="maps">'+getString("maps")+'</span></button><iframe style="display: none;width: 100%;height: 75vh;"></iframe><button style="display:none;" class="buttons afteruploadbuttons"><img width="32" height="32" src="/images/uploadicon.svg"> <span class="upload">'+getString("upload")+'</span></button>';
     if(currentUploadID){
         statusDiv.setAttribute("maps_div_currentUploadID", currentUploadID);
         var attributes = 'maps_btn_currentUploadID="'+currentUploadID+'"';
@@ -1284,13 +1052,13 @@ function getMapsDiv(currentUploadID, statusDiv, status, id, key){
     if(status){
         status.setAttribute("maps_div2_currentUploadID", currentUploadID);
     }
-    maps.innerHTML = '<div><button class="buttons afteruploadbuttons" onclick="mapsButton(this)" '+attributes+'><img width="32" height="32" src="/images/maps.svg"> <span class="maps">'+getString("maps")+'</span></button></div><iframe style="display: none;width: 100%;height: 75vh;background-color:#fff;"></iframe><div><button style="display:none;" class="buttons afteruploadbuttons"><img width="32" height="32" src="/images/uploadicon.svg"> <span class="upload">'+getString("upload")+'</span></button><div style="display:none;visibility:hidden;padding:4px;border-radius:8px;"><img style="vertical-align:middle;" width="32" height="32" src="/images/uploadicon.svg">&#160;<img style="vertical-align:middle;" width="32" height="32" src="/images/location.svg"></div></div>';
+    maps.innerHTML = '<div><button class="buttons afteruploadbuttons" onclick="mapsButton(this, ' + dbid + ')" '+attributes+'><img width="32" height="32" src="/images/maps.svg"> <span class="maps">'+getString("maps")+'</span></button></div><iframe style="display: none;width: 100%;height: 75vh;background-color:#fff;"></iframe><div><button style="display:none;" class="buttons afteruploadbuttons"><img width="32" height="32" src="/images/uploadicon.svg"> <span class="upload">'+getString("upload")+'</span></button><div style="display:none;visibility:hidden;padding:4px;border-radius:8px;"><img style="vertical-align:middle;" width="32" height="32" src="/images/uploadicon.svg">&#160;<img style="vertical-align:middle;" width="32" height="32" src="/images/location.svg"></div></div>';
     try{
         maps.children[0].appendChild(getFullscreenButton(maps));
     }catch(e){}
     return maps;
 }
-function filesUpload(files, fileInput, inputMode, filelink, formData0, typeImg0, typeString0, attachFiles0, locationCoordinates0, descriptionTexts0, voiceFiles0){
+function filesUpload(files, fileInput, inputMode, filelink, formData0, typeImg0, typeString0, attachFiles0, locationCoordinates0, descriptionTexts0, voiceFiles0, dbid){
     var currentUploadID = ++lastUploadID;
     if(!filelink && files === null && !formData0)  {
         files = fileInput.files;
@@ -1369,9 +1137,6 @@ function filesUpload(files, fileInput, inputMode, filelink, formData0, typeImg0,
         }catch(e){}
         statusText.innerHTML = getDateTime() + "<br>" + typeImg + ' ' + typeString + '<span class="uploading">' + getString("uploading") + '</span>';
         statusDiv.appendChild(statusText);
-        /*var progressArray = addProgressBar(statusDiv);
-        var progressBar = progressArray[0];
-        var progress = progressArray[1];*/
         var color = "#ffff00";
         if(filelink){
             var linkDiv = document.createElement("div");
@@ -1424,15 +1189,20 @@ function filesUpload(files, fileInput, inputMode, filelink, formData0, typeImg0,
                 automaticLocation = true;
             }
         }
+        try{
+            if(!dbid){
+                dbid = Date.now();
+            }
+        }catch(e){}
         uploadMyLocation.onclick = function(){
-            uploadLocationFunc(currentUploadID, automaticLocation, statusDiv, status);
+            uploadLocationFunc(currentUploadID, automaticLocation, statusDiv, status, null, dbid);
         };
         after0.appendChild(uploadMyLocation);
         if(!locationCoordinates0 && automaticLocation){
-            uploadLocationFunc(currentUploadID, automaticLocation, statusDiv, status);
+            uploadLocationFunc(currentUploadID, automaticLocation, statusDiv, status, null, dbid);
         }
         try{
-            after0.appendChild(getMapsDiv(currentUploadID, statusDiv, status));
+            after0.appendChild(getMapsDiv(currentUploadID, statusDiv, status, null, null, dbid));
         }catch(e){}
         after.appendChild(after0);
         subbox.insertBefore(after, subbox.childNodes[0]);
@@ -1458,7 +1228,7 @@ function filesUpload(files, fileInput, inputMode, filelink, formData0, typeImg0,
                         filesFormData.append("photovideo[]", this.files[i]);
                     }
                 }
-                filesPreAttach(currentUploadID, filesFormData/*this.files*/, statusDiv);
+                filesPreAttach(currentUploadID, filesFormData, statusDiv);
             }
             this.value = null;
         });
@@ -1473,7 +1243,7 @@ function filesUpload(files, fileInput, inputMode, filelink, formData0, typeImg0,
                 id = n_key[currentUploadID][1];
                 key = n_key[currentUploadID][2];
             }catch(e){}
-            saveData("description", textarea.value);
+            saveData("description", textarea.value, dbid);
             if(n && id && key){
                 uploadDescription(id,key,textarea.value,textarea,button,document.getElementById('q'+n));
             }else{
@@ -1529,7 +1299,7 @@ function filesUpload(files, fileInput, inputMode, filelink, formData0, typeImg0,
                 }
                 var voiceFormData = new FormData();
                 voiceFormData.append("voice", this.files[0]);
-                voicePreUpload(currentUploadID, voiceFormData/*this.files[0]*/, statusDiv);
+                voicePreUpload(currentUploadID, voiceFormData, statusDiv);
             }
             this.value = null;
         });
@@ -1612,11 +1382,11 @@ function filesUpload(files, fileInput, inputMode, filelink, formData0, typeImg0,
                     }else{
                         uploadsStorage = [];
                     }
-                    // var storage_ID = uploadsStorage.push([n, key, true, true]) - 1;
-                    uploadsStorage.push([n, id, key]);
+                    uploadsStorage.push([n, id, key, dbid]);
                     localStorage.setItem("uploads", JSON.stringify(uploadsStorage));
                 }
             }catch(e){}
+            saveData("ids", [n, id, key], dbid);
             try{
                 setUploadStatusTop(fileUploadStatus, fileUploadString, 1);
             }catch(e){}
@@ -1624,7 +1394,6 @@ function filesUpload(files, fileInput, inputMode, filelink, formData0, typeImg0,
                 n_key[currentUploadID] = [n, id, key];
             }catch(e){}
             try{
-                // var fullLink = window.location.href+"?view&n="+n;
                 var fullLink = location.origin+"?view&n="+n;
                 html = "<div class=\"boxs boxs2\"><span class=\"uploadedid\">" + getString("uploadedid") + "</span>: #" + n + "</div>";
                 html += '<div class="boxs boxs2"><label for="link'+n+'"><img width="16" height="16" src="/images/link.svg"><span class="link title">' + getString("link") + '</span></label><input type="text" readonly value="' + fullLink + '" id="link'+n+'"><button class="buttons afteruploadbuttons" onclick="copyString(this.previousElementSibling.value, this.nextElementSibling)"><img width="32" height="32" src="/images/copy.svg"> <span class="copy">'+getString("copy")+'</span></button><span style="padding:1px;border:1px solid #00ff00;display:none;"></span></div>';
@@ -1678,21 +1447,6 @@ function filesUpload(files, fileInput, inputMode, filelink, formData0, typeImg0,
                     }
                 }
             }catch(e){}
-            /*if(automaticLocation){
-                if(latitude != null && longitude != null)    {
-                    uploadLocation(id, key, element, true);
-                }else{
-                    locationUploadArray.push([n, id, key, true]);
-                }
-                if(!locationWait){
-                    unloadWarning--;
-                }
-            }else{
-                unloadWarning--;
-            }*/
-            /*if((automaticLocation && !geolocationSupported) || !automaticLocation){
-                unloadWarning--;
-            }*/
             unloadWarning--;
         }
         else    {
@@ -1708,7 +1462,7 @@ function filesUpload(files, fileInput, inputMode, filelink, formData0, typeImg0,
             if(currentUploadID == lastUploadID){
                 bottomProgressVisible(0);
             }
-            addRetryButton(function(){filesUpload(files, fileInput, inputMode, filelink, formData, typeImg, typeString, attachFiles[currentUploadID], locationCoordinates[currentUploadID], descriptionTexts[currentUploadID], voiceFiles[currentUploadID]);}, status);
+            addRetryButton(function(){filesUpload(files, fileInput, inputMode, filelink, formData, typeImg, typeString, attachFiles[currentUploadID], locationCoordinates[currentUploadID], descriptionTexts[currentUploadID], voiceFiles[currentUploadID], dbid);}, status);
         }
         try{
             statusText.classList.add("statusText");
@@ -1737,17 +1491,8 @@ function filesUpload(files, fileInput, inputMode, filelink, formData0, typeImg0,
             bottomProgressVisible(0);
         }
         status.insertBefore(statusText, status.childNodes[0]);
-        addRetryButton(function(){filesUpload(files, fileInput, inputMode, filelink, formData, typeImg, typeString, attachFiles[currentUploadID], locationCoordinates[currentUploadID], descriptionTexts[currentUploadID], voiceFiles[currentUploadID]);}, status);
+        addRetryButton(function(){filesUpload(files, fileInput, inputMode, filelink, formData, typeImg, typeString, attachFiles[currentUploadID], locationCoordinates[currentUploadID], descriptionTexts[currentUploadID], voiceFiles[currentUploadID], dbid);}, status);
     };
-    /*var progressPercent;
-    ajax.upload.onprogress = function(e){
-        progressPercent = getProgressPercent(e);
-        progress.innerText = getProgressText(progressPercent, e);
-        progressBar.style.width = progressPercent;
-        if(currentUploadID == lastUploadID){
-            bottomProgressBar.style.width = progressPercent;
-        }
-    };*/
     try{
         uploadProgressSetup(ajax, statusDiv, currentUploadID);
     }catch(e){}
@@ -1755,30 +1500,20 @@ function filesUpload(files, fileInput, inputMode, filelink, formData0, typeImg0,
     ajax.send(formData);
 }
 var unloadWarning = 0;
-function uploadFunction(input, /*div, */inputMode){
+function uploadFunction(input, inputMode){
     try{
         filesUpload(null, input, inputMode);
-        /*try{
-            if(localStorage.getItem(inputMode + "reopen")){
-                input.click();
-            }
-        }catch(e){}*/
     }catch(e){
         try{
             input.parentNode.submit();
-        }catch(e){
-            /*div.style.display = "inline-block";
-            input.style.width = "initial";
-            input.style.height = "initial";*/
-        }
+        }catch(e){}
     }
 }
 function buttonSetup(id0) {
     var input = document.getElementById(id0 + "input");
-    //var div = document.getElementById(id0 + "div");
     function uploadIfInput(){
         if(input.value){
-            uploadFunction(input, /*div, */id0);
+            uploadFunction(input, id0);
         }
     }
     input.addEventListener("change", function(){uploadIfInput();});
@@ -1788,10 +1523,6 @@ function buttonSetup(id0) {
         e.preventDefault();
         input.click();
     };
-    /*button.tabIndex = "";
-    div.style.display = "none";
-    input.style.width = "0";
-    input.style.height = "0";*/
     input.tabIndex = "-1";
 }
 try{
@@ -1800,11 +1531,6 @@ try{
     buttonSetup("choosephotos");
     buttonSetup("choosevideos");
     buttonSetup("choosefiles");
-    /*var uploadForms = document.getElementsByClassName("uploadforms");
-    for(var i = 0; i < uploadForms.length; i++){
-        uploadForms[i].style.border = "none";
-        uploadForms[i].style.padding = "0";
-    }*/
 }catch(e){}
 try{
     var fileLinkForm = document.getElementById("filelinkform");
@@ -2072,67 +1798,12 @@ try{
         var br = document.createElement("br");
         mainDiv.insertBefore(br, br0);
     }catch(e){}
-    /*function translateHTML(html){
-        for(var key in strings) {
-            try{
-                html = html.replaceAll("<string>"+key+"</string>", strings[key]);
-            }catch(e){
-                html = html.replace("<string>"+key+"</string>", strings[key]);
-            }
-        }
-        return html;
-    }*/
 }catch(e){}
 function copyString(string, copiedElement){
     navigator.clipboard.writeText(string);
     copiedElement.innerText = string;
     copiedElement.style.display = "inline";
 }
-/*try{
-    var colorFilterDefaultValue = 90;
-    var lightFilter = document.createElement("div");
-    lightFilter.className = "overlay";
-    mainDiv.style.position = "relative";
-    lightFilter.style.position = "absolute";
-    lightFilter.style.pointerEvents = "none";
-    lightFilter.style.mixBlendMode = "multiply";
-    lightFilter.style.zIndex = "1";
-    lightFilter.style.display = "none";
-    mainDiv.appendChild(lightFilter);
-    var r = 255;
-    var g;
-    var b;
-    function setFilterValue(value0){
-        var value = (value0 / 100.0) * 510;
-        if(value < 0){
-            value = 0;
-        }else if(value > 510){
-            value = 510;
-        }
-        if(value < 256){
-            g = value;
-            b = 0;
-        }else{
-            g = 255;
-            b = value - 255;
-        }
-        lightFilter.style.backgroundColor = "rgb("+r+", "+g+", "+b+")";
-        localStorage.setItem("colorfiltervalue", value0);
-    }
-    function colorfilter(){
-        if(localStorage.getItem("colorfiltervalue")){
-            setFilterValue(localStorage.getItem("colorfiltervalue"));
-        }else{
-            setFilterValue(colorFilterDefaultValue);
-        }
-        if(localStorage.getItem("colorfilterenabled") == "true"){
-            lightFilter.style.display = "block";
-        }else{
-            lightFilter.style.display = "none";
-        }
-    }
-    colorfilter();
-}catch(e){}*/
 try{
     var loaderStyle = document.createElement("link");
     loaderStyle.rel = "stylesheet";
@@ -2140,25 +1811,9 @@ try{
     document.head.appendChild(loaderStyle);
 }catch(e){}
 try{
-    window.addEventListener("load", function(){
-        location.hash = '';
-    });
-}catch(e){}
-// try{
-//     var localstorageButton = document.getElementById("localstorageButton");
-//     localstorageButton.innerHTML = '<svg width="64" height="64" class="icons" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0 500) scale(.1 -.1)"><path d="m2165 4690c-314-22-639-70-839-125-140-38-293-93-381-137-144-72-260-169-303-254-11-22-25-58-31-82l-12-43-3-1502c-2-826 1-1537 5-1579l8-77 25-48c32-65 106-145 175-192 160-109 407-198 716-260 217-44 446-70 729-83l249-12 251 12c543 26 973 111 1272 252 127 60 207 114 271 183 60 66 92 130 103 206 4 31 7 745 7 1586l-2 1530-23 57c-30 74-78 136-155 198l-62 51-110 54c-60 29-150 68-200 85-218 76-504 132-845 165l-165 16-275 4c-151 2-333 0-405-5zm820-306c437-40 820-140 1008-263 75-49 117-92 117-119 0-28-85-97-176-144-220-114-524-189-944-234l-165-18h-330l-330 1-155 17c-314 34-550 82-752 152-171 60-314 140-348 196-11 18-20 36-20 40 0 21 76 88 142 125 207 119 572 210 988 247 96 9 209 17 250 19 173 6 557-4 715-19zm-1988-828c158-68 398-137 588-171 161-29 383-54 568-66l182-12 590 12 135 15c421 47 719 119 975 235 37 17 69 31 71 31s4-138 4-307v-307l-54-51-53-51-94-46c-274-135-718-216-1272-234l-202-6-200 11c-110 6-261 18-335 26-455 52-816 166-962 306l-48 45v308 308l13-5c6-3 49-21 94-41zm-39-985c213-107 578-197 962-237l155-16 694-10 198 16c109 10 281 31 382 47 283 46 484 103 670 190 46 21 85 39 87 39s4-136 4-302v-303l-19-31c-57-93-349-215-665-279-280-56-464-74-811-82l-280-6-175 12c-280 19-519 55-737 112-259 66-478 172-519 250l-14 28v301c0 165 2 300 5 300s31-13 63-29zm172-1075c112-41 364-100 545-130 215-34 444-55 699-62l211-6 190 11c360 22 604 56 867 122 174 43 263 73 386 130l82 38v-309-308l-25-31c-31-36-135-103-224-143-99-44-307-104-476-137-176-35-381-57-654-72l-196-10-175 6c-374 13-694 53-930 116-228 61-411 144-497 225l-43 41v311 311l83-38c45-21 116-51 157-65z"/></g></svg>&#160;<span class="localstorage">' + getString("localstorage") + '</span>';
-//     localstorageButton.href = "/app/localstorage/";
-//     localstorageButton.classList.remove("hiddenonload");
-//     var localstorageButton2 = document.getElementById("localstorageButton2");
-//     localstorageButton2.innerHTML = '<svg width="64" height="64" viewBox="0 0 512 512" class="icons"><g transform="translate(0 512) scale(.1 -.1)"><path d="m685 4428c-3-7-4-852-3-1878l3-1865h1875 1875l3 938 2 937h-190-190v-750-750h-1500-1500v1500 1500h750 750v190 190h-935c-739 0-937-3-940-12z"/><path d="m3210 4165 265-265-528-528c-290-290-527-532-527-537 0-6 92-102 205-215l205-205 738 738c174 174 321 317 327 317 5 0 130-120 277-267l268-268v748 747h-747-748l265-265z"/></g></svg>';
-//     localstorageButton2.href = "/app/localstorage/";
-//     localstorageButton2.target = "_blank";
-//     localstorageButton2.classList.remove("hiddenonload");
-// }catch(e){}
-try{
     var iframeOverlayDiv = document.getElementById("iframeOverlayDiv");
     var overlayIframe = document.getElementById("overlayIframe");
-    var settingsclosewindow = document.getElementById("settingsclosewindow");
+    var closeiframeoverlay = document.getElementById("closeiframeoverlay");
     try{
         overlayIframe.style.width = "100%";
         overlayIframe.style.height = "100%";
@@ -2191,12 +1846,16 @@ try{
         button.target = "_blank";
         button.classList.remove("hiddenonload");
     }
-    settingsclosewindow.style.width = "100%";
-    settingsclosewindow.style.backgroundColor = "#256affc0";
-    settingsclosewindow.innerHTML = '<span style="font-size:32px;font-weight:bold;color:#ec0400;">&#215;</span>';
-    settingsclosewindow.onclick = function(){
+    closeiframeoverlay.style.width = "100%";
+    closeiframeoverlay.style.backgroundColor = "#256affc0";
+    closeiframeoverlay.innerHTML = '<span style="font-size:32px;font-weight:bold;color:#ec0400;">&#215;</span>';
+    closeiframeoverlay.onclick = function(){
         iframeOverlayDiv.style.display = "none";
-        document.body.style.overflowY = "initial";
+        document.body.style.overflowY = "";
+        var videoTag = overlayIframe.contentWindow.document.getElementsByTagName("video")[0];
+        if(videoTag){
+            videoTag.pause();
+        }
     };
     linkButtonSetup("myUploadsButton", "myuploads",
     '<svg width="64" height="64" viewBox="0 0 256 256" class="icons"><g transform="translate(0 256) scale(.1 -.1)"><path d="m705 2254c-326-72-588-347-646-680-16-93-6-270 21-364 94-328 381-569 723-605l67-7v31c0 30-2 31-42 31-24 0-79 9-123 19-355 86-595 390-597 756-2 305 159 563 441 704 142 72 357 96 515 57 190-46 362-167 472-333l36-55-176-177c-161-163-176-181-176-213 0-72 73-118 128-82 15 10 73 63 130 117l102 100v-240-240l-49-69c-98-140-244-252-398-305-31-10-58-19-60-19-1 0-3 38-3 85 0 89-15 137-45 149-37 14-86 6-110-19-28-27-29-54-25-410 2-173 8-197 56-215 39-15 1416-13 1449 2 51 23 55 45 55 327v259l-26 31c-19 23-34 31-59 31-88 0-95-20-95-275v-205h-600-600v95c0 88 1 95 20 95 32 0 150 48 222 91 76 44 172 129 230 202l38 49v-102c0-134 19-169 92-170 28 0 42 7 62 31l26 31v396 396l113-111c66-65 123-113 140-117 32-8 81 14 97 43 28 53 19 66-197 283-194 195-210 208-244 208-24 0-45-8-63-25-28-26-36-22-11 5 15 16 11 24-46 99-104 139-238 234-409 292-85 29-109 32-230 35-95 3-156-1-205-12z"/><path d="m762 1919c-125-62-177-214-116-337 94-188 364-188 458 0 32 64 35 152 7 213-21 46-88 111-137 131-52 22-161 18-212-7z"/><path d="m701 1405c-136-38-227-149-239-291-4-53-2-64 16-82 39-39 87-43 425-40 304 3 324 4 357 24 34 19 35 22 38 88 5 120-58 220-176 278-65 32-69 33-217 35-109 2-165-1-204-12z"/></g></svg>'
@@ -2208,156 +1867,6 @@ try{
     '<svg width="64" height="64" viewBox="0 0 64 64" class="icons"><g transform="translate(0 64) scale(.1 -.1)"><path d="m257 584c-4-4-7-22-7-40 0-23-7-36-26-49-23-15-29-15-64-1l-39 15-64-112 32-26c20-17 31-35 31-51s-11-34-31-51l-32-26 32-56 32-57 36 15c19 8 38 15 42 15 20-1 45-35 50-67l6-38h65 65l6 38c5 32 30 66 50 67 4 0 23-7 42-15l36-15 64 112-32 25c-42 33-42 73 0 106l32 25-32 56-32 55-39-15c-35-14-41-14-64 1-18 12-26 27-28 53l-3 37-60 3c-34 2-64 0-68-4zm128-199c36-35 35-97-1-130-61-57-154-17-154 65 0 56 34 90 90 90 30 0 47-6 65-25z"/></g></svg>'
     , "settings");
 }catch(e){}
-// try{
-//     function closeSettingsWindow(){
-//         document.body.style.overflow = "visible";
-//         settingsWindowOverlay.style.display = "none";
-//         //lightFilter.style.position = "absolute";
-//     }
-//     try{
-//         var settingsWindowOverlay = document.getElementById("settingswindowoverlay");
-//         settingsWindowOverlay.style.backgroundColor = "#00000080";
-//         settingsWindowOverlay.style.zIndex = "1";
-//         settingsWindowOverlay.addEventListener("click", function(e){
-//             if((e.target != settingsWindowOverlay) && (e.target.id != "settingsclosewindow")){
-//                 return;
-//             }
-//             closeSettingsWindow();
-//             history.back();
-//         });
-//         var settingsWindow = document.createElement("div");
-//         settingsWindow.style.maxWidth = "90%";
-//         settingsWindow.style.maxHeight = "90%";
-//         settingsWindow.id = "settingswindow";
-//         settingsWindowOverlay.appendChild(settingsWindow);
-//     }catch(e){}
-//     function setWindowDarkMode(/*windowOverlay, */windowDiv){
-//         try{
-//             if(darkModeEnabled){
-//                 // windowOverlay.style.backgroundColor = "#ffffff80";
-//                 windowDiv.style.backgroundColor = "#000000";
-//             }
-//             else{
-//                 // windowOverlay.style.backgroundColor = "#00000080";
-//                 windowDiv.style.backgroundColor = "#ffffff";
-//             }
-//         }catch(e){}
-//     }
-//     try{
-//         var settingsButton = document.getElementById("settingsbutton");
-//         var disableSettingsWindowLoad;
-//         var settingsScript;
-//         var settingsMain;
-//         var settingsContent;
-//         var settingsSetup;
-//     }catch(e){}
-//     function setSettingsWindow(reset){
-//         if(reset){
-//             settingsScript.remove();
-//         }
-//         disableSettingsWindowLoad = 1;
-//         if(!settingsMain){
-//             settingsMain = document.createElement("div");
-//             try{
-//                 settingsMain.style.fontFamily = "sans-serif";
-//             }catch(e){}
-//             settingsMain.style.height = "100%";
-//             settingsMain.innerHTML = '<div id="settingstop" style="display: flex;justify-content: space-between;align-items: center;padding: 4px;"><div style="display: flex;align-items: center;"><img width="32" height="32" src="/images/settings.svg">&nbsp;<h3 style="margin: 0;"><span class="settings">' + getString("settings") + '</span></h3></div><button id="settingsclosewindow" class="closeButtons">&times;</button></div><div class="settingsbottomline"></div>';
-//         }
-//         if(!settingsContent){
-//             settingsContent = document.createElement("div");
-//             settingsContent.id = "settingscontent";
-//             try{
-//                 settingsContent.style.display = "flex";
-//                 settingsContent.style.flexDirection = "column";
-//                 settingsContent.style.alignItems = "center";
-//             }catch(e){
-//                 settingsContent.style.display = "block";
-//             }
-//             settingsContent.style.padding = "4px";
-//             settingsContent.style.maxHeight = "calc(100% - 49px)";
-//             settingsContent.style.overflowY = "auto";
-//             settingsMain.appendChild(settingsContent);
-//             settingsWindow.appendChild(settingsMain);
-//         }
-//         settingsContent.innerHTML = '<div class="loader"></div>';
-//         try{
-//             setWindowDarkMode(/*settingsWindowOverlay, */settingsWindow);
-//         }catch(e){}
-//         var ajax = new XMLHttpRequest();
-//         ajax.open("GET", "?gethtml=settings");
-//         ajax.onload = function(){
-//             //settingsContent.innerHTML = translateHTML(this.responseText);
-//             settingsContent.innerHTML = this.responseText;
-//             if(!settingsSetup){
-//                 settingsSetup = 1;
-//                 var settingsStyle = document.createElement("link");
-//                 settingsStyle.rel = "stylesheet";
-//                 settingsStyle.href = "/styles/settings.css";
-//                 document.head.appendChild(settingsStyle);
-//                 settingsContent.style.maxHeight = "calc(100% - 9px - "+document.getElementById("settingstop").clientHeight+"px)";
-//                 try{
-//                     settingsWindow.style.height = settingsContent.clientHeight + "px";
-//                 }catch(e){
-//                     settingsWindow.style.height = "100%";
-//                 }
-//             }
-//             settingsScript = document.createElement("script");
-//             settingsScript.src = "/scripts/settings.js";
-//             settingsWindow.appendChild(settingsScript);
-//         };
-//         ajax.onerror = function(){
-//             settingsContent.innerHTML = '<div style="color:#ff0000;padding:1%;">LOAD ERROR!</div>';
-//             disableSettingsWindowLoad = 0;
-//         };
-//         ajax.send();
-//     }
-//     function openSettingsWindow(){
-//         settingsWindowOverlay.style.display = "block";
-//         settingsWindowOverlay.style.display = "flex";
-//         document.body.style.overflow = "hidden";
-//         //lightFilter.style.position = "";
-//         if(disableSettingsWindowLoad)    {
-//             return;
-//         }
-//         setSettingsWindow();
-//     }
-//     var settingsWindowID;
-//     function settingsURL(){
-//         if(settingsWindowOverlay.style.display == "flex"){
-//             closeSettingsWindow();
-//         }/*else if(location.hash == "#settings" + settingsWindowID){
-//             openSettingsWindow();
-//         }*/
-//     }
-//     window.addEventListener("popstate", function(){
-//         settingsURL();
-//         document.title = getString("title");
-//     });
-//     settingsButton.addEventListener("click", function(){
-//         settingsWindowID = Date.now();
-//         location.hash = "settings" + settingsWindowID;
-//         openSettingsWindow();
-//         document.title = getStrings(["settings", "title"]);
-//     });
-//     settingsButton.innerHTML = '<svg width="64" height="64" viewBox="0 0 64 64" class="icons"><g transform="translate(0 64) scale(.1 -.1)"><path d="m257 584c-4-4-7-22-7-40 0-23-7-36-26-49-23-15-29-15-64-1l-39 15-64-112 32-26c20-17 31-35 31-51s-11-34-31-51l-32-26 32-56 32-57 36 15c19 8 38 15 42 15 20-1 45-35 50-67l6-38h65 65l6 38c5 32 30 66 50 67 4 0 23-7 42-15l36-15 64 112-32 25c-42 33-42 73 0 106l32 25-32 56-32 55-39-15c-35-14-41-14-64 1-18 12-26 27-28 53l-3 37-60 3c-34 2-64 0-68-4zm128-199c36-35 35-97-1-130-61-57-154-17-154 65 0 56 34 90 90 90 30 0 47-6 65-25z"/></g></svg> <span class="settings"><string>settings</string></span>';
-//     settingsButton.style.display = "inline-block";
-//     try{
-//         var settingsButton2 = document.getElementById("settingsbutton2");
-//         settingsButton2.addEventListener("click", function(){
-//             window.open("/app/settings/");
-//         });
-//         settingsButton2.innerHTML = '<svg width="64" height="64" viewBox="0 0 512 512" class="icons"><g transform="translate(0 512) scale(.1 -.1)"><path d="m685 4428c-3-7-4-852-3-1878l3-1865h1875 1875l3 938 2 937h-190-190v-750-750h-1500-1500v1500 1500h750 750v190 190h-935c-739 0-937-3-940-12z"/><path d="m3210 4165 265-265-528-528c-290-290-527-532-527-537 0-6 92-102 205-215l205-205 738 738c174 174 321 317 327 317 5 0 130-120 277-267l268-268v748 747h-747-748l265-265z"/></g></svg>';
-//         settingsButton2.style.display = "inline-block";
-//         try{
-//             settingsButton2.classList.add("settings", "openinnewtab");
-//         }catch(e){}
-//         try{
-//             settingsButton2.className += "settings openinnewtab";
-//         }catch(e){}
-//         settingsButton2.title = getStrings(["settings", "openinnewtab"]);
-//     }catch(e){}
-// }catch(e){}
 try{
     function setLanguage(lang,get)  {
         var ajax = new XMLHttpRequest();
@@ -2480,393 +1989,12 @@ try{
         whenOffline();
     }
 }catch(e){}
-// try{
-//     if(localStorage.getItem("saveuploads") == null){
-//         localStorage.setItem("saveuploads", true);
-//     }
-// }catch(e){}
-// try{
-//     try{
-//         var myUploadsButton2 = document.getElementById("myUploadsButton2");
-//         myUploadsButton2.addEventListener("click", function(){
-//             window.open("/app/myuploads/");
-//         });
-//         myUploadsButton2.innerHTML = '<svg width="64" height="64" viewBox="0 0 512 512" class="icons"><g transform="translate(0 512) scale(.1 -.1)"><path d="m685 4428c-3-7-4-852-3-1878l3-1865h1875 1875l3 938 2 937h-190-190v-750-750h-1500-1500v1500 1500h750 750v190 190h-935c-739 0-937-3-940-12z"/><path d="m3210 4165 265-265-528-528c-290-290-527-532-527-537 0-6 92-102 205-215l205-205 738 738c174 174 321 317 327 317 5 0 130-120 277-267l268-268v748 747h-747-748l265-265z"/></g></svg>';
-//         myUploadsButton2.style.display = "inline-block";
-//         try{
-//             myUploadsButton2.classList.add("myuploads", "openinnewtab");
-//         }catch(e){}
-//         try{
-//             myUploadsButton2.className += "myuploads openinnewtab";
-//         }catch(e){}
-//         myUploadsButton2.title = getStrings(["myuploads", "openinnewtab"]);
-//     }catch(e){}
-//     // var myUploadsButton = document.createElement("button");
-//     var myUploadsButton = document.getElementById("myUploadsButton");
-//     myUploadsButton.innerHTML = '<svg width="64" height="64" viewBox="0 0 256 256" class="icons"><g transform="translate(0 256) scale(.1 -.1)"><path d="m705 2254c-326-72-588-347-646-680-16-93-6-270 21-364 94-328 381-569 723-605l67-7v31c0 30-2 31-42 31-24 0-79 9-123 19-355 86-595 390-597 756-2 305 159 563 441 704 142 72 357 96 515 57 190-46 362-167 472-333l36-55-176-177c-161-163-176-181-176-213 0-72 73-118 128-82 15 10 73 63 130 117l102 100v-240-240l-49-69c-98-140-244-252-398-305-31-10-58-19-60-19-1 0-3 38-3 85 0 89-15 137-45 149-37 14-86 6-110-19-28-27-29-54-25-410 2-173 8-197 56-215 39-15 1416-13 1449 2 51 23 55 45 55 327v259l-26 31c-19 23-34 31-59 31-88 0-95-20-95-275v-205h-600-600v95c0 88 1 95 20 95 32 0 150 48 222 91 76 44 172 129 230 202l38 49v-102c0-134 19-169 92-170 28 0 42 7 62 31l26 31v396 396l113-111c66-65 123-113 140-117 32-8 81 14 97 43 28 53 19 66-197 283-194 195-210 208-244 208-24 0-45-8-63-25-28-26-36-22-11 5 15 16 11 24-46 99-104 139-238 234-409 292-85 29-109 32-230 35-95 3-156-1-205-12z"/><path d="m762 1919c-125-62-177-214-116-337 94-188 364-188 458 0 32 64 35 152 7 213-21 46-88 111-137 131-52 22-161 18-212-7z"/><path d="m701 1405c-136-38-227-149-239-291-4-53-2-64 16-82 39-39 87-43 425-40 304 3 324 4 357 24 34 19 35 22 38 88 5 120-58 220-176 278-65 32-69 33-217 35-109 2-165-1-204-12z"/></g></svg> <span class="myuploads">' + getString("myuploads") + '</span>';
-//     myUploadsButton.classList.add("buttons");
-//     var myUploadsOverlay = document.createElement("div");
-//     myUploadsOverlay.id = "myuploadsoverlay";
-//     myUploadsOverlay.classList.add("overlay");
-//     // myUploadsOverlay.style.backgroundColor = "#256aff80";
-//     myUploadsOverlay.style.backgroundColor = "#00000080";
-//     var myUploadsWindow = document.createElement("div");
-//     myUploadsWindow.className = "backgrounds";
-//     myUploadsWindow.style.border = "1px solid #256aff";
-//     myUploadsWindow.style.borderRadius = "8px";
-//     var myUploadsTitle = document.createElement("h3");
-//     myUploadsTitle.innerHTML = '<img width="32" height="32" src="/images/myuploads.svg" alt> <span class="myuploads">'+getString("myuploads")+'</span>';
-//     try{
-//         myUploadsTitle.style.display = "flex";
-//         myUploadsTitle.style.justifyContent = "center";
-//         myUploadsTitle.style.alignItems = "center";
-//     }catch(e){
-//         myUploadsTitle.style.display = "block";
-//     }
-//     myUploadsTitle.style.margin = "0";
-//     var myUploadsTop = document.createElement("div");
-//     myUploadsTop.style.padding = "4px";
-//     myUploadsTop.style.borderBottom = "1px solid #256aff";
-//     try{
-//         myUploadsTop.style.display = "flex";
-//         myUploadsTop.style.justifyContent = "space-between";
-//     }catch(e){
-//         myUploadsTop.style.display = "block";
-//     }
-//     myUploadsTop.appendChild(myUploadsTitle);
-//     var closeMyUploads = document.createElement("button");
-//     closeMyUploads.innerHTML = "&times;";
-//     closeMyUploads.classList.add("closeButtons");
-//     function closeMyUploadsFunction(){
-//         document.body.style.overflow = "visible";
-//         myUploadsOverlay.style.display = "none";
-//         myUploadsContent.innerHTML = '';
-//     }
-//     function openMyUploads(){
-//         myUploadsWindow.style.height = "";
-//         myUploadsContent.innerHTML = '<div class="loader" style="align-self:center;"></div>';
-//         myUploadsOverlay.style.display = "block";
-//         myUploadsOverlay.style.display = "flex";
-//         document.body.style.overflow = "hidden";
-//         if(darkModeEnabled){
-//             myUploadsWindow.style.backgroundColor = "#000000";
-//         }else{
-//             myUploadsWindow.style.backgroundColor = "#ffffff";
-//         }
-//         setTimeout(function(){loadMyUploads();}, 1);
-//     }
-//     var myuploadsWindowID;
-//     function myuploadsURL(){
-//         if(myUploadsOverlay.style.display == "flex"){
-//             closeMyUploadsFunction();
-//         }/*else if(location.hash == "#myuploads" + myuploadsWindowID){
-//             openMyUploads();
-//         }*/
-//     }
-//     window.addEventListener("popstate", function(){
-//         myuploadsURL();
-//     });
-//     closeMyUploads.onclick = function(){
-//         closeMyUploadsFunction();
-//         history.back();
-//     };
-//     myUploadsTop.appendChild(closeMyUploads);
-//     myUploadsWindow.style.maxWidth = "90%";
-//     myUploadsWindow.style.maxHeight = "90%";
-//     myUploadsWindow.appendChild(myUploadsTop);
-//     var myUploadsContent = document.createElement("div");
-//     myUploadsContent.style.overflowY = "auto";
-//     try{
-//         myUploadsContent.style.display = "flex";
-//         myUploadsContent.style.flexDirection = "column";
-//     }catch(e){
-//         myUploadsContent.style.display = "block";
-//     }
-//     myUploadsWindow.appendChild(myUploadsContent);
-//     myUploadsOverlay.appendChild(myUploadsWindow);
-//     myUploadsOverlay.style.display = "none";
-//     myUploadsOverlay.onclick = function(e){
-//         if(e.target.id == this.id){
-//             closeMyUploadsFunction();
-//             history.back();
-//         }
-//     };
-//     mainDiv.appendChild(myUploadsOverlay);
-//     function loadMedia(id){
-//         var ajax = new XMLHttpRequest();
-//         ajax.onload = function(){
-//             var jsonArray = JSON.parse(this.response);
-//             if(jsonArray[1].length > 1){
-//                 return;
-//             }
-//             var previewDiv = document.createElement("div");
-//             previewDiv.style.border = "1px dotted #256aff";
-//             previewDiv.style.margin = "1px";
-//             previewDiv.style.padding = "1px";
-//             try{
-//                 previewDiv.style.display = "flex";
-//                 previewDiv.style.justifyContent = "center";
-//             }catch(e){}
-//             if(jsonArray[3] == "image"){
-//                 previewDiv.innerHTML = '<img style="max-width:100%;min-height:25vh;max-height:75vh;object-fit:contain;" src="'+jsonArray[1]+'">';
-//             }else{
-//                 previewDiv.innerHTML = '<video style="max-width:100%;min-height:25vh;max-height:75vh;" controls src="'+jsonArray[1]+'"></video>';
-//             }
-//             myUploadBox.appendChild(previewDiv);
-//             if(myUploadsWindow.style.height != "100%"){
-//                 myUploadsWindow.style.height = "100%";
-//             }
-//         };
-//         ajax.open("GET", "/?view&raw=1&n=" + id);
-//         ajax.send();
-//     }
-//     function loadSingleUpload(i){
-//         myUploadBox.innerHTML = '';
-//         var myUploadID = document.createElement("div");
-//         myUploadID.style.borderBottom = "1px solid #256aff";
-//         myUploadID.style.marginBottom = "1px";
-//         myUploadID.innerText = "#" + uploadsData[i][0];
-//         myUploadBox.appendChild(myUploadID);
-//         var myUploadView = document.createElement("a");
-//         myUploadView.classList.add("buttons", "afteruploadbuttons");
-//         myUploadView.innerHTML = '<img width="32" height="32" src="/images/viewicon.svg"> <span class="viewupload">' + getString("viewupload") + '</span> <img width="32" height="32" src="/images/newtab.svg">';
-//         myUploadView.target = "_blank";
-//         myUploadView.href = "/?view&n=" + uploadsData[i][0];
-//         myUploadBox.appendChild(myUploadView);
-//         var myUploadDownload = document.createElement("a");
-//         myUploadDownload.classList.add("buttons", "afteruploadbuttons");
-//         myUploadDownload.innerHTML = '<img width="32" height="32" src="/images/download.svg"> <span class="download">' + getString("download") + '</span>';
-//         myUploadDownload.download = "";
-//         myUploadDownload.href = "?download=" + uploadsData[i][0];
-//         myUploadBox.appendChild(myUploadDownload);
-//         // addShareButton(myUploadBox, window.location.href.replace(window.location.hash, "")+"?view&n="+uploadsData[i][0]);
-//         addShareButton(myUploadBox, location.origin+"?view&n="+uploadsData[i][0]);
-//         var element = document.createElement("div");
-//         element.id = 'i'+i;
-//         myUploadBox.appendChild(element);
-//         var filesUpload = document.createElement("button");
-//         filesUpload.innerHTML = '<img width="32" height="32" src="/images/photovideo.svg"> <span class="choosefiles">'+getString("choosefiles")+'</span>';
-//         filesUpload.classList.add("buttons", "afteruploadbuttons");
-//         filesUpload.id = "fb"+i;
-//         var fileInput = document.createElement("input");
-//         fileInput.type = "file";
-//         fileInput.accept = "image/*,video/*";
-//         fileInput.multiple = "1";
-//         fileInput.id = 'f'+i;
-//         fileInput.oninput = function(){
-//             var i = this.id.substring(1);
-//             var element = document.getElementById('i'+i);
-//             filesAttach(uploadsData[i][0], uploadsData[i][1], uploadsData[i][2], this.files, null, element);
-//         };
-//         fileInput.hidden = 1;
-//         myUploadBox.appendChild(fileInput);
-//         filesUpload.onclick = function(){
-//             document.getElementById("f"+this.id.substring(2)).click();
-//         }
-//         myUploadBox.insertBefore(filesUpload, element);
-//         // if(uploadsData[i][2]){
-//             var descriptionForm = document.createElement("form");
-//             descriptionForm.innerHTML = '<textarea class="writedescription" rows="2" cols="10" placeholder="'+getString("writedescription")+'..." maxlength="'+maxDescriptionLength+'"></textarea><br><span>0</span> / '+maxDescriptionLength+'<br><button type="submit" class="buttons afteruploadbuttons" disabled><img width="32" height="32" src="/images/description.svg"> <span class="uploaddescription">'+getString("uploaddescription")+'</span></button>';
-//             descriptionForm.children[0].addEventListener("input", function(){
-//                 this.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.disabled = this.value == '';
-//                 this.style.height = "0";
-//                 this.style.height = this.scrollHeight + "px";
-//                 this.nextElementSibling.nextElementSibling.innerText = this.value.length;
-//             });
-//             descriptionForm.id = 'd'+i;
-//             descriptionForm.onsubmit = function(e){
-//                 e.preventDefault();
-//                 var i = this.id.substring(1);
-//                 var element = document.getElementById('i'+i);
-//                 saveData("description", this.children[0].value);
-//                 uploadDescription(uploadsData[i][1], uploadsData[i][2], this.children[0].value, this.children[0], this.children[1], element);
-//                 this.children[0].value = '';
-//                 this.children[2].innerText = "0";
-//                 this.children[4].disabled = 1;
-//             };
-//             myUploadBox.insertBefore(descriptionForm, element);
-//         // }
-//         // if(uploadsData[i][3]){
-//             var voiceUpload = document.createElement("button");
-//             voiceUpload.innerHTML = '<img width="32" height="32" src="/images/microphone.svg"> <span class="uploadvoice">'+getString("uploadvoice")+'</span>';
-//             voiceUpload.classList.add("buttons", "afteruploadbuttons");
-//             voiceUpload.id = "vb"+i;
-//             var voiceInput = document.createElement("input");
-//             voiceInput.type = "file";
-//             voiceInput.accept = "audio/*";
-//             voiceInput.id = 'v'+i;
-//             voiceInput.oninput = function(){
-//                 var i = this.id.substring(1);
-//                 var element = document.getElementById('i'+i);
-//                 uploadVoice(uploadsData[i][1], uploadsData[i][2], element, this, document.getElementById("vb"+i));
-//             };
-//             voiceInput.hidden = 1;
-//             myUploadBox.appendChild(voiceInput);
-//             voiceUpload.onclick = function(){
-//                 document.getElementById("v"+this.id.substring(2)).click();
-//             }
-//             myUploadBox.insertBefore(voiceUpload, element);
-//         // }
-//         myUploadBox.insertBefore(getMapsDiv(null, element, null, uploadsData[i][1], uploadsData[i][2]), element);
-//         var clearSingleUpload = document.createElement("button");
-//         clearSingleUpload.innerHTML = '<span style="color:#ec0400;font-size:32px;">&times;</span> <span class="clear">'+getString("clear")+'</span>';
-//         clearSingleUpload.classList.add("buttons", "afteruploadbuttons");
-//         clearSingleUpload.onclick = function(){
-//             if(confirm(getString("clear")+"?")){
-//                 uploadsData.splice(i, 1);
-//                 localStorage.setItem("uploads", JSON.stringify(uploadsData));
-//                 if(uploadsData.length){
-//                     if(i >= uploadsData.length){
-//                         loadSingleUpload(uploadsData.length - 1);
-//                         currentPageIndex.innerText = uploadsData.length;
-//                     }else{
-//                         loadSingleUpload(i);
-//                         currentPageIndex.innerText = i + 1;
-//                     }
-//                     totalPageQuantity.innerText = uploadsData.length;
-//                     if(uploadsData.length === 1){
-//                         previousButton.disabled = 1;
-//                         nextButton.disabled = 1;
-//                     }
-//                 }else{
-//                     myUploadsContent.innerText = getString("nodata");
-//                 }
-//                 if(!uploadsData.length){
-//                     localStorage.removeItem("uploads");
-//                 }
-//             }
-//         };
-//         myUploadBox.appendChild(clearSingleUpload);
-//         try{
-//             loadMedia(uploadsData[i][0]);
-//         }catch(e){}
-//     }
-//     var uploadsData;
-//     var myUploadBox;
-//     var previousButton;
-//     var nextButton;
-//     var currentPageIndex;
-//     var totalPageQuantity;
-//     function addSavingUploadsDisabled(){
-//         if((localStorage.getItem("saveuploads") != "true") && (localStorage.getItem("saveuploads") != null)){
-//             var savingUploadsDisabled = document.createElement("div");
-//             savingUploadsDisabled.style.border = "2px solid #ff0000";
-//             savingUploadsDisabled.style.margin = "2px";
-//             savingUploadsDisabled.style.padding = "2px";
-//             savingUploadsDisabled.classList.add("savinguploadsdisabledinfo");
-//             savingUploadsDisabled.innerText = getString("savinguploadsdisabledinfo");
-//             myUploadsContent.insertBefore(savingUploadsDisabled, myUploadsContent.childNodes[0]);
-//         }
-//     }
-//     function loadMyUploads(){
-//         uploadsData = localStorage.getItem("uploads");
-//         if(uploadsData){
-//             uploadsData = JSON.parse(uploadsData);
-//             try{
-//                 uploadsData.reverse();
-//             }catch(e){}
-//             myUploadsContent.innerHTML = '';
-//             //for(var i = uploadsData.length - 1; i >= 0; i--){
-//             myUploadBox = document.createElement("div");
-//             myUploadBox.style.border = "2px solid #256aff";
-//             myUploadBox.style.margin = "4px 2px";
-//             myUploadBox.style.padding = "2px";
-//             myUploadsContent.appendChild(myUploadBox);
-//             var div = document.createElement("div");
-//             try{
-//                 div.style.justifyContent = "space-around";
-//                 div.style.display = "flex";
-//             }catch(e){}
-//             div.style.margin = "2px";
-//             div.style.padding = "2px";
-//             previousButton = document.createElement("button");
-//             previousButton.classList.add("buttons", "afteruploadbuttons");
-//             previousButton.innerHTML = '<span style="color:#256aff;font-size:32px;">&#60;&#60;</span> <span class="previous">'+getString("previous")+'</span>';
-//             previousButton.onclick = function(){
-//                 if(currentPageIndex.innerText == "1"){
-//                     currentPageIndex.innerText = uploadsData.length;
-//                 }else{
-//                     currentPageIndex.innerText -= 1;
-//                 }
-//                 loadSingleUpload(currentPageIndex.innerText - 1);
-//             };
-//             div.appendChild(previousButton);
-//             nextButton = document.createElement("button");
-//             nextButton.classList.add("buttons", "afteruploadbuttons");
-//             nextButton.innerHTML = '<span style="color:#256aff;font-size:32px;">&#62;&#62;</span> <span class="next">'+getString("next")+'</span>';
-//             nextButton.onclick = function(){
-//                 if(currentPageIndex.innerText == uploadsData.length){
-//                     currentPageIndex.innerText = 1;
-//                 }else{
-//                     currentPageIndex.innerText = parseInt(currentPageIndex.innerText) + 1;
-//                 }
-//                 loadSingleUpload(currentPageIndex.innerText - 1);
-//             };
-//             div.appendChild(nextButton);
-//             myUploadsContent.appendChild(div);
-//             div = document.createElement("div");
-//             div.style.margin = "2px";
-//             div.style.padding = "2px";
-//             div.innerHTML = '<span id="currentPageIndex"></span> / <span id="totalPageQuantity"></span>';
-//             myUploadsContent.appendChild(div);
-//             div = document.createElement("div");
-//             div.style.margin = "2px";
-//             div.style.padding = "2px";
-//             var clearMyUploads = document.createElement("button");
-//             clearMyUploads.innerHTML = '<span style="color:#ec0400;font-size:32px;">&times;</span> <span class="clearall">'+getString("clearall")+'</span>';
-//             clearMyUploads.classList.add("buttons", "afteruploadbuttons");
-//             clearMyUploads.onclick = function(){
-//                 if(confirm(getString("clearall")+"?")){
-//                     localStorage.removeItem("uploads");
-//                     myUploadsContent.innerText = getString("nodata");
-//                     addSavingUploadsDisabled();
-//                 }
-//             };
-//             div.appendChild(clearMyUploads);
-//             myUploadsContent.appendChild(div);
-//             currentPageIndex = document.getElementById("currentPageIndex");
-//             totalPageQuantity = document.getElementById("totalPageQuantity");
-//             currentPageIndex.innerText = "1";
-//             totalPageQuantity.innerText = uploadsData.length;
-//             if(uploadsData.length == 1){
-//                 nextButton.disabled = 1;
-//                 previousButton.disabled = 1;
-//             }
-//             loadSingleUpload(0);
-//         }else{
-//             myUploadsContent.innerText = getString("nodata");
-//         }
-//         addSavingUploadsDisabled();
-//         myUploadsWindow.style.height = myUploadsTop.clientHeight + 1 + myUploadsContent.clientHeight + "px";
-//         myUploadsContent.style.maxHeight = "calc(100% - 1px - "+myUploadsTop.clientHeight+"px)";
-//     }
-//     myUploadsButton.onclick = function(){
-//         myuploadsWindowID = Date.now();
-//         location.hash = "myuploads" + myuploadsWindowID;
-//         openMyUploads();
-//     };
-//     // mainDiv.insertBefore(myUploadsButton, settingsButton);
-//     // var br0 = document.createElement("br");
-//     // mainDiv.insertBefore(br0, myUploadsButton.nextElementSibling);
-//     // var br = document.createElement("br");
-//     // mainDiv.insertBefore(br, br0);
-//     myUploadsButton.style.display = "inline-block";
-// }catch(e){}
 try{
     var matchmedia = window.matchMedia("(prefers-color-scheme: dark)");
-    function onDarkModeChange(checked){
-        if(typeof darkmodecheckbox != "undefined"){
-            darkmodecheckbox.checked = checked;
-        }
-        if(typeof settingsWindowOverlay != "undefined" && typeof settingsWindow != "undefined"){
-            setWindowDarkMode(/*settingsWindowOverlay, */settingsWindow);
-        }
-    }
     function defaultdarkmode()  {
         setDarkMode(matchmedia.matches);
         matchmedia.onchange = function(e){
             setDarkMode(e.matches);
-            onDarkModeChange(e.matches);
         };
     }
     function darkmode(){
@@ -2888,24 +2016,9 @@ try{
         try{
             language();
         }catch(e){}
-        try{
-            setSettingsLanguage(lang);
-        }catch(e){}
-        /*try{
-            colorfilter();
-        }catch(e){}*/
     });
 }catch(e){}
-/*try{
-    var startupSetting = localStorage.getItem("startupmode");
-    if(startupSetting && startupSetting != "default"){
-        document.getElementById(startupSetting + "input").click();
-    }
-}catch(e){}*/
 try{
-    /*if(!localStorage.getItem("mobilewebappmodemainapppage")){
-        localStorage.setItem("mobilewebappmodemainapppage", true);
-    }*/
     if(localStorage.getItem("mobilewebappmodemainapppage") == "true"){
         var metaApp = document.createElement("meta");
         metaApp.name = "mobile-web-app-capable";
@@ -2918,4 +2031,6 @@ try{
         navigator.serviceWorker.register("/app/offlineserviceworker.js");
     }
 }catch(e){}
-setCookie("timezone", (new Date()).getTimezoneOffset(), 1000);
+try{
+    setCookie("timezone", (new Date()).getTimezoneOffset(), 1000);
+}catch(e){}
