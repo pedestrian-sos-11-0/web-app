@@ -151,6 +151,9 @@
                 else if($extension === "3gpp2")	{
                     $extension = "3g2";
                 }
+                else if($extension === "x-matroska")	{
+                    $extension = "webm";
+                }
                 if(!(($type === "image") || ($type === "video")))    {
                     echoError(getString("onlyimgvid") . " (" . $fileName . ")");
                     return;

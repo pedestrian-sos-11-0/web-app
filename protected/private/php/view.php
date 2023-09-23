@@ -20,6 +20,9 @@
                     // header("X-Frame-Options: DENY");
                     header("X-Frame-Options: SAMEORIGIN");
                 }
+                if(strpos($mimeContentType, "x-matroska")){
+                    $mimeContentType = str_replace("x-matroska", "webm", $mimeContentType);
+                }
                 header("Content-Type: " . $mimeContentType);
                 header("Content-Length: " . filesize($path));
                 // if(strpos($path, "descriptions") !== FALSE){

@@ -5,13 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><string>pedestrian</string>&nbsp;SOS!</title>
         <link rel="stylesheet" href="/styles/index.css">
-        <!-- <link rel="stylesheet" href="/styles/index0.css"> -->
         <noscript>
             <link rel="stylesheet" href="/styles/index0.css">
         </noscript>
         <meta name="title" content="<string>pedestrian</string> SOS!">
         <meta name="description" content="<string>webapp</string>">
-        <!-- <meta name="image" content="images/pedestriansos_256.png"> -->
         <meta name="image" content="/images/pedestriansos.svg">
         <link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-icon-60x60.png">
@@ -28,7 +26,6 @@
         <link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png">
         <meta name="msapplication-TileImage" content="/images/favicons/ms-icon-144x144.png">
         <link rel="icon" type="image/svg" href="/images/pedestriansos.svg" id="favicon">
-        <!-- <meta name="mobile-web-app-capable" content="yes"> -->
     </head>
     <body>
         <div id="main">
@@ -47,7 +44,6 @@
                     <form method="post" enctype="multipart/form-data" class="uploadforms">
                         <input type="hidden" name="submitform">
                         <input type="file" accept="image/*" id="takephotoinput" name="photovideo" capture="environment" required>
-                        <!-- <button type="button" id="takephotobutton"> -->
                         <button type="button" id="takephotobutton">
                             <label class="buttons" for="takephotoinput">
                                 <svg width="64" height="64" viewBox="0 0 225 225" class="icons">
@@ -289,8 +285,6 @@
                     <br>
                     <strong><span class="linknote"><string>linknote</string></span></strong>
                 </div>
-                <!-- <br>
-                <strong><span class="linknote"><string>linknote</string></span></strong> -->
             </div>
             <!--AFTER_UPLOAD-->
             <br><br>
@@ -319,10 +313,6 @@
                         </svg>
                     </a>
                 </div>
-                <!-- <div class="buttongroup">
-                    <button id="myUploadsButton" class="buttons hiddenonload"></button>
-                    <button id="myUploadsButton2" class="buttons hiddenonload"></button>
-                </div> -->
                 <div class="buttongroup">
                     <button id="myUploadsButton" class="buttons hiddenonload"></button>
                     <a id="myUploadsButton1" class="buttons hiddenonload"></a>
@@ -333,10 +323,6 @@
                     <a id="localstorageButton1" class="buttons hiddenonload"></a>
                     <a id="localstorageButton2" class="buttons hiddenonload"></a>
                 </div>
-                <!-- <div class="buttongroup">
-                    <button id="settingsbutton" class="buttons hiddenonload"></button>
-                    <button id="settingsbutton2" class="buttons hiddenonload"></button>
-                </div> -->
                 <div class="buttongroup">
                     <button id="settingsbutton" class="buttons hiddenonload"></button>
                     <a id="settingsbutton1" class="buttons hiddenonload"></a>
@@ -345,8 +331,6 @@
             </div>
             <br>
             <div class="info">
-                <!-- <span class="maxfilesize"><string>maxfilesize</string></span> 25MB. -->
-                <!-- <span class="maxfilesize"><string>maxfilesize</string></span> <?php echo $uploadLimits["max_file_size"] / 1000000; ?>MB. -->
                 <span class="maxfilesize"><string>maxfilesize</string></span> <php>max_file_size</php>MB.
                 <hr>
                 <span class="onlyimgvid"><string>onlyimgvid</string></span>
@@ -383,10 +367,9 @@
             <div id="uploadstatusbottomcenter">
                 <div id="uploadstatusbottom"></div>
             </div>
-            <!-- <div id="settingswindowoverlay" class="overlay"></div> -->
             <div id="dragoverlay" class="overlay"></div>
             <div id="iframeOverlayDiv" class="overlay" style="display:none;">
-                <div id="settingsclosewindow"></div>
+                <div id="closeiframeoverlay"></div>
                 <iframe id="overlayIframe"></iframe>
             </div>
             <br>
@@ -406,6 +389,5 @@
         <br><br>
         <script>try{function consoleWarning(a,b){for(var i=0;i<3;i++){console.log("%c!!!!!!!!!!","color:#ff0000;font-size:64px;font-weight:bold;");console.log("%c"+a+"!","color:#ff0000;font-size:32px;font-weight:bold;");console.log("%c"+b,"font-size:25px");console.log("%c!!!!!!!!!!","color:#ff0000;font-size:64px;font-weight:bold;");}}consoleWarning("<string>warning</string>","<string>consolewarning</string>");}catch(e){}</script>
         <script src="/scripts/index.js"></script>
-        <!-- <script src="/getjsphp.php?a=index"></script> -->
     </body>
 </html>
